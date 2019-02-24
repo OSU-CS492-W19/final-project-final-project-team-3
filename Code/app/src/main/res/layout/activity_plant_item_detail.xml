@@ -4,12 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/iv_plant_pic"
-        android:padding="4dp"
-        android:layout_width="128dp"
-        android:layout_height="128dp" />
-
     <TextView
         android:id="@+id/tv_plant_scientific"
         android:textStyle="italic"
@@ -27,6 +21,13 @@
         android:padding="4dp"
         android:layout_marginLeft="12dp"
         android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/iv_plant_pic_det"
+        android:layout_gravity="center_horizontal"
+        android:padding="4dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp" />
 
     <TextView
         android:id="@+id/tv_plant_details"

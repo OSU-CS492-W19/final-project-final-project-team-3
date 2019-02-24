@@ -18,6 +18,10 @@ import com.example.android.lifecycleweather.data.WeatherPreferences;
 import com.example.android.lifecycleweather.utils.NetworkUtils;
 import com.example.android.lifecycleweather.utils.USDAUtils;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
