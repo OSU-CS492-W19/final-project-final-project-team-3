@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.android.usdaplantindex.R;
 import com.example.android.usdaplantindex.data.WeatherPreferences;
 import com.example.android.usdaplantindex.utils.NetworkUtils;
 import com.example.android.usdaplantindex.utils.USDAUtils;
@@ -22,7 +21,7 @@ import com.example.android.usdaplantindex.utils.USDAUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements PlantAdapter.OnPlantItemClickListener {
+public class MainActivity extends AppCompatActivity implements PlantSearchAdapter.OnPlantItemClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements PlantAdapter.OnPl
     private RecyclerView mPlantItemsRV;
     private ProgressBar mLoadingIndicatorPB;
     private TextView mLoadingErrorMessageTV;
-    private PlantAdapter mPlantAdapter;
+    private PlantSearchAdapter mPlantAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements PlantAdapter.OnPl
         mLoadingErrorMessageTV = findViewById(R.id.tv_loading_error_message);
         mPlantItemsRV = findViewById(R.id.rv_forecast_items);
 
-        mPlantAdapter = new PlantAdapter(this);
+        mPlantAdapter = new PlantSearchAdapter(this);
         mPlantItemsRV.setAdapter(mPlantAdapter);
         mPlantItemsRV.setLayoutManager(new LinearLayoutManager(this));
         mPlantItemsRV.setHasFixedSize(true);
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements PlantAdapter.OnPl
     @Override
     public void onPlantItemClick(USDAUtils.PlantItem plantItem) {
         Intent intent = new Intent(this, PlantItemDetailActivity.class);
-        intent.putExtra(USDAUtils.EXTRA_FORECAST_ITEM, plantItem);
+        intent.putExtra(USDAUtils.EXTRA_PLANT_ITEM, plantItem);
         startActivity(intent);
     }
 

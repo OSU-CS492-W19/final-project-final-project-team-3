@@ -7,12 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.usdaplantindex.R;
 import com.example.android.usdaplantindex.utils.USDAUtils;
 
 import java.util.ArrayList;
 
-public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantItemViewHolder> {
+public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.PlantItemViewHolder> {
 
     private ArrayList<USDAUtils.PlantItem> mPlantItems;
     private OnPlantItemClickListener mPlantItemClickListener;
@@ -21,7 +20,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantItemVie
         void onPlantItemClick(USDAUtils.PlantItem plantItem);
     }
 
-    public PlantAdapter(OnPlantItemClickListener clickListener) {
+    public PlantSearchAdapter(OnPlantItemClickListener clickListener) {
         mPlantItemClickListener = clickListener;
     }
 

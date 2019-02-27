@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.android.usdaplantindex.R;
 import com.example.android.usdaplantindex.utils.USDAUtils;
 
 import org.jsoup.Jsoup;
@@ -43,9 +42,9 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         mPlantPicIV = findViewById(R.id.iv_plant_pic_det);
 
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra(USDAUtils.EXTRA_FORECAST_ITEM)) {
+        if (intent != null && intent.hasExtra(USDAUtils.EXTRA_PLANT_ITEM)) {
             mPlantItem = (USDAUtils.PlantItem)intent.getSerializableExtra(
-                    USDAUtils.EXTRA_FORECAST_ITEM
+                    USDAUtils.EXTRA_PLANT_ITEM
             );
             fillInLayout(mPlantItem);
 

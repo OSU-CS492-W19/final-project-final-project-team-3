@@ -15,4 +15,8 @@
 
     <string name="button_text_search_by_name">Search By Name</string>
     <string name="button_text_search_by_location">Search By Location</string>
+
+    <!-- Plant Search Activity -->
+    <string name="plant_search_box_hint">Common Name or Species</string>
+    <string name="plant_search_button_text">Do Search</string>
 </resources>
