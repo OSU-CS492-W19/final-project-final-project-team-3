@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.example.android.usdaplantindex.R;
 
-// This is our main activity.
 // This activity is the entry to "Search Plants" and "Identify by Map" activities.
 public class StartupActivity extends AppCompatActivity {
 
