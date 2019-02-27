@@ -79,12 +79,8 @@ public class MainActivity extends AppCompatActivity implements PlantSearchAdapte
     }
 
     public void loadPlant() {
-        String openWeatherMapPlantURL = USDAUtils.buildPlantURL(
-                WeatherPreferences.getDefaultPlantLocation(),
-                WeatherPreferences.getDefaultTemperatureUnits()
-        );
-        Log.d(TAG, "got forecast url: " + openWeatherMapPlantURL);
-        new PlantTask().execute(openWeatherMapPlantURL);
+        String url = USDAUtils.buildPlantSearchURL();
+        new PlantTask().execute(url);
     }
 
     public void showPlantLocation() {

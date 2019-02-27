@@ -21,14 +21,6 @@
             android:layout_margin="4dp"
             android:hint="@string/plant_search_box_hint"/>
 
-        <Button
-            android:id="@+id/plant_search_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/plant_search_button_text"
-            android:textSize="20sp"
-            android:layout_margin="4dp"/>
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -1,5 +1,6 @@
 package com.example.android.usdaplantindex.utils;
 
+import android.content.Intent;
 import android.net.Uri;
 
 import com.google.gson.Gson;
@@ -12,19 +13,20 @@ public class USDAUtils {
     public static final String EXTRA_PLANT_ITEM = "com.example.android.usdaplantindex.utils.PlantItem";
 
 
-    private final static String PLANT_SEARCH_BASE_URL = "https://plantsdb.xyz/search?limit=25&offset=0";
+    private final static String PLANT_SEARCH_BASE_URL = "https://plantsdb.xyz/search";
+    private final static String PLANT_SEARCH_LIMIT_PARAM = "limit";
+    private final static Integer PLANT_SEARCH_LIMIT = 25;
+    private final static String PLANT_SEARCH_OFFSET_PARAM = "offset";
+    private final static Integer PLANT_SEARCH_OFFSET = 0;
+
     private final static String OWM_ICON_URL_FORMAT_STR = "https://openweathermap.org/img/w/%s.png";
-    private final static String OWM_FORECAST_QUERY_PARAM = "q";
-    private final static String OWM_FORECAST_UNITS_PARAM = "units";
-    private final static String OWM_FORECAST_APPID_PARAM = "appid";
-    private final static String OWM_FORECAST_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    private final static String OWM_FORECAST_TIME_ZONE = "UTC";
 
     /*
      * This class is used as a final representation of a single plant item.
      * It condenses the classes below that are used for parsing the OWN JSON response with Gson.
      */
     public static class PlantItem implements Serializable {
+        public Integer id;
         public String Scientific_Name_x;
         public String Common_Name;
         public String Symbol;
@@ -50,22 +52,42 @@ public class USDAUtils {
         public ArrayList<PlantItem> data;
     }
 
+    public static String buildPlantSearchURL() {
+        return Uri.parse(PLANT_SEARCH_BASE_URL)
+                .buildUpon()
+                .appendQueryParameter(PLANT_SEARCH_LIMIT_PARAM, String.valueOf(PLANT_SEARCH_LIMIT))
+                .appendQueryParameter(PLANT_SEARCH_OFFSET_PARAM, String.valueOf(PLANT_SEARCH_OFFSET))
+                .build()
+                .toString();
+    }
+
+    public static String buildPlantSearchURL(Integer limit, Integer offset) {
+        return Uri.parse(PLANT_SEARCH_BASE_URL)
+                .buildUpon()
+                .appendQueryParameter(PLANT_SEARCH_LIMIT_PARAM, String.valueOf(limit))
+                .appendQueryParameter(PLANT_SEARCH_OFFSET_PARAM, String.valueOf(offset))
+                .build()
+                .toString();
+    }
+
     public static String buildPlantSearchURL(String query_param, String query_value) {
         return Uri.parse(PLANT_SEARCH_BASE_URL)
                 .buildUpon()
+                .appendQueryParameter(PLANT_SEARCH_LIMIT_PARAM, String.valueOf(PLANT_SEARCH_LIMIT))
+                .appendQueryParameter(PLANT_SEARCH_OFFSET_PARAM, String.valueOf(PLANT_SEARCH_OFFSET))
                 .appendQueryParameter(query_param, query_value)
                 .build()
                 .toString();
     }
 
-    public static String buildPlantURL(String forecastLocation, String temperatureUnits) {
+    public static String buildPlantSearchURL(Integer limit, Integer offset, String query_param, String query_value) {
         return Uri.parse(PLANT_SEARCH_BASE_URL)
-                .buildUpon().build().toString();
-                //.appendQueryParameter(OWM_FORECAST_QUERY_PARAM, forecastLocation)
-                //.appendQueryParameter(OWM_FORECAST_UNITS_PARAM, temperatureUnits)
-                //.appendQueryParameter(OWM_FORECAST_APPID_PARAM, OWM_FORECAST_APPID)
-                //.build()
-                //.toString();
+                .buildUpon()
+                .appendQueryParameter(PLANT_SEARCH_LIMIT_PARAM, String.valueOf(limit))
+                .appendQueryParameter(PLANT_SEARCH_OFFSET_PARAM, String.valueOf(offset))
+                .appendQueryParameter(query_param, query_value)
+                .build()
+                .toString();
     }
 
     public static String buildIconURL(String icon) {
