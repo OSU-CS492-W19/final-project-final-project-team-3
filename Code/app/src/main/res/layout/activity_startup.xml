@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="@color/design_default_color_primary"
+        android:background="@color/colorAccent"
         android:text="@string/button_text_search_by_location" />
 
     <Button
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="@color/design_default_color_primary"
+        android:background="@color/colorAccent"
         android:text="@string/button_text_search_by_name" />
 
 </LinearLayout>
