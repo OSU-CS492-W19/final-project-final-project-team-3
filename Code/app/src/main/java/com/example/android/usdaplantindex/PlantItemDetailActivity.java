@@ -1,4 +1,4 @@
-package com.example.android.lifecycleweather;
+package com.example.android.usdaplantindex;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -11,7 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.android.lifecycleweather.utils.USDAUtils;
+import com.example.android.usdaplantindex.R;
+import com.example.android.usdaplantindex.utils.USDAUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

@@ -1,4 +1,4 @@
-package com.example.android.lifecycleweather;
+package com.example.android.usdaplantindex;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -14,13 +14,10 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.android.lifecycleweather.data.WeatherPreferences;
-import com.example.android.lifecycleweather.utils.NetworkUtils;
-import com.example.android.lifecycleweather.utils.USDAUtils;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+import com.example.android.usdaplantindex.R;
+import com.example.android.usdaplantindex.data.WeatherPreferences;
+import com.example.android.usdaplantindex.utils.NetworkUtils;
+import com.example.android.usdaplantindex.utils.USDAUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;

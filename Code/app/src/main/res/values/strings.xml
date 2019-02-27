@@ -9,4 +9,5 @@
 
     <string name="plant_item_detail">PLACEHOLDER</string>
     <string name="plant_item_share_text">Plant Information:</string>
+    <string name="title_activity_startup">StartupActivity</string>
 </resources>

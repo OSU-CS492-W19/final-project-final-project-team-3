@@ -1,4 +1,4 @@
-package com.example.android.lifecycleweather;
+package com.example.android.usdaplantindex;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

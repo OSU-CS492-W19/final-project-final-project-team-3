@@ -1,4 +1,4 @@
-package com.example.android.lifecycleweather.utils;
+package com.example.android.usdaplantindex.utils;
 
 import android.net.Uri;
 
@@ -13,7 +13,7 @@ import java.util.TimeZone;
 
 public class USDAUtils {
 
-    public static final String EXTRA_FORECAST_ITEM = "com.example.android.lifecycleweather.utils.PlantItem";
+    public static final String EXTRA_FORECAST_ITEM = "com.example.android.usdaplantindex.utils.PlantItem";
 
     private final static String OWM_FORECAST_BASE_URL = "https://plantsdb.xyz/search?limit=25&offset=0";
     private final static String OWM_ICON_URL_FORMAT_STR = "https://openweathermap.org/img/w/%s.png";
