@@ -9,5 +9,10 @@
 
     <string name="plant_item_detail">PLACEHOLDER</string>
     <string name="plant_item_share_text">Plant Information:</string>
-    <string name="title_activity_startup">StartupActivity</string>
+
+    <string name="title_activity_startup">USDA Plant Index</string>
+    <string name="title_activity_plant_search">Plant Search</string>
+
+    <string name="button_text_search_by_name">Search By Name</string>
+    <string name="button_text_search_by_location">Search By Location</string>
 </resources>
