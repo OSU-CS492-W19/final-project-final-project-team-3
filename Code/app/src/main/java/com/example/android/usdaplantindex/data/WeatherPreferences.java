@@ -1,4 +1,4 @@
-package com.example.android.lifecycleweather.data;
+package com.example.android.usdaplantindex.data;
 
 public class WeatherPreferences {
     private static final String DEFAULT_FORECAST_LOCATION = "Corvallis,OR,US";

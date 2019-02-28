@@ -1,4 +1,4 @@
-package com.example.android.lifecycleweather;
+package com.example.android.usdaplantindex;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.android.lifecycleweather.utils.USDAUtils;
+import com.example.android.usdaplantindex.utils.USDAUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -42,9 +42,9 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         mPlantPicIV = findViewById(R.id.iv_plant_pic_det);
 
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra(USDAUtils.EXTRA_FORECAST_ITEM)) {
+        if (intent != null && intent.hasExtra(USDAUtils.EXTRA_PLANT_ITEM)) {
             mPlantItem = (USDAUtils.PlantItem)intent.getSerializableExtra(
-                    USDAUtils.EXTRA_FORECAST_ITEM
+                    USDAUtils.EXTRA_PLANT_ITEM
             );
             fillInLayout(mPlantItem);
 

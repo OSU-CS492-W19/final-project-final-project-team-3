@@ -1,4 +1,4 @@
-package com.example.android.lifecycleweather;
+package com.example.android.usdaplantindex;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.example.android.lifecycleweather;
+package com.example.android.usdaplantindex;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.android.connectedweather", appContext.getPackageName());
+        assertEquals("com.example.android.usdaplantindex", appContext.getPackageName());
     }
 }
