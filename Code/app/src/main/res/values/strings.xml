@@ -13,8 +13,8 @@
     <string name="title_activity_startup">USDA Plant Index</string>
     <string name="title_activity_plant_search">Plant Search</string>
 
-    <string name="button_text_search_by_name">Search By Name</string>
-    <string name="button_text_search_by_location">Search By Location</string>
+    <string name="button_text_search_by_name">Search Plants By Name</string>
+    <string name="button_text_identify">Identify Plant</string>
 
     <!-- Plant Search Activity -->
     <string name="plant_search_box_hint">Enter Species...</string>
