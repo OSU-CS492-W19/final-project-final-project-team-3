@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">USA Plant Index</string>
-    <string name="forecast_for">Plants found in</string>
     <string name="loading_error_message">We couldn\'t load plant information.  Check your internet connection and try again.</string>
     <string name="action_share">Share plant</string>
     <string name="action_location">Show forecast location</string>
@@ -10,7 +9,7 @@
     <string name="plant_item_detail">PLACEHOLDER</string>
     <string name="plant_item_share_text">Plant Information:</string>
 
-    <string name="title_activity_startup">USDA Plant Index</string>
+    <string name="title_activity_startup">USA Plant Index</string>
     <string name="title_activity_plant_search_by_species">Plants by Species</string>
     <string name="title_activity_plant_search_by_name">Plants by Name</string>
 

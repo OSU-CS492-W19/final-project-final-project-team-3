@@ -17,13 +17,6 @@
         android:padding="12dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/forecast_for"
-            android:textColor="#fff"
-            android:textSize="18sp" />
-
-        <TextView
             android:id="@+id/tv_forecast_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
