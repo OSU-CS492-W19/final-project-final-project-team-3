@@ -25,34 +25,29 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.concurrent.LinkedBlockingDeque;
 
-import okio.Timeout;
-
-/*
- This activity provides the functionality for searching plants by species
- - When activity is created, we first load all the species and their ids
-   (this doesn't take a while)
- - When search box text changes, we obtain all species that partially match the text,
-   and have the asynchronous task load details of matches species and fill the adapter.
- */
-public class PlantSearchActivity extends AppCompatActivity
+// This activity provides the functionality for searching plants by species.
+public class PlantSearchBySpeciesActivity extends AppCompatActivity
         implements PlantSearchAdapter.OnPlantItemClickListener {
 
-    private static final String TAG = PlantSearchActivity.class.getSimpleName();
+    private static final String TAG = PlantSearchBySpeciesActivity.class.getSimpleName();
 
-    private static final String PLANT_SEARCH_LITE_ARRAY_KEY = "plantSearchLite";
-    private static final String PLANT_SEARCH_LITE_URL_KEY = "plantSearchLiteURL";
+    private static final String PLANT_SEARCH_LITE_ARRAY_KEY = "plantSearchByNameLite";
+    private static final String PLANT_SEARCH_LITE_URL_KEY = "plantSearchByNameLiteURL";
     private static final Integer PLANT_SEARCH_LITE_LOADER_ID = 1;
 
-    private static final String PLANT_SEARCH_HEAVY_ARRAY_KEY = "plantSearchHeavy";
-    private static final String PLANT_SEARCH_HEAVY_URL_KEY = "plantSearchHeavyURL";
+    private static final String PLANT_SEARCH_HEAVY_ARRAY_KEY = "plantSearchByNameHeavy";
+    private static final String PLANT_SEARCH_HEAVY_URL_KEY = "plantSearchByNameHeavyURL";
     private static final Integer PLANT_SEARCH_HEAVY_LOADER_ID = 2;
 
     /*
-     - When this activity is created, we load all the plant species (just the species fields).
-     - We load all the plant Species only when the activity is created and if there are none
-       cached results.
-     - Because we only request the Species fields, it does not take long to load all of them.
-     - The load limit is there just in case there is actually more than that species.
+     - When the activity is created, we first load all the Species fields and
+       nothing else. This doesn't take a while; it would take longer to load additional fields,
+       so we restrict to only pre-loading one field.
+     - The load limit is there just in case there is actually more items than that, that could
+       affect the pre-loading performance.
+     - When search box text changes, we iterate the pre-loaded array and for Species that
+       partially match the search query, have an asynchronous task gradually load their plant item
+       details and fill the results adapter.
      */
     private static final Integer LITE_LOAD_LIMIT = 5000;
 
@@ -73,7 +68,7 @@ public class PlantSearchActivity extends AppCompatActivity
        smallest ID + offset to the greatest ID. Keeping that in mind, we can load the matched
        species partially, incrementing a load offset for the species each time we request an
        additional chunk of information.
-     - All already-loaded details are stored in the array to increase the loading time.
+     - All already-loaded details are stored in the array to decrease the loading time.
        This array is not saved. When activity is recreated (due to screen rotation or
        activation of different activity), the details array is empty.
      */
@@ -113,12 +108,12 @@ public class PlantSearchActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plant_search);
+        setContentView(R.layout.activity_plant_search_by_species);
 
-        mSearchBoxET = findViewById(R.id.plant_search_et);
-        mSearchResultsRV = findViewById(R.id.plant_search_results);
-        mLoadingErrorTV = findViewById(R.id.plant_search_loading_error_tv);
-        mLoadingPB = findViewById(R.id.plant_search_loading_pb);
+        mSearchBoxET = findViewById(R.id.plant_search_by_species_et);
+        mSearchResultsRV = findViewById(R.id.plant_search_by_species_results);
+        mLoadingErrorTV = findViewById(R.id.plant_search_by_species_loading_error_tv);
+        mLoadingPB = findViewById(R.id.plant_search_by_species_loading_pb);
 
         mSearchResultsRV.setLayoutManager(new LinearLayoutManager(this));
         mSearchResultsRV.setHasFixedSize(true);
@@ -158,7 +153,7 @@ public class PlantSearchActivity extends AppCompatActivity
                 if (bundle != null) {
                     url = bundle.getString(PLANT_SEARCH_LITE_URL_KEY);
                 }
-                return new PlantSearchLoader(PlantSearchActivity.this, url);
+                return new PlantSearchLoader(PlantSearchBySpeciesActivity.this, url);
             }
 
             @Override
@@ -166,7 +161,9 @@ public class PlantSearchActivity extends AppCompatActivity
                 Log.d(TAG, "Lite loader finished loading.");
                 if (s != null) {
                     ArrayList<USDAUtils.PlantItem> items = USDAUtils.parsePlantJSON(s);
-                    updateAllPlantSpecies(items);
+                    if (items != null) {
+                        updateAllPlantSpecies(items);
+                    }
                     mLoadingErrorTV.setVisibility(View.INVISIBLE);
                     mSearchResultsRV.setVisibility(View.VISIBLE);
                 } else {
@@ -190,7 +187,7 @@ public class PlantSearchActivity extends AppCompatActivity
                 if (bundle != null) {
                     url = bundle.getString(PLANT_SEARCH_HEAVY_URL_KEY);
                 }
-                return new PlantSearchLoader(PlantSearchActivity.this, url);
+                return new PlantSearchLoader(PlantSearchBySpeciesActivity.this, url);
             }
 
             @Override

@@ -9,15 +9,6 @@
     tools:context="com.example.android.usdaplantindex.StartupActivity">
 
     <Button
-        android:id="@+id/btn_search_by_location"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@color/colorAccent"
-        android:text="@string/button_text_search_by_location" />
-
-    <Button
         android:id="@+id/btn_search_by_name"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
@@ -25,5 +16,23 @@
         android:layout_margin="5dp"
         android:background="@color/colorAccent"
         android:text="@string/button_text_search_by_name" />
+
+    <Button
+        android:id="@+id/btn_search_by_species"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/colorAccent"
+        android:text="@string/button_text_search_by_species" />
+
+    <Button
+        android:id="@+id/btn_search_by_location"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/colorAccent"
+        android:text="@string/button_text_search_by_location" />
 
 </LinearLayout>
