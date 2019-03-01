@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.android.usdaplantindex.utils.USDAUtils;
+import com.example.android.usdaplantindex.utils.USAUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -29,7 +29,7 @@ public class PlantItemDetailActivity extends AppCompatActivity {
     private TextView mPlantDetails;
     private ImageView mPlantPicIV;
 
-    private USDAUtils.PlantItem mPlantItem;
+    private USAUtils.PlantItem mPlantItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +42,9 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         mPlantPicIV = findViewById(R.id.iv_plant_pic_det);
 
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra(USDAUtils.EXTRA_PLANT_ITEM)) {
-            mPlantItem = (USDAUtils.PlantItem)intent.getSerializableExtra(
-                    USDAUtils.EXTRA_PLANT_ITEM
+        if (intent != null && intent.hasExtra(USAUtils.EXTRA_PLANT_ITEM)) {
+            mPlantItem = (USAUtils.PlantItem)intent.getSerializableExtra(
+                    USAUtils.EXTRA_PLANT_ITEM
             );
             fillInLayout(mPlantItem);
 
@@ -125,7 +125,7 @@ public class PlantItemDetailActivity extends AppCompatActivity {
     }
 
     // Displays information about the selected plant.
-    private void fillInLayout(USDAUtils.PlantItem plantItem) {
+    private void fillInLayout(USAUtils.PlantItem plantItem) {
         String sciString = plantItem.Scientific_Name_x;
         String comString = plantItem.Common_Name;
         String detailString = getDetailedString();

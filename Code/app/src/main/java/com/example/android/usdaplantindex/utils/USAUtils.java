@@ -1,6 +1,5 @@
 package com.example.android.usdaplantindex.utils;
 
-import android.content.Intent;
 import android.net.Uri;
 
 import com.google.gson.Gson;
@@ -8,7 +7,7 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class USDAUtils {
+public class USAUtils {
 
     public static final String EXTRA_PLANT_ITEM = "com.example.android.usdaplantindex.utils.PlantItem";
 
@@ -18,8 +17,6 @@ public class USDAUtils {
     private final static Integer PLANT_SEARCH_LIMIT = 25;
     private final static String PLANT_SEARCH_OFFSET_PARAM = "offset";
     private final static Integer PLANT_SEARCH_OFFSET = 0;
-
-    private final static String OWM_ICON_URL_FORMAT_STR = "https://openweathermap.org/img/w/%s.png";
 
     /*
      * This class is used as a final representation of a single plant item.
@@ -88,10 +85,6 @@ public class USDAUtils {
                 .appendQueryParameter(query_param, query_value)
                 .build()
                 .toString();
-    }
-
-    public static String buildIconURL(String icon) {
-        return String.format(OWM_ICON_URL_FORMAT_STR, icon);
     }
 
     public static ArrayList<PlantItem> parsePlantJSON(String plantJSON) {
