@@ -33,6 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:background="@color/colorAccent"
-        android:text="@string/button_text_search_by_location" />
+        android:text="@string/button_text_identify" />
 
 </LinearLayout>

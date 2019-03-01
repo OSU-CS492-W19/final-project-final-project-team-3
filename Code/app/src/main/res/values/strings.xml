@@ -16,7 +16,7 @@
 
     <string name="button_text_search_by_species">Search By Species</string>
     <string name="button_text_search_by_name">Search By Scientific Name</string>
-    <string name="button_text_search_by_location">Search By Location</string>
+    <string name="button_text_identify">Identify Plant</string>
 
     <string name="plant_search_by_species_box_hint">Enter Species...</string>
     <string name="plant_search_by_name_box_hint">Enter Scientific Name...</string>
