@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context="com.example.android.usdaplantindex.StartupActivity">
 
     <Button
@@ -34,5 +34,13 @@
         android:layout_margin="5dp"
         android:background="@color/colorAccent"
         android:text="@string/button_text_identify" />
+
+    <TextView
+        android:id="@+id/tv_citation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="8sp"
+        android:text="@string/source_citation" />
 
 </LinearLayout>

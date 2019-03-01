@@ -25,4 +25,9 @@
     <string name="plant_text_growth">Growth Requirements</string>
     <string name="plant_text_reproduction">Reproduction</string>
     <string name="plant_text_suitability">Suitability/Use</string>
+
+    <string name="source_citation">Citation: USDA, NRCS. 2016. The PLANTS Database (http://plants.usda.gov, 12 July 2016).
+        National Plant Data Team, Greensboro, NC 27401-4901 USA.\n\n
+        Plant images are returned by Google Images and may be inaccurate.
+    </string>
 </resources>
