@@ -26,55 +26,81 @@ public class USAUtils {
 
         // Mostly general information.
         public Integer id;
-        public String Scientific_Name_x;
-        public String Common_Name;
-        public String Symbol;
-        public String Family;
-        public String Duration;
-        public String Growth_Habit;
-        public String Native_Status;
-        public String Category;
-        public String xOrder;
-        public String SubClass;
-        public String Class;
-        public String Kingdom;
-        public String Species;
-        public String Subspecies;
-        public String State_and_Province;
 
-        // More detailed information.
-        public String Hybrid_Genus_Indicator;
-        public String Hybrid_Species_Indicator;
-        public String Subspecies_Prefix;
-        public String Hybrid_Subspecies_Indicator;
+        public String Scientific_Name_x;
+
+        public String Scientific_Name_y;
+
+        public String Common_Name;
+
+        public String Symbol;
+
+        public String Duration;
+
+        public String Growth_Habit;
+
+        public String Native_Status;
+
+        public String Category;
+
+        public String Parents;
+
+        public String Forma;
+        public String Forma_Prefix;
+
+        public String Variety;
         public String Variety_Prefix;
         public String Hybrid_Variety_Indicator;
-        public String Variety;
-        public String Subvariety_Prefix;
+
         public String Subvariety;
-        public String Forma_Prefix;
-        public String Forma;
+        public String Subvariety_Prefix;
+
+        public String Species;
+        public String Hybrid_Species_Indicator;
+
+        public String Subspecies;
+        public String Subspecies_Prefix;
+        public String Hybrid_Subspecies_Indicator;
+
+        public String Genus;
+        public String Hybrid_Genus_Indicator;
+
+        public String Family;
+        public String Family_Symbol;
+        public String Family_Common_Name;
+
+        public String xOrder;
+
+        public String Class;
+        public String SubClass;
+
+        public String Division;
+        public String SubDivision;
+        public String SuperDivision;
+
+        public String Kingdom;
+        public String SubKingdom;
+
+        public String State_and_Province;
+
+        public String Federal_T_E_Status;
+        public String Federal_Noxious_Status;
+
+        public String State_T_E_Status;
+        public String State_T_E_Common_Name;
+        public String State_Noxious_Status;
+        public String State_Noxious_Common_Name;
+
         public String Genera_Binomial_Author;
         public String Trinomial_Author;
         public String Quadranomial_Author;
         public String Questionable_Taxon_Indicator;
-        public String Parents;
-        public String Family_Symbol;
-        public String Family_Common_Name;
-        public String SubDivision;
-        public String Division;
-        public String SuperDivision;
-        public String SubKingdom;
-        public String Federal_Noxious_Status;
-        public String State_Noxious_Status;
-        public String State_Noxious_Common_Name;
+
         public String Invasive;
-        public String Federal_T_E_Status;
-        public String State_T_E_Status;
-        public String State_T_E_Common_Name;
+
         public String Accepted_Symbol_y;
         public String Synonym_Symbol_y;
-        public String Scientific_Name_y;
+
         public String Active_Growth_Period;
         public String After_Harvest_Regrowth_Rate;
         public String Bloat;
@@ -158,7 +184,6 @@ public class USAUtils {
         public String Protein_Potential;
         public String Pulpwood_Product;
         public String Veneer_Product;
-        public String Genus;
     }
 
     /*
