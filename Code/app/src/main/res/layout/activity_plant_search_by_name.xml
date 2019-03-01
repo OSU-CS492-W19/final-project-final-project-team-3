@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.example.android.usdaplantindex.PlantSearchByNameActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/plant_search_by_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="4dp"
+            android:hint="@string/plant_search_by_name_box_hint"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/plant_search_by_name_results"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/plant_search_by_name_loading_error_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:padding="16dp"
+                android:visibility="invisible"
+                android:text="@string/loading_error_message" />
+
+            <ProgressBar
+                android:id="@+id/plant_search_by_name_loading_pb"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginTop="32dp"
+                android:visibility="invisible"/>
+
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>

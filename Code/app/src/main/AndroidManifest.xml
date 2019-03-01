@@ -16,12 +16,21 @@
             android:label="@string/title_activity_startup">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".PlantSearchActivity"
-            android:label="@string/title_activity_plant_search"
+            android:name=".PlantSearchBySpeciesActivity"
+            android:label="@string/title_activity_plant_search_by_species"
+            android:parentActivityName=".StartupActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.usdaplantindex.StartupActivity" />
+        </activity>
+        <activity
+            android:name=".PlantSearchByNameActivity"
+            android:label="@string/title_activity_plant_search_by_name"
             android:parentActivityName=".StartupActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -29,8 +38,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:parentActivityName=".StartupActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:parentActivityName=".StartupActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.usdaplantindex.StartupActivity" />

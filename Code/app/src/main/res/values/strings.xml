@@ -11,12 +11,13 @@
     <string name="plant_item_share_text">Plant Information:</string>
 
     <string name="title_activity_startup">USDA Plant Index</string>
-    <string name="title_activity_plant_search">Plant Search</string>
+    <string name="title_activity_plant_search_by_species">Plants by Species</string>
+    <string name="title_activity_plant_search_by_name">Plants by Name</string>
 
-    <string name="button_text_search_by_name">Search Plants By Name</string>
+    <string name="button_text_search_by_species">Search By Species</string>
+    <string name="button_text_search_by_name">Search By Scientific Name</string>
     <string name="button_text_identify">Identify Plant</string>
 
-    <!-- Plant Search Activity -->
-    <string name="plant_search_box_hint">Enter Species...</string>
-    <string name="plant_search_button_text">Do Search</string>
+    <string name="plant_search_by_species_box_hint">Enter Species...</string>
+    <string name="plant_search_by_name_box_hint">Enter Scientific Name...</string>
 </resources>

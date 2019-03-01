@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.example.android.usdaplantindex.PlantSearchActivity">
+    tools:context="com.example.android.usdaplantindex.PlantSearchBySpeciesActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,12 +14,12 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/plant_search_et"
+            android:id="@+id/plant_search_by_species_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_margin="4dp"
-            android:hint="@string/plant_search_box_hint"/>
+            android:hint="@string/plant_search_by_species_box_hint"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -27,12 +27,12 @@
             android:padding="8dp">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/plant_search_results"
+                android:id="@+id/plant_search_by_species_results"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
             <TextView
-                android:id="@+id/plant_search_loading_error_tv"
+                android:id="@+id/plant_search_by_species_loading_error_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -41,7 +41,7 @@
                 android:text="@string/loading_error_message" />
 
             <ProgressBar
-                android:id="@+id/plant_search_loading_pb"
+                android:id="@+id/plant_search_by_species_loading_pb"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_gravity="top|center_horizontal"
