@@ -10,6 +10,7 @@ import android.widget.Button;
 public class StartupActivity extends AppCompatActivity {
 
     private Button mSearchByNameBtn;
+    private Button mSearchBySpeciesBtn;
     private Button mSearchByLocationBtn;
 
     @Override
@@ -18,12 +19,21 @@ public class StartupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_startup);
 
         mSearchByNameBtn = findViewById(R.id.btn_search_by_name);
+        mSearchBySpeciesBtn = findViewById(R.id.btn_search_by_species);
         mSearchByLocationBtn = findViewById(R.id.btn_search_by_location);
 
         mSearchByNameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StartupActivity.this, PlantSearchActivity.class);
+                Intent intent = new Intent(StartupActivity.this, PlantSearchByNameActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mSearchBySpeciesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StartupActivity.this, PlantSearchBySpeciesActivity.class);
                 startActivity(intent);
             }
         });
