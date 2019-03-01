@@ -7,23 +7,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.android.usdaplantindex.data.WeatherPreferences;
 import com.example.android.usdaplantindex.utils.NetworkUtils;
 import com.example.android.usdaplantindex.utils.USAUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements PlantSearchAdapter.OnPlantItemClickListener {
+public class IdentifyListActivity extends AppCompatActivity implements PlantSearchAdapter.OnPlantItemClickListener {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = IdentifyListActivity.class.getSimpleName();
 
     private TextView mPlantLocationTV;
     private RecyclerView mPlantItemsRV;
@@ -39,12 +37,9 @@ public class MainActivity extends AppCompatActivity implements PlantSearchAdapte
         // Remove shadow under action bar.
         getSupportActionBar().setElevation(0);
 
-        mPlantLocationTV = findViewById(R.id.tv_forecast_location);
-        mPlantLocationTV.setText(WeatherPreferences.getDefaultPlantLocation());
-
         mLoadingIndicatorPB = findViewById(R.id.pb_loading_indicator);
         mLoadingErrorMessageTV = findViewById(R.id.tv_loading_error_message);
-        mPlantItemsRV = findViewById(R.id.rv_forecast_items);
+        mPlantItemsRV = findViewById(R.id.rv_plant_items);
 
         mPlantAdapter = new PlantSearchAdapter(this);
         mPlantItemsRV.setAdapter(mPlantAdapter);
@@ -70,9 +65,6 @@ public class MainActivity extends AppCompatActivity implements PlantSearchAdapte
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_location:
-                showPlantLocation();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -81,16 +73,6 @@ public class MainActivity extends AppCompatActivity implements PlantSearchAdapte
     public void loadPlant() {
         String url = USAUtils.buildPlantSearchURL();
         new PlantTask().execute(url);
-    }
-
-    public void showPlantLocation() {
-        Uri geoUri = Uri.parse("geo:0,0").buildUpon()
-                .appendQueryParameter("q", WeatherPreferences.getDefaultPlantLocation())
-                .build();
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, geoUri);
-        if (mapIntent.resolveActivity(getPackageManager()) != null) {
-            startActivity(mapIntent);
-        }
     }
 
     class PlantTask extends AsyncTask<String, Void, String> {
