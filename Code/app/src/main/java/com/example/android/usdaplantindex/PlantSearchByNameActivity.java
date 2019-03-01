@@ -24,6 +24,7 @@ import com.example.android.usdaplantindex.utils.USAUtils;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingDeque;
 
 // This activity provides the functionality for searching plants by scientific name.
@@ -86,6 +87,7 @@ public class PlantSearchByNameActivity extends AppCompatActivity
 
     // Contains search box text split into individual words
     private ArrayList<String> mFilters;
+    private ArrayList<Integer> mFilteredPlantIds;
 
     private PlantSearchAdapter mPlantSearchAdapter;
     private LoaderManager.LoaderCallbacks<String> mSearchLiteLoader;
@@ -111,6 +113,9 @@ public class PlantSearchByNameActivity extends AppCompatActivity
         mPlantIdsToLoad = new HashSet<>();
         mPlants = new Hashtable<>();
         mFilters = new ArrayList<>();
+
+        mFilteredPlantIds = new ArrayList<>();
+
 
         mSearchBoxET.addTextChangedListener(new TextWatcher() {
             @Override
@@ -177,20 +182,24 @@ public class PlantSearchByNameActivity extends AppCompatActivity
             @Override
             public void onLoadFinished(@NonNull Loader<String> loader, String s) {
                 Log.d(TAG, "Heavy loader finished loading.");
+
+                // Store details
                 if (s != null) {
                     ArrayList<USAUtils.PlantItem> items = USAUtils.parsePlantJSON(s);
                     if (items != null) {
-                        Log.d(TAG, "items not null");
-                        // Store details
                         storePlantDetails(items);
-                        // Update search results with new/additional information
-                        updateSearchResults();
                     }
                 }
 
+                // Update search results with new/additional information
+
+                updateSearchResults();
+
                 // Resume loading until plant details of all, matched plant scientific names
                 // are loaded
-                loadPlantDetails();
+                if (mFilteredPlantIds.size() < RESULTS_DIPLAY_LIMIT) {
+                    loadPlantDetails();
+                }
             }
 
             @Override
@@ -235,12 +244,16 @@ public class PlantSearchByNameActivity extends AppCompatActivity
             for (String item : mAllPlantNames.keySet()) {
                 String name = item.toLowerCase();
                 Integer id = mAllPlantNames.get(item);
-                for (String filter : mFilters) {
-                    if (name.contains(filter)) {
-                        if (!mPlants.containsKey(id)) // if not already loaded
-                            mPlantIdsToLoad.add(id);
-                        break;
-                    }
+                // Proceed if not already loaded
+                if (mPlants.containsKey(id)) continue;
+                // Check if plant matches all filters
+                int i;
+                for (i = 0; i < mFilters.size(); ++i) {
+                    String filter = mFilters.get(i);
+                    if (!name.contains(filter)) break;
+                }
+                if (i == mFilters.size()) { // if plant contains all filters
+                    mPlantIdsToLoad.add(id);
                 }
             }
         }
@@ -255,18 +268,47 @@ public class PlantSearchByNameActivity extends AppCompatActivity
 
     private void updateSearchResults() {
         Log.d(TAG, "Filtering: " + mFilters.toString());
+
         ArrayList<USAUtils.PlantItem> filteredPlants = new ArrayList<>();
-        for (USAUtils.PlantItem item : mPlants.values()) {
-            String name = item.Scientific_Name_x.toLowerCase();
-            for (String filter : mFilters) {
-                if (name.contains(filter)) {
+
+        // Remove current filters that do not match the results
+        ArrayList<Integer> prevIds = new ArrayList<Integer>(mFilteredPlantIds);
+        mFilteredPlantIds.clear();
+        if (!mFilters.isEmpty()) {
+            for (Integer id : prevIds) {
+                USAUtils.PlantItem item = mPlants.get(id);
+                if (item == null) continue;
+                String name = item.Scientific_Name_x.toLowerCase();
+                int i;
+                for (i = 0; i < mFilters.size(); ++i) {
+                    String filter = mFilters.get(i);
+                    if (!name.contains(filter)) break;
+                }
+                if (i == mFilters.size()) { // if plant contains all filters
                     filteredPlants.add(item);
-                    break;
+                    mFilteredPlantIds.add(id);
                 }
             }
-            if (filteredPlants.size() >= RESULTS_DIPLAY_LIMIT)
-                break;
+
+            // Add new filters
+            for (USAUtils.PlantItem item : mPlants.values()) {
+                if (mFilteredPlantIds.contains(item.id)) continue;
+                String name = item.Scientific_Name_x.toLowerCase();
+                int i;
+                for (i = 0; i < mFilters.size(); ++i) {
+                    String filter = mFilters.get(i);
+                    if (!name.contains(filter)) break;
+                }
+                if (i == mFilters.size()) { // if plant contains all filters
+                    filteredPlants.add(item);
+                    mFilteredPlantIds.add(item.id);
+                    if (filteredPlants.size() >= RESULTS_DIPLAY_LIMIT) // verify limit
+                        break;
+                }
+            }
         }
+
+        // Show results
         mPlantSearchAdapter.updatePlantItems(filteredPlants);
     }
 
