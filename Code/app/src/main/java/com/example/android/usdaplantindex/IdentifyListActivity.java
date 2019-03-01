@@ -23,7 +23,6 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
 
     private static final String TAG = IdentifyListActivity.class.getSimpleName();
 
-    private TextView mPlantLocationTV;
     private RecyclerView mPlantItemsRV;
     private ProgressBar mLoadingIndicatorPB;
     private TextView mLoadingErrorMessageTV;

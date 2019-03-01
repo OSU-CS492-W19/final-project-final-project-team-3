@@ -19,4 +19,10 @@
 
     <string name="plant_search_by_species_box_hint">Enter Species...</string>
     <string name="plant_search_by_name_box_hint">Enter Scientific Name...</string>
+
+    <string name="plant_text_general">General Information</string>
+    <string name="plant_text_morphology">Morphology/Physiology</string>
+    <string name="plant_text_growth">Growth Requirements</string>
+    <string name="plant_text_reproduction">Reproduction</string>
+    <string name="plant_text_suitability">Suitability/Use</string>
 </resources>

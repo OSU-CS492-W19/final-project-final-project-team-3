@@ -10,7 +10,7 @@
 
         <TextView
             android:id="@+id/tv_plant_scientific"
-            android:textStyle="italic"
+            android:textStyle="bold|italic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
@@ -34,7 +34,84 @@
             android:layout_height="300dp" />
 
         <TextView
-            android:id="@+id/tv_plant_details"
+            android:id="@+id/tv_h_general"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_plant_general"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_h_morphology"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_plant_morphology"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_h_growth"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_plant_growth"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_h_reproduction"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_plant_reproduction"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_h_suitability"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_plant_suitability"
             android:padding="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

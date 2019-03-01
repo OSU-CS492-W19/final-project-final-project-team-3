@@ -27,7 +27,6 @@ public class USAUtils {
         public String Scientific_Name_x;
         public String Common_Name;
         public String Symbol;
-        public String Group;
         public String Family;
         public String Duration;
         public String Growth_Habit;
