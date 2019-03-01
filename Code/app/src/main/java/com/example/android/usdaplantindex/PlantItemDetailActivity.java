@@ -74,55 +74,42 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         }
     }
 
+    // Takes in the name and value of a string and returns a string
+    // of that shows the fields name and value, if the value is not empty.
+    public String getFieldString(String fieldName, String fieldValue) {
+        String returnString = "";
+        if(fieldValue != "" && fieldValue != null) {
+            returnString = fieldName + ": " + fieldValue + "\n";
+        }
+        return returnString;
+    }
+
+    // Returns a string with all of the detailed information
+    // for the given plant.
     public String getDetailedString() {
         String detailString = "";
 
-        if(mPlantItem.Symbol != "" && mPlantItem.Symbol != null) {
-            detailString += "Symbol: " + mPlantItem.Symbol + "\n";
-        }
-        if(mPlantItem.Group != "" && mPlantItem.Group != null) {
-            detailString += "Group: " + mPlantItem.Group + "\n";
-        }
-        if(mPlantItem.Family != "" && mPlantItem.Family != null) {
-            detailString += "Family: " + mPlantItem.Family + "\n";
-        }
-        if(mPlantItem.Duration != "" && mPlantItem.Duration != null) {
-            detailString += "Duration: " + mPlantItem.Duration + "\n";
-        }
-        if(mPlantItem.Growth_Habit != "" && mPlantItem.Growth_Habit != null) {
-            detailString += "Growth Habit: " + mPlantItem.Growth_Habit + "\n";
-        }
-        if(mPlantItem.Native_Status != "" && mPlantItem.Native_Status != null) {
-            detailString += "Native status: " + mPlantItem.Native_Status + "\n";
-        }
-        if(mPlantItem.Category != "" && mPlantItem.Category != null) {
-            detailString += "Category: " + mPlantItem.Category + "\n";
-        }
-        if(mPlantItem.xOrder != "" && mPlantItem.xOrder != null) {
-            detailString += "Order: " + mPlantItem.xOrder + "\n";
-        }
-        if(mPlantItem.Class != "" && mPlantItem.Class != null) {
-            detailString += "Class: " + mPlantItem.Class + "\n";
-        }
-        if(mPlantItem.SubClass != "" && mPlantItem.SubClass != null) {
-            detailString += "Subclass: " + mPlantItem.SubClass + "\n";
-        }
-        if(mPlantItem.Kingdom != "" && mPlantItem.Kingdom != null) {
-            detailString += "Kingdom: " + mPlantItem.Kingdom + "\n";
-        }
-        if(mPlantItem.Species != "" && mPlantItem.Species != null) {
-            detailString += "Species: " + mPlantItem.Species + "\n";
-        }
-        if(mPlantItem.Subspecies != "" && mPlantItem.Subspecies != null) {
-            detailString += "Subspecies: " + mPlantItem.Subspecies + "\n";
-        }
-        if(mPlantItem.State_and_Province != "" && mPlantItem.State_and_Province != null) {
-            detailString += "State and Province: " + mPlantItem.State_and_Province + "\n";
-        }
+        getFieldString("Symbol", mPlantItem.Symbol);
+        getFieldString("Group", mPlantItem.Group);
+        getFieldString("Family", mPlantItem.Family);
+        getFieldString("Duration", mPlantItem.Duration);
+        getFieldString("Growth Habit", mPlantItem.Growth_Habit);
+        getFieldString("Native status", mPlantItem.Native_Status);
+        getFieldString("Category", mPlantItem.Category);
+        getFieldString("Order", mPlantItem.xOrder);
+        getFieldString("Class", mPlantItem.Class);
+        getFieldString("SubClass", mPlantItem.SubClass);
+        getFieldString("Kingdom", mPlantItem.Kingdom);
+        getFieldString("Species", mPlantItem.Species);
+        getFieldString("Subspecies", mPlantItem.Subspecies);
+        getFieldString("State and Province", mPlantItem.State_and_Province);
+        getFieldString("Class", mPlantItem.Class);
+        getFieldString("Class", mPlantItem.Class);
 
         return detailString;
     }
 
+    // Allows the user to share this plant with other users.
     public void sharePlant() {
         if (mPlantItem != null) {
 
@@ -137,6 +124,7 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         }
     }
 
+    // Displays information about the selected plant.
     private void fillInLayout(USDAUtils.PlantItem plantItem) {
         String sciString = plantItem.Scientific_Name_x;
         String comString = plantItem.Common_Name;
@@ -147,6 +135,7 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         mPlantDetails.setText(detailString);
     }
 
+    // Sets the plants image.
     private void setImage(String plantImage){
         Glide.with(mPlantPicIV).load(plantImage).into(mPlantPicIV);
     }
