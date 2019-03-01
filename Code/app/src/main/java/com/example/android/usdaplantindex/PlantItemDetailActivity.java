@@ -136,6 +136,47 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         return detailString;
     }
 
+    // Returns a string with all of the morph information
+    // for the given plant.
+    public String getMorphString() {
+        String detailString = "";
+
+        detailString += getFieldString("Symbol", mPlantItem.Symbol);
+
+        return detailString;
+    }
+
+    // Returns a string with all of the growth information
+    // for the given plant.
+    public String getGrowthString() {
+        String detailString = "";
+
+        detailString += getFieldString("Symbol", mPlantItem.Symbol);
+
+        return detailString;
+    }
+
+    // Returns a string with all of the rep information
+    // for the given plant.
+    public String getRepString() {
+        String detailString = "";
+
+        detailString += getFieldString("Symbol", mPlantItem.Symbol);
+
+        return detailString;
+    }
+
+    // Returns a string with all of the suit information
+    // for the given plant.
+    public String getSuitString() {
+        String detailString = "";
+
+        detailString += getFieldString("Symbol", mPlantItem.Symbol);
+
+        return detailString;
+    }
+
+
     // Allows the user to share this plant with other users.
     public void sharePlant() {
         if (mPlantItem != null) {
@@ -157,20 +198,28 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         String comString = plantItem.Common_Name;
         String generalString = getGeneralString();
         String generalHString = getHeaderString(getString(R.string.plant_text_general), generalString);
+        String morphString = getMorphString();
+        String morphHString = getHeaderString(getString(R.string.plant_text_morphology), morphString);
+        String growthString = getGrowthString();
+        String growthHString = getHeaderString(getString(R.string.plant_text_growth), growthString);
+        String repString = getRepString();
+        String repHString = getHeaderString(getString(R.string.plant_text_reproduction), repString);
+        String suitString = getSuitString();
+        String suitHString = getHeaderString(getString(R.string.plant_text_suitability), suitString);
 
         mPlantSciTV.setText(sciString);
         mPlantComTV.setText(comString);
 
         mHGeneralTV.setText(generalHString);
         mPlantGeneralTV.setText(generalString);
-        //mHMorphTV;
-        //mPlantMorphTV;
-        //mHGrowthTV;
-        //mPlantGrowthTV;
-        //mHRepTV;
-        //mPlantRepTV;
-        //mHSuitTV;
-        //mPlantSuitTV;
+        mHMorphTV.setText(morphHString);
+        mPlantMorphTV.setText(morphString);
+        mHGrowthTV.setText(growthHString);
+        mPlantGrowthTV.setText(growthString);
+        mHRepTV.setText(repHString);
+        mPlantRepTV.setText(repString);
+        mHSuitTV.setText(suitHString);
+        mPlantSuitTV.setText(suitString);
     }
 
     // Sets the plants image.
