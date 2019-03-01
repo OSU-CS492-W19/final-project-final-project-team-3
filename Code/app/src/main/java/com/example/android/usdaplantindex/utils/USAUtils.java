@@ -180,7 +180,7 @@ public class USAUtils {
         public String Palatable_Browse_Animal;
         public String Palatable_Graze_Animal;
         public String Palatable_Human;
-        public String Post_Product;,
+        public String Post_Product;
         public String Protein_Potential;
         public String Pulpwood_Product;
         public String Veneer_Product;
