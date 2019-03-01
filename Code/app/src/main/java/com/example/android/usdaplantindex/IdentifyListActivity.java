@@ -70,7 +70,7 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
     }
 
     public void loadPlant() {
-        String url = USAUtils.buildPlantSearchURL();
+        String url = USAUtils.buildPlantSearchURL(1000,1000);
         new PlantTask().execute(url);
     }
 
@@ -83,10 +83,10 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
 
         @Override
         protected String doInBackground(String... params) {
-            String openWeatherMapURL = params[0];
+            String USDAplantsURL = params[0];
             String plantJSON = null;
             try {
-                plantJSON = NetworkUtils.doHTTPGet(openWeatherMapURL);
+                plantJSON = NetworkUtils.doHTTPGet(USDAplantsURL);
             } catch (IOException e) {
                 e.printStackTrace();
             }
