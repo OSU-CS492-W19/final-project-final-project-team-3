@@ -53,13 +53,11 @@ public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.
     class PlantItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mPlantSciTV;
         private TextView mPlantComTV;
-        private ImageView mPlantPicIV;
 
         public PlantItemViewHolder(View itemView) {
             super(itemView);
             mPlantSciTV = itemView.findViewById(R.id.tv_plant_scientific);
             mPlantComTV = itemView.findViewById(R.id.tv_plant_common);
-            mPlantPicIV = itemView.findViewById(R.id.iv_plant_pic);
             itemView.setOnClickListener(this);
         }
 
@@ -67,10 +65,8 @@ public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.
         public void bind(USAUtils.PlantItem plantItem) {
             String sciString = plantItem.Scientific_Name_x;
             String comString = plantItem.Common_Name;
-            //String iconURL = USAUtils.buildIconURL(plantItem.icon);
             mPlantSciTV.setText(sciString);
             mPlantComTV.setText(comString);
-            //Glide.with(mPlantPicIV.getContext()).load(iconURL).into(mPlantPicIV);
         }
 
         @Override
