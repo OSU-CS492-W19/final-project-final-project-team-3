@@ -10,13 +10,29 @@ import java.util.ArrayList;
 public class USAUtils {
 
     public static final String EXTRA_PLANT_ITEM = "com.example.android.usdaplantindex.utils.PlantItem";
-
+    public static final String EXTRA_PLANT_IDENTIFY = "com.example.android.usdaplantindex.utils.PlantIdentify";
 
     private final static String PLANT_SEARCH_BASE_URL = "https://plantsdb.xyz/search";
     private final static String PLANT_SEARCH_LIMIT_PARAM = "limit";
     private final static Integer PLANT_SEARCH_LIMIT = 25;
     private final static String PLANT_SEARCH_OFFSET_PARAM = "offset";
     private final static Integer PLANT_SEARCH_OFFSET = 0;
+    private final static String PLANT_SEARCH_URL_AMPERSAND = "&";
+    private final static String PLANT_SEARCH_URL_EQUAL = "=";
+    private final static String PLANT_SEARCH_FIELD_STATE_AND_PROVINCE = "State_and_Province";
+    private final static String PLANT_SEARCH_FIELD_GROWTH_HABIT = "Growth_Habit";
+    private final static String PLANT_SEARCH_FIELD_CATEGORY = "Category";
+    private final static String PLANT_SEARCH_FIELD_DURATION = "Duration";
+
+    /*
+     * This class is used in passing values via Intent to the IdentifyListActivity for URL building.
+     */
+    public static class PlantIdentify implements Serializable {
+        public String plantState;
+        public String plantGrowthHabit;
+        public String plantCategory;
+        public String plantDuration;
+    }
 
     /*
      * This class is used as a final representation of a single plant item.
@@ -229,6 +245,39 @@ public class USAUtils {
                 .appendQueryParameter(query_param, query_value)
                 .build()
                 .toString();
+    }
+
+    /*
+     * URL builder for PlantIdentificationActivity -> IdentityListActivity
+     */
+    public static String buildPlantSearchURL(Integer limit, Integer offset, String state, String growthHabit, String category, String duration) {
+        String url = Uri.parse(PLANT_SEARCH_BASE_URL)
+                .buildUpon()
+                .appendQueryParameter(PLANT_SEARCH_LIMIT_PARAM, String.valueOf(limit))
+                .appendQueryParameter(PLANT_SEARCH_OFFSET_PARAM, String.valueOf(offset))
+                .build()
+                .toString();
+
+        /*
+         * Add parameters on to the URL dynamically depending upon what is available
+         */
+        if (!state.equals("")) {
+            url += PLANT_SEARCH_URL_AMPERSAND.concat(PLANT_SEARCH_FIELD_STATE_AND_PROVINCE).concat(PLANT_SEARCH_URL_EQUAL).concat(state);
+        }
+
+        if (!growthHabit.equals("")) {
+            url += PLANT_SEARCH_URL_AMPERSAND.concat(PLANT_SEARCH_FIELD_GROWTH_HABIT).concat(PLANT_SEARCH_URL_EQUAL).concat(growthHabit);
+        }
+
+        if (!category.equals("")) {
+            url += PLANT_SEARCH_URL_AMPERSAND.concat(PLANT_SEARCH_FIELD_CATEGORY).concat(PLANT_SEARCH_URL_EQUAL).concat(category);
+        }
+
+        if (!duration.equals("")) {
+            url += PLANT_SEARCH_URL_AMPERSAND.concat(PLANT_SEARCH_FIELD_DURATION).concat(PLANT_SEARCH_URL_EQUAL).concat(duration);
+        }
+
+        return url;
     }
 
     public static ArrayList<PlantItem> parsePlantJSON(String plantJSON) {

@@ -12,6 +12,7 @@
     <string name="title_activity_startup">USA Plant Index</string>
     <string name="title_activity_plant_search_by_species">Plants by Species</string>
     <string name="title_activity_plant_search_by_name">Plants by Name</string>
+    <string name="title_activity_plant_identification">Plant Identification</string>
 
     <string name="button_text_search_by_species">Search By Species</string>
     <string name="button_text_search_by_name">Search By Scientific Name</string>
@@ -26,8 +27,160 @@
     <string name="plant_text_reproduction">Reproduction</string>
     <string name="plant_text_suitability">Suitability/Use</string>
 
+    <string name="plant_identify_button_text">Identify</string>
+
     <string name="source_citation">Citation: USDA, NRCS. 2016. The PLANTS Database (http://plants.usda.gov, 12 July 2016).
         National Plant Data Team, Greensboro, NC 27401-4901 USA.\n\n
         Plant images are returned by Google Images and may be inaccurate.
     </string>
+
+    <string name="title_plant_identification_spinner_state">Select a State</string>
+    <string-array name="states_labels">
+        <item>Select</item>
+        <item>Alabama</item>
+        <item>Alaska</item>
+        <item>Arizona</item>
+        <item>Arkansas</item>
+        <item>California</item>
+        <item>Colorado</item>
+        <item>Connecticut</item>
+        <item>Delaware</item>
+        <item>Florida</item>
+        <item>Georgia</item>
+        <item>Hawaii</item>
+        <item>Idaho</item>
+        <item>Illinois</item>
+        <item>Indiana</item>
+        <item>Iowa</item>
+        <item>Kansas</item>
+        <item>Kentucky</item>
+        <item>Louisiana</item>
+        <item>Maine</item>
+        <item>Maryland</item>
+        <item>Massachusetts</item>
+        <item>Michigan</item>
+        <item>Minnesota</item>
+        <item>Mississippi</item>
+        <item>Missouri</item>
+        <item>Montana</item>
+        <item>Nebraska</item>
+        <item>Nevada</item>
+        <item>New Hampshire</item>
+        <item>New Jersey</item>
+        <item>New Mexico</item>
+        <item>New York</item>
+        <item>North Carolina</item>
+        <item>North Dakota</item>
+        <item>Ohio</item>
+        <item>Oklahoma</item>
+        <item>Oregon</item>
+        <item>Pennsylvania</item>
+        <item>Rhode Island</item>
+        <item>South Carolina</item>
+        <item>South Dakota</item>
+        <item>Tennessee</item>
+        <item>Texas</item>
+        <item>Utah</item>
+        <item>Vermont</item>
+        <item>Virginia</item>
+        <item>Washington</item>
+        <item>West Virginia</item>
+        <item>Wisconsin</item>
+        <item>Wyoming</item>
+    </string-array>
+
+    <string-array name="states_values">
+        <item>Select</item>
+        <item>USA%20(AL)</item>
+        <item>USA%20(AK)</item>
+        <item>USA%20(AZ)</item>
+        <item>USA%20(AR)</item>
+        <item>USA%20(CA)</item>
+        <item>USA%20(CO)</item>
+        <item>USA%20(CT)</item>
+        <item>USA%20(DE)</item>
+        <item>USA%20(FL)</item>
+        <item>USA%20(GA)</item>
+        <item>USA%20(HI)</item>
+        <item>USA%20(ID)</item>
+        <item>USA%20(IL)</item>
+        <item>USA%20(IN)</item>
+        <item>USA%20(IA)</item>
+        <item>USA%20(KS)</item>
+        <item>USA%20(KY)</item>
+        <item>USA%20(LA)</item>
+        <item>USA%20(ME)</item>
+        <item>USA%20(MD)</item>
+        <item>USA%20(MA)</item>
+        <item>USA%20(MI)</item>
+        <item>USA%20(MN)</item>
+        <item>USA%20(MS)</item>
+        <item>USA%20(MO)</item>
+        <item>USA%20(MT)</item>
+        <item>USA%20(NE)</item>
+        <item>USA%20(NV)</item>
+        <item>USA%20(NH)</item>
+        <item>USA%20(NJ)</item>
+        <item>USA%20(NM)</item>
+        <item>USA%20(NY)</item>
+        <item>USA%20(NC)</item>
+        <item>USA%20(ND)</item>
+        <item>USA%20(OH)</item>
+        <item>USA%20(OK)</item>
+        <item>USA%20(OR)</item>
+        <item>USA%20(PA)</item>
+        <item>USA%20(RI)</item>
+        <item>USA%20(SC)</item>
+        <item>USA%20(SD)</item>
+        <item>USA%20(TN)</item>
+        <item>USA%20(TX)</item>
+        <item>USA%20(UT)</item>
+        <item>USA%20(VT)</item>
+        <item>USA%20(VA)</item>
+        <item>USA%20(WA)</item>
+        <item>USA%20(WV)</item>
+        <item>USA%20(WI)</item>
+        <item>USA%20(WY)</item>
+    </string-array>
+
+    <string name="title_plant_identification_spinner_growth_habit">Select a Growth Habit</string>
+    <string-array name="growth_habits">
+        <item>Select</item>
+        <item>Forb/herb</item>
+        <item>Graminoid</item>
+        <item>Lichenous</item>
+        <item>Liana</item>
+        <item>Nonvascular</item>
+        <item>Shrub</item>
+        <item>Subshrub</item>
+        <item>Tree</item>
+        <item>Vine</item>
+    </string-array>
+
+    <string name="title_plant_identification_spinner_category">Select a Category</string>
+    <string-array name="categories">
+        <item>Select</item>
+        <item>Dicot</item>
+        <item>Fern</item>
+        <item>Green alga</item>
+        <item>Gymnosperm</item>
+        <item>Hornwort</item>
+        <item>Horsetail</item>
+        <item>Lichen</item>
+        <item>Liverwort</item>
+        <item>Lycopod</item>
+        <item>Monocot</item>
+        <item>Moss</item>
+        <item>Quillwort</item>
+        <item>Whisk-fern</item>
+    </string-array>
+
+    <string name="title_plant_identification_spinner_duration">Select a Duration</string>
+    <string-array name="durations">
+        <item>Select</item>
+        <item>Annual</item>
+        <item>Biennial</item>
+        <item>Perennial</item>
+    </string-array>
+
 </resources>
