@@ -1,7 +1,6 @@
 package com.example.android.usdaplantindex;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,11 +26,12 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
     private ProgressBar mLoadingIndicatorPB;
     private TextView mLoadingErrorMessageTV;
     private PlantSearchAdapter mPlantAdapter;
+    private USAUtils.PlantIdentify mPlantIdentify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_plant_identify_list);
 
         // Remove shadow under action bar.
         getSupportActionBar().setElevation(0);
@@ -70,7 +70,32 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
     }
 
     public void loadPlant() {
-        String url = USAUtils.buildPlantSearchURL(1000,1000);
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra(USAUtils.EXTRA_PLANT_IDENTIFY)) {
+            mPlantIdentify = (USAUtils.PlantIdentify)intent.getSerializableExtra(
+                    USAUtils.EXTRA_PLANT_IDENTIFY
+            );
+        }
+
+        if (mPlantIdentify.plantState == null) {
+            mPlantIdentify.plantState = "";
+        }
+
+        if (mPlantIdentify.plantGrowthHabit == null) {
+            mPlantIdentify.plantGrowthHabit = "";
+        }
+
+        if (mPlantIdentify.plantCategory == null) {
+            mPlantIdentify.plantCategory = "";
+        }
+
+        if (mPlantIdentify.plantDuration == null) {
+            mPlantIdentify.plantDuration = "";
+        }
+
+        String url = USAUtils.buildPlantSearchURL(1000,0,
+                mPlantIdentify.plantState, mPlantIdentify.plantGrowthHabit,
+                mPlantIdentify.plantCategory, mPlantIdentify.plantDuration);
         new PlantTask().execute(url);
     }
 

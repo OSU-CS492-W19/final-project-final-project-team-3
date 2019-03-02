@@ -41,7 +41,7 @@ public class StartupActivity extends AppCompatActivity {
         mSearchByLocationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StartupActivity.this, IdentifyListActivity.class);
+                Intent intent = new Intent(StartupActivity.this, PlantIdentificationActivity.class);
                 startActivity(intent);
             }
         });
