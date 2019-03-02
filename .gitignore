@@ -10,3 +10,4 @@
 /Code/captures
 /Code/.externalNativeBuild
 *.DS_Store
+*.iml

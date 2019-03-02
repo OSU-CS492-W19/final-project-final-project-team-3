@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">USA Plant Index</string>
-    <string name="forecast_for">Plants found in</string>
     <string name="loading_error_message">We couldn\'t load plant information.  Check your internet connection and try again.</string>
     <string name="action_share">Share plant</string>
     <string name="action_location">Show forecast location</string>
@@ -10,7 +9,7 @@
     <string name="plant_item_detail">PLACEHOLDER</string>
     <string name="plant_item_share_text">Plant Information:</string>
 
-    <string name="title_activity_startup">USDA Plant Index</string>
+    <string name="title_activity_startup">USA Plant Index</string>
     <string name="title_activity_plant_search_by_species">Plants by Species</string>
     <string name="title_activity_plant_search_by_name">Plants by Name</string>
 
@@ -20,4 +19,15 @@
 
     <string name="plant_search_by_species_box_hint">Enter Species...</string>
     <string name="plant_search_by_name_box_hint">Enter Scientific Name...</string>
+
+    <string name="plant_text_general">General Information</string>
+    <string name="plant_text_morphology">Morphology/Physiology</string>
+    <string name="plant_text_growth">Growth Requirements</string>
+    <string name="plant_text_reproduction">Reproduction</string>
+    <string name="plant_text_suitability">Suitability/Use</string>
+
+    <string name="source_citation">Citation: USDA, NRCS. 2016. The PLANTS Database (http://plants.usda.gov, 12 July 2016).
+        National Plant Data Team, Greensboro, NC 27401-4901 USA.\n\n
+        Plant images are returned by Google Images and may be inaccurate.
+    </string>
 </resources>

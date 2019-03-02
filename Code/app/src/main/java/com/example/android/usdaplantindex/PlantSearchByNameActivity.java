@@ -19,11 +19,12 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.android.usdaplantindex.utils.USDAUtils;
+import com.example.android.usdaplantindex.utils.USAUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingDeque;
 
 // This activity provides the functionality for searching plants by scientific name.
@@ -82,10 +83,11 @@ public class PlantSearchByNameActivity extends AppCompatActivity
     private HashSet<Integer> mPlantIdsToLoad;
 
     // Contains plant details (initially empty)
-    private Hashtable<Integer, USDAUtils.PlantItem> mPlants;
+    private Hashtable<Integer, USAUtils.PlantItem> mPlants;
 
     // Contains search box text split into individual words
     private ArrayList<String> mFilters;
+    private ArrayList<Integer> mFilteredPlantIds;
 
     private PlantSearchAdapter mPlantSearchAdapter;
     private LoaderManager.LoaderCallbacks<String> mSearchLiteLoader;
@@ -111,6 +113,9 @@ public class PlantSearchByNameActivity extends AppCompatActivity
         mPlantIdsToLoad = new HashSet<>();
         mPlants = new Hashtable<>();
         mFilters = new ArrayList<>();
+
+        mFilteredPlantIds = new ArrayList<>();
+
 
         mSearchBoxET.addTextChangedListener(new TextWatcher() {
             @Override
@@ -144,7 +149,7 @@ public class PlantSearchByNameActivity extends AppCompatActivity
             public void onLoadFinished(@NonNull Loader<String> loader, String s) {
                 Log.d(TAG, "Lite loader finished loading.");
                 if (s != null) {
-                    ArrayList<USDAUtils.PlantItem> items = USDAUtils.parsePlantJSON(s);
+                    ArrayList<USAUtils.PlantItem> items = USAUtils.parsePlantJSON(s);
                     if (items != null) {
                         updateAllPlantNames(items);
                     }
@@ -177,20 +182,24 @@ public class PlantSearchByNameActivity extends AppCompatActivity
             @Override
             public void onLoadFinished(@NonNull Loader<String> loader, String s) {
                 Log.d(TAG, "Heavy loader finished loading.");
+
+                // Store details
                 if (s != null) {
-                    ArrayList<USDAUtils.PlantItem> items = USDAUtils.parsePlantJSON(s);
+                    ArrayList<USAUtils.PlantItem> items = USAUtils.parsePlantJSON(s);
                     if (items != null) {
-                        Log.d(TAG, "items not null");
-                        // Store details
                         storePlantDetails(items);
-                        // Update search results with new/additional information
-                        updateSearchResults();
                     }
                 }
 
+                // Update search results with new/additional information
+
+                updateSearchResults();
+
                 // Resume loading until plant details of all, matched plant scientific names
                 // are loaded
-                loadPlantDetails();
+                if (mFilteredPlantIds.size() < RESULTS_DIPLAY_LIMIT) {
+                    loadPlantDetails();
+                }
             }
 
             @Override
@@ -235,12 +244,16 @@ public class PlantSearchByNameActivity extends AppCompatActivity
             for (String item : mAllPlantNames.keySet()) {
                 String name = item.toLowerCase();
                 Integer id = mAllPlantNames.get(item);
-                for (String filter : mFilters) {
-                    if (name.contains(filter)) {
-                        if (!mPlants.containsKey(id)) // if not already loaded
-                            mPlantIdsToLoad.add(id);
-                        break;
-                    }
+                // Proceed if not already loaded
+                if (mPlants.containsKey(id)) continue;
+                // Check if plant matches all filters
+                int i;
+                for (i = 0; i < mFilters.size(); ++i) {
+                    String filter = mFilters.get(i);
+                    if (!name.contains(filter)) break;
+                }
+                if (i == mFilters.size()) { // if plant contains all filters
+                    mPlantIdsToLoad.add(id);
                 }
             }
         }
@@ -255,30 +268,59 @@ public class PlantSearchByNameActivity extends AppCompatActivity
 
     private void updateSearchResults() {
         Log.d(TAG, "Filtering: " + mFilters.toString());
-        ArrayList<USDAUtils.PlantItem> filteredPlants = new ArrayList<>();
-        for (USDAUtils.PlantItem item : mPlants.values()) {
-            String name = item.Scientific_Name_x.toLowerCase();
-            for (String filter : mFilters) {
-                if (name.contains(filter)) {
+
+        ArrayList<USAUtils.PlantItem> filteredPlants = new ArrayList<>();
+
+        // Remove current filters that do not match the results
+        ArrayList<Integer> prevIds = new ArrayList<Integer>(mFilteredPlantIds);
+        mFilteredPlantIds.clear();
+        if (!mFilters.isEmpty()) {
+            for (Integer id : prevIds) {
+                USAUtils.PlantItem item = mPlants.get(id);
+                if (item == null) continue;
+                String name = item.Scientific_Name_x.toLowerCase();
+                int i;
+                for (i = 0; i < mFilters.size(); ++i) {
+                    String filter = mFilters.get(i);
+                    if (!name.contains(filter)) break;
+                }
+                if (i == mFilters.size()) { // if plant contains all filters
                     filteredPlants.add(item);
-                    break;
+                    mFilteredPlantIds.add(id);
                 }
             }
-            if (filteredPlants.size() >= RESULTS_DIPLAY_LIMIT)
-                break;
+
+            // Add new filters
+            for (USAUtils.PlantItem item : mPlants.values()) {
+                if (mFilteredPlantIds.contains(item.id)) continue;
+                String name = item.Scientific_Name_x.toLowerCase();
+                int i;
+                for (i = 0; i < mFilters.size(); ++i) {
+                    String filter = mFilters.get(i);
+                    if (!name.contains(filter)) break;
+                }
+                if (i == mFilters.size()) { // if plant contains all filters
+                    filteredPlants.add(item);
+                    mFilteredPlantIds.add(item.id);
+                    if (filteredPlants.size() >= RESULTS_DIPLAY_LIMIT) // verify limit
+                        break;
+                }
+            }
         }
+
+        // Show results
         mPlantSearchAdapter.updatePlantItems(filteredPlants);
     }
 
-    private void updateAllPlantNames(ArrayList<USDAUtils.PlantItem> items) {
+    private void updateAllPlantNames(ArrayList<USAUtils.PlantItem> items) {
         mAllPlantNames.clear(); // TODO this may need to be removed if we load partially
-        for (USDAUtils.PlantItem item : items) {
+        for (USAUtils.PlantItem item : items) {
             mAllPlantNames.put(item.Scientific_Name_x, item.id);
         }
     }
 
-    private void storePlantDetails(ArrayList<USDAUtils.PlantItem> items) {
-        for (USDAUtils.PlantItem item : items) {
+    private void storePlantDetails(ArrayList<USAUtils.PlantItem> items) {
+        for (USAUtils.PlantItem item : items) {
             // Store plant details
             mPlants.put(item.id, item);
             // Remove id from the to load set
@@ -289,7 +331,7 @@ public class PlantSearchByNameActivity extends AppCompatActivity
     private void loadPlantNames() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String url = USDAUtils.buildPlantSearchURL(LITE_LOAD_LIMIT, 0, "fields", "id,Scientific_Name_x");
+        String url = USAUtils.buildPlantSearchURL(LITE_LOAD_LIMIT, 0, "fields", "id,Scientific_Name_x");
 
         Bundle args = new Bundle();
         args.putString(PLANT_SEARCH_LITE_URL_KEY, url);
@@ -300,7 +342,7 @@ public class PlantSearchByNameActivity extends AppCompatActivity
     private void loadPlantDetails() {
         if (mPlantIdsToLoad.isEmpty()) return;
         Integer id = mPlantIdsToLoad.iterator().next();
-        String url = USDAUtils.buildPlantSearchURL(RESULTS_LOAD_LIMIT, 0, "id", String.valueOf(id));
+        String url = USAUtils.buildPlantSearchURL(RESULTS_LOAD_LIMIT, 0, "id", String.valueOf(id));
 
         Bundle args = new Bundle();
         args.putString(PLANT_SEARCH_HEAVY_URL_KEY, url);
@@ -308,9 +350,9 @@ public class PlantSearchByNameActivity extends AppCompatActivity
     }
 
     @Override
-    public void onPlantItemClick(USDAUtils.PlantItem repo) {
+    public void onPlantItemClick(USAUtils.PlantItem repo) {
         Intent intent = new Intent(this, PlantItemDetailActivity.class);
-        intent.putExtra(USDAUtils.EXTRA_PLANT_ITEM, repo);
+        intent.putExtra(USAUtils.EXTRA_PLANT_ITEM, repo);
         startActivity(intent);
     }
 

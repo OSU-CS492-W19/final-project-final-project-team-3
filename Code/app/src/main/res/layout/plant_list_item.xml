@@ -10,12 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/iv_plant_pic"
-            android:padding="8dp"
-            android:layout_width="72dp"
-            android:layout_height="72dp" />
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
