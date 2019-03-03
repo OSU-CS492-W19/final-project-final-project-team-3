@@ -12,11 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
+        android:paddingTop="10dp"
         android:paddingRight="10dp"
-        android:paddingBottom="2dp"
+        android:paddingBottom="10dp"
         android:text="@string/title_plant_identification_spinner_state"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -28,18 +28,19 @@
         android:paddingBottom="2dp"
         android:gravity="center"
         android:textAlignment="center"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:background="@drawable/spinner_border" />
 
     <TextView
         android:id="@+id/tv_spinner_growth_habit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
+        android:paddingTop="10dp"
         android:paddingRight="10dp"
-        android:paddingBottom="2dp"
+        android:paddingBottom="10dp"
         android:text="@string/title_plant_identification_spinner_growth_habit"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -51,18 +52,19 @@
         android:paddingBottom="2dp"
         android:gravity="center"
         android:textAlignment="center"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:background="@drawable/spinner_border" />
 
     <TextView
         android:id="@+id/tv_spinner_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
+        android:paddingTop="10dp"
         android:paddingRight="10dp"
-        android:paddingBottom="2dp"
+        android:paddingBottom="10dp"
         android:text="@string/title_plant_identification_spinner_category"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -74,18 +76,19 @@
         android:paddingBottom="2dp"
         android:gravity="center"
         android:textAlignment="center"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:background="@drawable/spinner_border" />
 
     <TextView
         android:id="@+id/tv_spinner_duration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
+        android:paddingTop="10dp"
         android:paddingRight="10dp"
-        android:paddingBottom="2dp"
+        android:paddingBottom="10dp"
         android:text="@string/title_plant_identification_spinner_duration"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -97,7 +100,8 @@
         android:paddingBottom="2dp"
         android:gravity="center"
         android:textAlignment="center"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:background="@drawable/spinner_border" />
 
     <Button
         android:id="@+id/btn_identify"
