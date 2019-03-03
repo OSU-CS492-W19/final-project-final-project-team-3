@@ -26,6 +26,15 @@
             android:visibility="invisible"
             android:text="@string/loading_error_message" />
 
+        <TextView
+            android:id="@+id/tv_search_error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:padding="16dp"
+            android:visibility="invisible"
+            android:text="@string/search_error_message" />
+
         <ProgressBar
             android:id="@+id/pb_loading_indicator"
             android:layout_width="72dp"
