@@ -25,7 +25,8 @@ public class USAUtils {
     private final static String PLANT_SEARCH_FIELD_DURATION = "Duration";
 
     /*
-     * This class is used in passing values via Intent to the IdentifyListActivity for URL building.
+     * This class is used in passing values via Intent from the PlantIdentificationActivity
+     * to the IdentifyListActivity for URL building.
      */
     public static class PlantIdentify implements Serializable {
         public String plantState;
@@ -248,7 +249,7 @@ public class USAUtils {
     }
 
     /*
-     * URL builder for PlantIdentificationActivity -> IdentityListActivity
+     * URL builder for PlantIdentificationActivity -> IdentifyListActivity
      */
     public static String buildPlantSearchURL(Integer limit, Integer offset, String state, String growthHabit, String category, String duration) {
         String url = Uri.parse(PLANT_SEARCH_BASE_URL)

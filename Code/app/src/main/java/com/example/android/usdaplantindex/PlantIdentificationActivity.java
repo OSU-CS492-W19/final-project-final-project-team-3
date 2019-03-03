@@ -57,9 +57,12 @@ public class PlantIdentificationActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
                 String selectedItem = parent.getItemAtPosition(position).toString();
-                if(!selectedItem.equals("Select"))
+                if(!selectedItem.equals("All"))
                 {
                     plantIdentify.plantState = getResources().getStringArray(R.array.states_values)[position];
+                }
+                else {
+                    plantIdentify.plantState = "";
                 }
             } // to close the onItemSelected
             public void onNothingSelected(AdapterView<?> parent) { /* Do Nothing */ }
@@ -70,9 +73,12 @@ public class PlantIdentificationActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
                 String selectedItem = parent.getItemAtPosition(position).toString();
-                if(!selectedItem.equals("Select"))
+                if(!selectedItem.equals("All"))
                 {
                     plantIdentify.plantGrowthHabit = selectedItem;
+                }
+                else {
+                    plantIdentify.plantGrowthHabit = "";
                 }
             } // to close the onItemSelected
             public void onNothingSelected(AdapterView<?> parent) { /* Do Nothing */ }
@@ -83,9 +89,12 @@ public class PlantIdentificationActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
                 String selectedItem = parent.getItemAtPosition(position).toString();
-                if(!selectedItem.equals("Select"))
+                if(!selectedItem.equals("All"))
                 {
                     plantIdentify.plantCategory = selectedItem;
+                }
+                else {
+                    plantIdentify.plantCategory = "";
                 }
             } // to close the onItemSelected
             public void onNothingSelected(AdapterView<?> parent) { /* Do Nothing */ }
@@ -96,9 +105,12 @@ public class PlantIdentificationActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
                 String selectedItem = parent.getItemAtPosition(position).toString();
-                if(!selectedItem.equals("Select"))
+                if(!selectedItem.equals("All"))
                 {
                     plantIdentify.plantDuration = selectedItem;
+                }
+                else {
+                    plantIdentify.plantDuration = "";
                 }
             } // to close the onItemSelected
             public void onNothingSelected(AdapterView<?> parent) { /* Do Nothing */ }

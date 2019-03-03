@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">USA Plant Index</string>
     <string name="loading_error_message">We couldn\'t load plant information.  Check your internet connection and try again.</string>
+    <string name="search_error_message">"Your search criteria did not yield any results. Please try again."</string>
     <string name="action_share">Share plant</string>
     <string name="action_location">Show forecast location</string>
     <string name="action_settings">Settings</string>
@@ -36,7 +37,7 @@
 
     <string name="title_plant_identification_spinner_state">Select a State</string>
     <string-array name="states_labels">
-        <item>Select</item>
+        <item>All</item>
         <item>Alabama</item>
         <item>Alaska</item>
         <item>Arizona</item>
@@ -90,7 +91,7 @@
     </string-array>
 
     <string-array name="states_values">
-        <item>Select</item>
+        <item>All</item>
         <item>USA%20(AL)</item>
         <item>USA%20(AK)</item>
         <item>USA%20(AZ)</item>
@@ -145,7 +146,7 @@
 
     <string name="title_plant_identification_spinner_growth_habit">Select a Growth Habit</string>
     <string-array name="growth_habits">
-        <item>Select</item>
+        <item>All</item>
         <item>Forb/herb</item>
         <item>Graminoid</item>
         <item>Lichenous</item>
@@ -159,7 +160,7 @@
 
     <string name="title_plant_identification_spinner_category">Select a Category</string>
     <string-array name="categories">
-        <item>Select</item>
+        <item>All</item>
         <item>Dicot</item>
         <item>Fern</item>
         <item>Green alga</item>
@@ -177,7 +178,7 @@
 
     <string name="title_plant_identification_spinner_duration">Select a Duration</string>
     <string-array name="durations">
-        <item>Select</item>
+        <item>All</item>
         <item>Annual</item>
         <item>Biennial</item>
         <item>Perennial</item>

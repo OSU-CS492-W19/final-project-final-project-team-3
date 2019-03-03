@@ -77,18 +77,19 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
             );
         }
 
+        /*
+         * We must ensure that our PlantIdentify values aren't null
+         * to avoid null pointer exceptions in the URL builder
+         */
         if (mPlantIdentify.plantState == null) {
             mPlantIdentify.plantState = "";
         }
-
         if (mPlantIdentify.plantGrowthHabit == null) {
             mPlantIdentify.plantGrowthHabit = "";
         }
-
         if (mPlantIdentify.plantCategory == null) {
             mPlantIdentify.plantCategory = "";
         }
-
         if (mPlantIdentify.plantDuration == null) {
             mPlantIdentify.plantDuration = "";
         }
@@ -126,7 +127,22 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
                 mPlantItemsRV.setVisibility(View.VISIBLE);
                 ArrayList<USAUtils.PlantItem> plantItems = USAUtils.parsePlantJSON(plantJSON);
                 mPlantAdapter.updatePlantItems(plantItems);
+
+                /*
+                 * If the plantItems array list comes back null, our search did not yield
+                 * any results. Display the appropriate search error message to the user
+                 */
+                if (plantItems == null) {
+                    mLoadingErrorMessageTV = findViewById(R.id.tv_search_error_message);
+                    mPlantItemsRV.setVisibility(View.INVISIBLE);
+                    mLoadingErrorMessageTV.setVisibility(View.VISIBLE);
+                }
             } else {
+                /*
+                 * If the plantJSON comes back null, then our HTTP connection wasn't
+                 * available. Display the appropriate loading error message to the user
+                 */
+                mLoadingErrorMessageTV = findViewById(R.id.tv_loading_error_message);
                 mPlantItemsRV.setVisibility(View.INVISIBLE);
                 mLoadingErrorMessageTV.setVisibility(View.VISIBLE);
             }
