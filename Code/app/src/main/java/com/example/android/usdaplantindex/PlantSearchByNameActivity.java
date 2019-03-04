@@ -35,6 +35,7 @@ public class PlantSearchByNameActivity extends AppCompatActivity
 
     private static final String PLANT_SEARCH_LITE_ARRAY_KEY = "plantSearchByNameLite";
     private static final String PLANT_SEARCH_LITE_URL_KEY = "plantSearchByNameLiteURL";
+    private static final String PLANT_SEARCH_LITE_LOAD_OFFSET_KEY = "plantSearchByNameLiteOffset";
     private static final Integer PLANT_SEARCH_LITE_LOADER_ID = 3;
 
     private static final String PLANT_SEARCH_HEAVY_ARRAY_KEY = "plantSearchByNameHeavy";
@@ -42,16 +43,15 @@ public class PlantSearchByNameActivity extends AppCompatActivity
     private static final Integer PLANT_SEARCH_HEAVY_LOADER_ID = 4;
 
     /*
-     - When the activity is created, we first load all the Scientific_Name_x fields and
-       nothing else. This doesn't take a while; it would take longer to load additional fields,
-       so we restrict to only pre-loading one field.
-     - The load limit is there just in case there is actually more items than that, that could
-       affect the pre-loading performance.
+     - When the activity is created, we first load all the Scientific_Name_x fields
+     - Because there are more than 20000 plants, requesting all of them fails and we have to
+       load them partially with time and incrementing load offset.
+     - The load limit indicates the number of plant scientific names to load per call.
      - When search box text changes, we iterate the pre-loaded array and for Scientific_Name_x that
        partially match the search query, have an asynchronous task gradually load their plant item
        details and fill the results adapter.
      */
-    private static final Integer LITE_LOAD_LIMIT = 5000;
+    private static final Integer LITE_LOAD_LIMIT = 3000;
 
     /*
      - The is one interesting property about plant scientific names and it is that no two plants
@@ -73,10 +73,12 @@ public class PlantSearchByNameActivity extends AppCompatActivity
     private RecyclerView mSearchResultsRV;
     private EditText mSearchBoxET;
     private TextView mLoadingErrorTV;
+    private TextView mLoadingTextTV;
     private ProgressBar mLoadingPB;
 
     // Contains all plant scientific names and their ids
-    private Hashtable<String, Integer> mAllPlantNames;
+    private Hashtable<Integer, String> mAllPlantNames;
+    private Integer mLiteLoadOffset;
 
     // Whenever we enter something to search, this is emptied and
     // filled in with all the ids of all the scientific names that need to be loaded.
@@ -101,6 +103,7 @@ public class PlantSearchByNameActivity extends AppCompatActivity
         mSearchBoxET = findViewById(R.id.plant_search_by_name_et);
         mSearchResultsRV = findViewById(R.id.plant_search_by_name_results);
         mLoadingErrorTV = findViewById(R.id.plant_search_by_name_loading_error_tv);
+        mLoadingTextTV = findViewById(R.id.plant_search_by_name_loading_tv);
         mLoadingPB = findViewById(R.id.plant_search_by_name_loading_pb);
 
         mSearchResultsRV.setLayoutManager(new LinearLayoutManager(this));
@@ -115,7 +118,7 @@ public class PlantSearchByNameActivity extends AppCompatActivity
         mFilters = new ArrayList<>();
 
         mFilteredPlantIds = new ArrayList<>();
-
+        mLiteLoadOffset = 0;
 
         mSearchBoxET.addTextChangedListener(new TextWatcher() {
             @Override
@@ -148,18 +151,25 @@ public class PlantSearchByNameActivity extends AppCompatActivity
             @Override
             public void onLoadFinished(@NonNull Loader<String> loader, String s) {
                 Log.d(TAG, "Lite loader finished loading.");
+                mLoadingPB.setVisibility(View.INVISIBLE);
+
                 if (s != null) {
                     ArrayList<USAUtils.PlantItem> items = USAUtils.parsePlantJSON(s);
                     if (items != null) {
                         updateAllPlantNames(items);
+                        //mLoadingErrorTV.setVisibility(View.INVISIBLE);
+                        //mSearchResultsRV.setVisibility(View.VISIBLE);
+                        //return;
+                        if (!items.isEmpty()) {
+                            mLiteLoadOffset += LITE_LOAD_LIMIT;
+                            loadPlantNames();
+                            updateLoadingText();
+                            return;
+                        }
                     }
-                    mLoadingErrorTV.setVisibility(View.INVISIBLE);
-                    mSearchResultsRV.setVisibility(View.VISIBLE);
-                } else {
-                    mLoadingErrorTV.setVisibility(View.VISIBLE);
-                    mSearchResultsRV.setVisibility(View.INVISIBLE);
                 }
-                mLoadingPB.setVisibility(View.INVISIBLE);
+                //mLoadingErrorTV.setVisibility(View.VISIBLE);
+                //mSearchResultsRV.setVisibility(View.INVISIBLE);
             }
 
             @Override
@@ -212,11 +222,11 @@ public class PlantSearchByNameActivity extends AppCompatActivity
         getSupportLoaderManager().initLoader(PLANT_SEARCH_HEAVY_LOADER_ID, null, mSearchHeavyLoader);
 
         if (savedInstanceState != null && savedInstanceState.containsKey(PLANT_SEARCH_LITE_ARRAY_KEY)) {
-            mAllPlantNames = (Hashtable<String, Integer>) savedInstanceState.getSerializable(PLANT_SEARCH_LITE_ARRAY_KEY);
+            mAllPlantNames = (Hashtable<Integer, String>) savedInstanceState.getSerializable(PLANT_SEARCH_LITE_ARRAY_KEY);
+            mLiteLoadOffset = (Integer)savedInstanceState.getSerializable(PLANT_SEARCH_LITE_LOAD_OFFSET_KEY);
         }
-        else {
-            loadPlantNames();
-        }
+        loadPlantNames();
+        updateLoadingText();
 
         // TODO Also load search results
     }
@@ -226,6 +236,10 @@ public class PlantSearchByNameActivity extends AppCompatActivity
         super.onResume();
         // Update search results
         searchChanged(mSearchBoxET.getText().toString());
+    }
+
+    private void updateLoadingText() {
+        mLoadingTextTV.setText(String.valueOf(mAllPlantNames.size()));
     }
 
     private void searchChanged(String s) {
@@ -241,9 +255,8 @@ public class PlantSearchByNameActivity extends AppCompatActivity
         // Look through all, pre-loaded plant scientific names for matches
         mPlantIdsToLoad.clear();
         if (!mFilters.isEmpty()) {
-            for (String item : mAllPlantNames.keySet()) {
-                String name = item.toLowerCase();
-                Integer id = mAllPlantNames.get(item);
+            for (Integer id : mAllPlantNames.keySet()) {
+                String name = mAllPlantNames.get(id);
                 // Proceed if not already loaded
                 if (mPlants.containsKey(id)) continue;
                 // Check if plant matches all filters
@@ -313,9 +326,8 @@ public class PlantSearchByNameActivity extends AppCompatActivity
     }
 
     private void updateAllPlantNames(ArrayList<USAUtils.PlantItem> items) {
-        mAllPlantNames.clear(); // TODO this may need to be removed if we load partially
         for (USAUtils.PlantItem item : items) {
-            mAllPlantNames.put(item.Scientific_Name_x, item.id);
+            mAllPlantNames.put(item.id, item.Scientific_Name_x.toLowerCase());
         }
     }
 
@@ -331,7 +343,9 @@ public class PlantSearchByNameActivity extends AppCompatActivity
     private void loadPlantNames() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String url = USAUtils.buildPlantSearchURL(LITE_LOAD_LIMIT, 0, "fields", "id,Scientific_Name_x");
+        Log.d(TAG, "Lite load " + String.valueOf(mLiteLoadOffset));
+
+        String url = USAUtils.buildPlantSearchURL(LITE_LOAD_LIMIT, mLiteLoadOffset, "fields", "id,Scientific_Name_x");
 
         Bundle args = new Bundle();
         args.putString(PLANT_SEARCH_LITE_URL_KEY, url);
@@ -360,7 +374,9 @@ public class PlantSearchByNameActivity extends AppCompatActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mAllPlantNames != null) {
-            outState.putSerializable(PLANT_SEARCH_LITE_ARRAY_KEY, mAllPlantNames);
+            // Saving large amount of data results with android.os.TransactionTooLargeException
+            //~ outState.putSerializable(PLANT_SEARCH_LITE_ARRAY_KEY, mAllPlantNames);
+            //~ outState.putSerializable(PLANT_SEARCH_LITE_LOAD_OFFSET_KEY, mLiteLoadOffset);
         }
 
         // TODO Also store search results
