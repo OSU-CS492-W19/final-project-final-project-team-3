@@ -9,5 +9,5 @@
 /Code/build
 /Code/captures
 /Code/.externalNativeBuild
+/Code/*.iml
 *.DS_Store
-*.iml
