@@ -284,10 +284,10 @@ public class PlantSearchByNameActivity extends AppCompatActivity
 
         ArrayList<USAUtils.PlantItem> filteredPlants = new ArrayList<>();
 
-        // Remove current filters that do not match the results
         ArrayList<Integer> prevIds = new ArrayList<Integer>(mFilteredPlantIds);
         mFilteredPlantIds.clear();
         if (!mFilters.isEmpty()) {
+            // Remove current filters that do not match the results
             for (Integer id : prevIds) {
                 USAUtils.PlantItem item = mPlants.get(id);
                 if (item == null) continue;
