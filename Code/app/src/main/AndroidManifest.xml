@@ -47,6 +47,8 @@
         </activity>
         <activity
             android:name=".FavoritePlantsActivity"
+            android:launchMode="singleTop"
+            android:label="@string/title_activity_plant_favorites"
             android:parentActivityName=".StartupActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
