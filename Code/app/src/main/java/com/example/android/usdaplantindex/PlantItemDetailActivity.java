@@ -1,12 +1,16 @@
 package com.example.android.usdaplantindex;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +21,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import com.example.android.usdaplantindex.data.PlantInfo;
 
 public class PlantItemDetailActivity extends AppCompatActivity {
 
@@ -28,8 +33,13 @@ public class PlantItemDetailActivity extends AppCompatActivity {
     private TextView mPlantComTV;
     private TextView mPlantDetails;
     private ImageView mPlantPicIV;
+    private ImageView mPlantFavoriteIV;
 
     private USDAUtils.PlantItem mPlantItem;
+
+    private PlantInfoViewModel mPlantInfoViewModel;
+    private PlantInfo mPlantInfo;
+    private boolean mIsFav = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +50,11 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         mPlantComTV = findViewById(R.id.tv_plant_common);
         mPlantDetails = findViewById(R.id.tv_plant_details);
         mPlantPicIV = findViewById(R.id.iv_plant_pic_det);
+        mPlantFavoriteIV = findViewById(R.id.iv_plant_favorite);
 
+        mPlantInfoViewModel = ViewModelProviders.of(this).get(PlantInfoViewModel.class);
+
+        mPlantInfo = null;
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(USDAUtils.EXTRA_PLANT_ITEM)) {
             mPlantItem = (USDAUtils.PlantItem)intent.getSerializableExtra(
@@ -54,7 +68,56 @@ public class PlantItemDetailActivity extends AppCompatActivity {
             // Finds an image URL based on the plants name.
             findImageURL mImageFinder = new findImageURL();
             mImageFinder.execute();
+
+            mPlantInfo = new PlantInfo();
+
+            // change PlantItem to PlantInfo
+            mPlantInfo.id = mPlantItem.id;
+            mPlantInfo.Scientific_Name_x = mPlantItem.Scientific_Name_x;
+            mPlantInfo.Common_Name = mPlantItem.Common_Name;
+            mPlantInfo.Symbol = mPlantItem.Symbol;
+            mPlantInfo.Group = mPlantItem.Group;
+            mPlantInfo.Family = mPlantItem.Family;
+            mPlantInfo.Duration = mPlantItem.Duration;
+            mPlantInfo.Growth_Habit = mPlantItem.Growth_Habit;
+            mPlantInfo.Native_Status = mPlantItem.Native_Status;
+            mPlantInfo.Category = mPlantItem.Category;
+            mPlantInfo.xOrder = mPlantItem.xOrder;
+            mPlantInfo.SubClass = mPlantItem.SubClass;
+            mPlantInfo.Class = mPlantItem.Class;
+            mPlantInfo.Kingdom = mPlantItem.Kingdom;
+            mPlantInfo.Species = mPlantItem.Species;
+            mPlantInfo.Subspecies = mPlantItem.Subspecies;
+            mPlantInfo.State_and_Province = mPlantItem.State_and_Province;
+
+            // checks for favorite
+            mPlantInfoViewModel.getPlantById(mPlantInfo.id).observe(this, new Observer<PlantInfo>() {
+                @Override
+                public void onChanged(@Nullable PlantInfo plant) {
+                    if (plant != null) {
+                        mIsFav = true;
+                        mPlantFavoriteIV.setImageResource(R.drawable.ic_favorites_black_24dp);
+                    } else {
+                        mIsFav = false;
+                        mPlantFavoriteIV.setImageResource(R.drawable.ic_favorites_border_black_24dp);
+                    }
+                }
+            });
         }
+
+        // set click listener on the favorites button
+        mPlantFavoriteIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mPlantInfo != null) {
+                    if (!mIsFav) {
+                        mPlantInfoViewModel.insertPlant(mPlantInfo);
+                    } else {
+                        mPlantInfoViewModel.deletePlant(mPlantInfo);
+                    }
+                }
+            }
+        });
     }
 
     @Override

@@ -45,6 +45,13 @@
                 android:value="com.example.android.usdaplantindex.StartupActivity" />
         </activity>
         <activity
+            android:name=".FavoritePlantsActivity"
+            android:parentActivityName=".StartupActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.usdaplantindex.StartupActivity" />
+        </activity>
+        <activity
             android:name=".PlantItemDetailActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
