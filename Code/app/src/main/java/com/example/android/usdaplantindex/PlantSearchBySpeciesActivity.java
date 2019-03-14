@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.android.usdaplantindex.utils.USDAUtils;
+import com.example.android.usdaplantindex.utils.USAUtils;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -31,25 +31,25 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
 
     private static final String TAG = PlantSearchBySpeciesActivity.class.getSimpleName();
 
-    private static final String PLANT_SEARCH_LITE_ARRAY_KEY = "plantSearchByNameLite";
-    private static final String PLANT_SEARCH_LITE_URL_KEY = "plantSearchByNameLiteURL";
+    private static final String PLANT_SEARCH_LITE_ARRAY_KEY = "plantSearchBySpeciesLite";
+    private static final String PLANT_SEARCH_LITE_URL_KEY = "plantSearchBySpeciesLiteURL";
+    private static final String PLANT_SEARCH_LITE_LOAD_OFFSET_KEY = "plantSearchBySpeciesLiteOffset";
     private static final Integer PLANT_SEARCH_LITE_LOADER_ID = 1;
 
-    private static final String PLANT_SEARCH_HEAVY_ARRAY_KEY = "plantSearchByNameHeavy";
-    private static final String PLANT_SEARCH_HEAVY_URL_KEY = "plantSearchByNameHeavyURL";
+    private static final String PLANT_SEARCH_HEAVY_ARRAY_KEY = "plantSearchBySpeciesHeavy";
+    private static final String PLANT_SEARCH_HEAVY_URL_KEY = "plantSearchBySpeciesHeavyURL";
     private static final Integer PLANT_SEARCH_HEAVY_LOADER_ID = 2;
 
     /*
-     - When the activity is created, we first load all the Species fields and
-       nothing else. This doesn't take a while; it would take longer to load additional fields,
-       so we restrict to only pre-loading one field.
-     - The load limit is there just in case there is actually more items than that, that could
-       affect the pre-loading performance.
+     - When the activity is created, we first load all the Species fields
+     - Because there are more than 20000 plant items, requesting all of them fails and we have to
+       load them partially, with time and incrementing load offset.
+     - The load limit indicates the number of plant items to load per call.
      - When search box text changes, we iterate the pre-loaded array and for Species that
        partially match the search query, have an asynchronous task gradually load their plant item
        details and fill the results adapter.
      */
-    private static final Integer LITE_LOAD_LIMIT = 5000;
+    private static final Integer LITE_LOAD_LIMIT = 3000;
 
     /*
      - Having all the species fields, we first store the species fields into a unique array, to
@@ -82,10 +82,12 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
     private RecyclerView mSearchResultsRV;
     private EditText mSearchBoxET;
     private TextView mLoadingErrorTV;
+    private TextView mLoadingTextTV;
     private ProgressBar mLoadingPB;
 
     // Contains all plant species and their count (filled on create)
     private Hashtable<String, Integer> mAllPlantSpecies;
+    private Integer mLiteLoadOffset;
 
     // Contains plant detail load offsets (this is initially empty)
     private Hashtable<String, Integer> mPlantSpeciesLoadOffsets;
@@ -96,10 +98,11 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
     private LinkedBlockingDeque<String> mPlantSpeciesToLoad;
 
     // Contains plant details (initially empty)
-    private Hashtable<Integer, USDAUtils.PlantItem> mPlants;
+    private Hashtable<Integer, USAUtils.PlantItem> mPlants;
 
     // Contains search box text split into individual words
     private ArrayList<String> mFilters;
+    private ArrayList<Integer> mFilteredPlantIds;
 
     private PlantSearchAdapter mPlantSearchAdapter;
     private LoaderManager.LoaderCallbacks<String> mSearchLiteLoader;
@@ -113,6 +116,7 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
         mSearchBoxET = findViewById(R.id.plant_search_by_species_et);
         mSearchResultsRV = findViewById(R.id.plant_search_by_species_results);
         mLoadingErrorTV = findViewById(R.id.plant_search_by_species_loading_error_tv);
+        mLoadingTextTV = findViewById(R.id.plant_search_by_species_loading_tv);
         mLoadingPB = findViewById(R.id.plant_search_by_species_loading_pb);
 
         mSearchResultsRV.setLayoutManager(new LinearLayoutManager(this));
@@ -127,6 +131,8 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
         mPlantSpeciesToLoad = new LinkedBlockingDeque<>();
         mPlants = new Hashtable<>();
         mFilters = new ArrayList<>();
+        mFilteredPlantIds = new ArrayList<>();
+        mLiteLoadOffset = 0;
 
         mSearchBoxET.addTextChangedListener(new TextWatcher() {
             @Override
@@ -159,18 +165,25 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
             @Override
             public void onLoadFinished(@NonNull Loader<String> loader, String s) {
                 Log.d(TAG, "Lite loader finished loading.");
+                mLoadingPB.setVisibility(View.INVISIBLE);
+
                 if (s != null) {
-                    ArrayList<USDAUtils.PlantItem> items = USDAUtils.parsePlantJSON(s);
+                    ArrayList<USAUtils.PlantItem> items = USAUtils.parsePlantJSON(s);
                     if (items != null) {
                         updateAllPlantSpecies(items);
+                        if (!items.isEmpty()) {
+                            mLiteLoadOffset += LITE_LOAD_LIMIT;
+                            loadPlantSpecies();
+                            updateLoadingText();
+                            return;
+                        }
                     }
-                    mLoadingErrorTV.setVisibility(View.INVISIBLE);
-                    mSearchResultsRV.setVisibility(View.VISIBLE);
+                    //mLoadingErrorTV.setVisibility(View.INVISIBLE);
+                    //mSearchResultsRV.setVisibility(View.VISIBLE);
                 } else {
-                    mLoadingErrorTV.setVisibility(View.VISIBLE);
-                    mSearchResultsRV.setVisibility(View.INVISIBLE);
+                    //mLoadingErrorTV.setVisibility(View.VISIBLE);
+                    //mSearchResultsRV.setVisibility(View.INVISIBLE);
                 }
-                mLoadingPB.setVisibility(View.INVISIBLE);
             }
 
             @Override
@@ -193,19 +206,23 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
             @Override
             public void onLoadFinished(@NonNull Loader<String> loader, String s) {
                 Log.d(TAG, "Heavy loader finished loading.");
+
+                // Store details
                 if (s != null) {
-                    ArrayList<USDAUtils.PlantItem> items = USDAUtils.parsePlantJSON(s);
+                    ArrayList<USAUtils.PlantItem> items = USAUtils.parsePlantJSON(s);
                     if (items != null) {
-                        Log.d(TAG, "items not null");
-                        // Store details
                         storePlantDetails(items);
-                        // Update search results with new/additional information
-                        updateSearchResults();
                     }
                 }
 
-                // Resume loading until all matched species are loaded
-                loadPlantDetails();
+                // Update search results with new/additional information
+                updateSearchResults();
+
+                // Resume loading until plant details of all, matched plant Species
+                // are loaded
+                if (mFilteredPlantIds.size() < RESULTS_DIPLAY_LIMIT) {
+                    loadPlantDetails();
+                }
             }
 
             @Override
@@ -219,10 +236,11 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
 
         if (savedInstanceState != null && savedInstanceState.containsKey(PLANT_SEARCH_LITE_ARRAY_KEY)) {
             mAllPlantSpecies = (Hashtable<String, Integer>) savedInstanceState.getSerializable(PLANT_SEARCH_LITE_ARRAY_KEY);
+            mLiteLoadOffset = (Integer)savedInstanceState.getSerializable(PLANT_SEARCH_LITE_LOAD_OFFSET_KEY);
         }
-        else {
-            loadPlantSpecies();
-        }
+
+        loadPlantSpecies();
+        updateLoadingText();
 
         // TODO Also load search results
     }
@@ -232,6 +250,10 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
         super.onResume();
         // Update search results
         searchChanged(mSearchBoxET.getText().toString());
+    }
+
+    private void updateLoadingText() {
+        mLoadingTextTV.setText(String.valueOf(mAllPlantSpecies.size()));
     }
 
     private void searchChanged(String s) {
@@ -244,7 +266,7 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
             }
         }
 
-        // Look through all plant species for matches
+        // Look through all, pre-loaded plant species for matches
         mPlantSpeciesToLoad.clear();
         if (!mFilters.isEmpty()) {
             for (String item : mAllPlantSpecies.keySet()) {
@@ -273,24 +295,51 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
 
     private void updateSearchResults() {
         Log.d(TAG, "Filtering: " + mFilters.toString());
-        ArrayList<USDAUtils.PlantItem> filteredPlants = new ArrayList<>();
-        for (USDAUtils.PlantItem item : mPlants.values()) {
-            String species = item.Species.toLowerCase();
-            for (String filter : mFilters) {
-                if (species.contains(filter)) {
+
+        ArrayList<USAUtils.PlantItem> filteredPlants = new ArrayList<>();
+
+        ArrayList<Integer> prevIds = new ArrayList<Integer>(mFilteredPlantIds);
+        mFilteredPlantIds.clear();
+        if (!mFilters.isEmpty()) {
+            // Remove current filters that do not match the results
+            for (Integer id : prevIds) {
+                USAUtils.PlantItem item = mPlants.get(id);
+                if (item == null) continue;
+                String name = item.Species.toLowerCase();
+                int i;
+                for (i = 0; i < mFilters.size(); ++i) {
+                    String filter = mFilters.get(i);
+                    if (!name.contains(filter)) break;
+                }
+                if (i == mFilters.size()) { // if plant contains all filters
                     filteredPlants.add(item);
-                    break;
+                    mFilteredPlantIds.add(id);
                 }
             }
-            if (filteredPlants.size() >= RESULTS_DIPLAY_LIMIT)
-                break;
+
+            // Add new filters
+            for (USAUtils.PlantItem item : mPlants.values()) {
+                if (mFilteredPlantIds.contains(item.id)) continue;
+                String name = item.Species.toLowerCase();
+                int i;
+                for (i = 0; i < mFilters.size(); ++i) {
+                    String filter = mFilters.get(i);
+                    if (!name.contains(filter)) break;
+                }
+                if (i == mFilters.size()) { // if plant contains all filters
+                    filteredPlants.add(item);
+                    mFilteredPlantIds.add(item.id);
+                    if (filteredPlants.size() >= RESULTS_DIPLAY_LIMIT) // verify limit
+                        break;
+                }
+            }
         }
+
         mPlantSearchAdapter.updatePlantItems(filteredPlants);
     }
 
-    private void updateAllPlantSpecies(ArrayList<USDAUtils.PlantItem> items) {
-        mAllPlantSpecies.clear(); // TODO this may need to be removed if we load partially
-        for (USDAUtils.PlantItem item : items) {
+    private void updateAllPlantSpecies(ArrayList<USAUtils.PlantItem> items) {
+        for (USAUtils.PlantItem item : items) {
             Integer count = mAllPlantSpecies.get(item.Species);
             if (count != null) {
                 mAllPlantSpecies.put(item.Species, count + 1);
@@ -301,8 +350,8 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
         }
     }
 
-    private void storePlantDetails(ArrayList<USDAUtils.PlantItem> items) {
-        for (USDAUtils.PlantItem item : items) {
+    private void storePlantDetails(ArrayList<USAUtils.PlantItem> items) {
+        for (USAUtils.PlantItem item : items) {
             // Store plant details
             mPlants.put(item.id, item);
             // Update search offset for the species
@@ -330,7 +379,7 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
     private void loadPlantSpecies() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String url = USDAUtils.buildPlantSearchURL(LITE_LOAD_LIMIT, 0, "fields", "Species");
+        String url = USAUtils.buildPlantSearchURL(LITE_LOAD_LIMIT, mLiteLoadOffset, "fields", "Species");
 
         Bundle args = new Bundle();
         args.putString(PLANT_SEARCH_LITE_URL_KEY, url);
@@ -346,7 +395,7 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
         if (offset == null) {
             offset = 0;
         }
-        String url = USDAUtils.buildPlantSearchURL(RESULTS_LOAD_LIMIT, offset, "Species", species);
+        String url = USAUtils.buildPlantSearchURL(RESULTS_LOAD_LIMIT, offset, "Species", species);
 
         Bundle args = new Bundle();
         args.putString(PLANT_SEARCH_HEAVY_URL_KEY, url);
@@ -354,9 +403,9 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
     }
 
     @Override
-    public void onPlantItemClick(USDAUtils.PlantItem repo) {
+    public void onPlantItemClick(USAUtils.PlantItem repo) {
         Intent intent = new Intent(this, PlantItemDetailActivity.class);
-        intent.putExtra(USDAUtils.EXTRA_PLANT_ITEM, repo);
+        intent.putExtra(USAUtils.EXTRA_PLANT_ITEM, repo);
         startActivity(intent);
     }
 
@@ -364,7 +413,9 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mAllPlantSpecies != null) {
-            outState.putSerializable(PLANT_SEARCH_LITE_ARRAY_KEY, mAllPlantSpecies);
+            // Saving large amount of data results with android.os.TransactionTooLargeException
+            //~ outState.putSerializable(PLANT_SEARCH_LITE_ARRAY_KEY, mAllPlantSpecies);
+            //~ outState.putSerializable(PLANT_SEARCH_LITE_LOAD_OFFSET_KEY, mLiteLoadOffset);
         }
 
         // TODO Also store search results

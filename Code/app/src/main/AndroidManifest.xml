@@ -37,8 +37,9 @@
                 android:value="com.example.android.usdaplantindex.StartupActivity" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".PlantIdentificationActivity"
             android:launchMode="singleTop"
+            android:label="@string/title_activity_plant_identification"
             android:parentActivityName=".StartupActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -52,11 +53,20 @@
                 android:value="com.example.android.usdaplantindex.StartupActivity" />
         </activity>
         <activity
-            android:name=".PlantItemDetailActivity"
-            android:parentActivityName=".MainActivity">
+            android:name=".IdentifyListActivity"
+            android:launchMode="singleTop"
+            android:label="@string/title_activity_plant_identification"
+            android:parentActivityName=".PlantIdentificationActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.usdaplantindex.MainActivity" />
+                android:value="com.example.android.usdaplantindex.PlantIdentificationActivity" />
+        </activity>
+        <activity
+            android:name=".PlantItemDetailActivity"
+            android:parentActivityName=".IdentifyListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.usdaplantindex.IdentifyListActivity" />
         </activity>
     </application>
 

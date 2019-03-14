@@ -7,24 +7,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.usdaplantindex.utils.USDAUtils;
+import com.example.android.usdaplantindex.utils.USAUtils;
 
 import java.util.ArrayList;
 
 public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.PlantItemViewHolder> {
 
-    private ArrayList<USDAUtils.PlantItem> mPlantItems;
+    private ArrayList<USAUtils.PlantItem> mPlantItems;
     private OnPlantItemClickListener mPlantItemClickListener;
 
     public interface OnPlantItemClickListener {
-        void onPlantItemClick(USDAUtils.PlantItem plantItem);
+        void onPlantItemClick(USAUtils.PlantItem plantItem);
     }
 
     public PlantSearchAdapter(OnPlantItemClickListener clickListener) {
         mPlantItemClickListener = clickListener;
     }
 
-    public void updatePlantItems(ArrayList<USDAUtils.PlantItem> plantItems) {
+    public void updatePlantItems(ArrayList<USAUtils.PlantItem> plantItems) {
         mPlantItems = plantItems;
         notifyDataSetChanged();
     }
@@ -53,29 +53,25 @@ public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.
     class PlantItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mPlantSciTV;
         private TextView mPlantComTV;
-        private ImageView mPlantPicIV;
 
         public PlantItemViewHolder(View itemView) {
             super(itemView);
             mPlantSciTV = itemView.findViewById(R.id.tv_plant_scientific);
             mPlantComTV = itemView.findViewById(R.id.tv_plant_common);
-            mPlantPicIV = itemView.findViewById(R.id.iv_plant_pic);
             itemView.setOnClickListener(this);
         }
 
         // Binds plant item to a view holder.
-        public void bind(USDAUtils.PlantItem plantItem) {
+        public void bind(USAUtils.PlantItem plantItem) {
             String sciString = plantItem.Scientific_Name_x;
             String comString = plantItem.Common_Name;
-            //String iconURL = USDAUtils.buildIconURL(plantItem.icon);
             mPlantSciTV.setText(sciString);
             mPlantComTV.setText(comString);
-            //Glide.with(mPlantPicIV.getContext()).load(iconURL).into(mPlantPicIV);
         }
 
         @Override
         public void onClick(View v) {
-            USDAUtils.PlantItem plantItem = mPlantItems.get(getAdapterPosition());
+            USAUtils.PlantItem plantItem = mPlantItems.get(getAdapterPosition());
             mPlantItemClickListener.onPlantItemClick(plantItem);
         }
     }

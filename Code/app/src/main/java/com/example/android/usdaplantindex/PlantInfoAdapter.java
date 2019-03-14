@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.usdaplantindex.data.PlantInfo;
-import com.example.android.usdaplantindex.utils.USDAUtils;
+import com.example.android.usdaplantindex.utils.USAUtils;
 
 import java.util.List;
 
@@ -54,13 +54,11 @@ public class PlantInfoAdapter extends RecyclerView.Adapter<PlantInfoAdapter.Plan
     class PlantInfoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mPlantSciTV;
         private TextView mPlantComTV;
-        private ImageView mPlantPicIV;
 
         public PlantInfoViewHolder(View view) {
             super(view);
             mPlantSciTV = view.findViewById(R.id.tv_plant_scientific);
             mPlantComTV = view.findViewById(R.id.tv_plant_common);
-            mPlantPicIV = view.findViewById(R.id.iv_plant_pic);
             view.setOnClickListener(this);
         }
 

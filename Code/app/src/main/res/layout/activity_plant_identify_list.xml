@@ -5,40 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.android.usdaplantindex.MainActivity">
+    tools:context="com.example.android.usdaplantindex.PlantIdentificationActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="12dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/forecast_for"
-            android:textColor="#fff"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/tv_forecast_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:textColor="#fff"
-            android:textSize="42sp" />
-
-    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_forecast_items"
+            android:id="@+id/rv_plant_items"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -50,6 +25,15 @@
             android:padding="16dp"
             android:visibility="invisible"
             android:text="@string/loading_error_message" />
+
+        <TextView
+            android:id="@+id/tv_search_error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:padding="16dp"
+            android:visibility="invisible"
+            android:text="@string/search_error_message" />
 
         <ProgressBar
             android:id="@+id/pb_loading_indicator"

@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_margin="4dp"
+            android:inputType="text"
             android:hint="@string/plant_search_by_name_box_hint"/>
 
         <FrameLayout
@@ -40,13 +41,22 @@
                 android:visibility="invisible"
                 android:text="@string/loading_error_message" />
 
-            <ProgressBar
-                android:id="@+id/plant_search_by_name_loading_pb"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:layout_gravity="top|center_horizontal"
-                android:layout_marginTop="32dp"
-                android:visibility="invisible"/>
+                <ProgressBar
+                    android:id="@+id/plant_search_by_name_loading_pb"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginTop="16dp"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/plant_search_by_name_loading_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginRight="32dp"
+                    android:text="" />
 
         </FrameLayout>
     </LinearLayout>
