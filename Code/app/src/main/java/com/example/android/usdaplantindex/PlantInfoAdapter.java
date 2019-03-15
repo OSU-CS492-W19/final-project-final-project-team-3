@@ -64,7 +64,7 @@ public class PlantInfoAdapter extends RecyclerView.Adapter<PlantInfoAdapter.Plan
         public void bind(PlantInfo plantInfo) {
             String sciString = plantInfo.Scientific_Name_x;
             String comString = plantInfo.Common_Name;
-            //String iconURL = USDAUtils.buildIconURL(plantItem.icon);
+            //String iconURL = USDAPlantUtils.buildIconURL(plantItem.icon);
             mPlantSciTV.setText(sciString);
             mPlantComTV.setText(comString);
             //Glide.with(mPlantPicIV.getContext()).load(iconURL).into(mPlantPicIV);
