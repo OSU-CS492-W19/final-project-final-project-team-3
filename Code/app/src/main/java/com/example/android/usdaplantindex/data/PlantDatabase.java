@@ -14,7 +14,7 @@ public abstract class PlantDatabase extends RoomDatabase {
             synchronized (PlantDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            PlantDatabase.class, "github_repos_db").build();
+                            PlantDatabase.class, "usda_plant_db").build();
                 }
             }
         }
