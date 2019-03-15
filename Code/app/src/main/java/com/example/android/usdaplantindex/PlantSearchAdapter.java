@@ -4,27 +4,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.usdaplantindex.utils.USAUtils;
+import com.example.android.usdaplantindex.utils.USDAUtils;
 
 import java.util.ArrayList;
 
 public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.PlantItemViewHolder> {
 
-    private ArrayList<USAUtils.PlantItem> mPlantItems;
+    private ArrayList<USDAUtils.PlantItem> mPlantItems;
     private OnPlantItemClickListener mPlantItemClickListener;
 
     public interface OnPlantItemClickListener {
-        void onPlantItemClick(USAUtils.PlantItem plantItem);
+        void onPlantItemClick(USDAUtils.PlantItem plantItem);
     }
 
     public PlantSearchAdapter(OnPlantItemClickListener clickListener) {
         mPlantItemClickListener = clickListener;
     }
 
-    public void updatePlantItems(ArrayList<USAUtils.PlantItem> plantItems) {
+    public void updatePlantItems(ArrayList<USDAUtils.PlantItem> plantItems) {
         mPlantItems = plantItems;
         notifyDataSetChanged();
     }
@@ -62,7 +61,7 @@ public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.
         }
 
         // Binds plant item to a view holder.
-        public void bind(USAUtils.PlantItem plantItem) {
+        public void bind(USDAUtils.PlantItem plantItem) {
             String sciString = plantItem.Scientific_Name_x;
             String comString = plantItem.Common_Name;
             mPlantSciTV.setText(sciString);
@@ -71,7 +70,7 @@ public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.
 
         @Override
         public void onClick(View v) {
-            USAUtils.PlantItem plantItem = mPlantItems.get(getAdapterPosition());
+            USDAUtils.PlantItem plantItem = mPlantItems.get(getAdapterPosition());
             mPlantItemClickListener.onPlantItemClick(plantItem);
         }
     }

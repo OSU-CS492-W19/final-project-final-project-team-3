@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class USAUtils {
+public class USDAUtils {
 
     public static final String EXTRA_PLANT_ITEM = "com.example.android.usdaplantindex.utils.PlantItem";
     public static final String EXTRA_PLANT_IDENTIFY = "com.example.android.usdaplantindex.utils.PlantIdentify";

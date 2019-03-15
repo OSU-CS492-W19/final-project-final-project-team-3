@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.android.usdaplantindex.utils.NetworkUtils;
-import com.example.android.usdaplantindex.utils.USAUtils;
+import com.example.android.usdaplantindex.utils.USDAUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
     private ProgressBar mLoadingIndicatorPB;
     private TextView mLoadingErrorMessageTV;
     private PlantSearchAdapter mPlantAdapter;
-    private USAUtils.PlantIdentify mPlantIdentify;
+    private USDAUtils.PlantIdentify mPlantIdentify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +49,9 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
     }
 
     @Override
-    public void onPlantItemClick(USAUtils.PlantItem plantItem) {
+    public void onPlantItemClick(USDAUtils.PlantItem plantItem) {
         Intent intent = new Intent(this, PlantItemDetailActivity.class);
-        intent.putExtra(USAUtils.EXTRA_PLANT_ITEM, plantItem);
+        intent.putExtra(USDAUtils.EXTRA_PLANT_ITEM, plantItem);
         startActivity(intent);
     }
 
@@ -71,9 +71,9 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
 
     public void loadPlant() {
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra(USAUtils.EXTRA_PLANT_IDENTIFY)) {
-            mPlantIdentify = (USAUtils.PlantIdentify)intent.getSerializableExtra(
-                    USAUtils.EXTRA_PLANT_IDENTIFY
+        if (intent != null && intent.hasExtra(USDAUtils.EXTRA_PLANT_IDENTIFY)) {
+            mPlantIdentify = (USDAUtils.PlantIdentify)intent.getSerializableExtra(
+                    USDAUtils.EXTRA_PLANT_IDENTIFY
             );
         }
 
@@ -94,7 +94,7 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
             mPlantIdentify.plantDuration = "";
         }
 
-        String url = USAUtils.buildPlantSearchURL(1000,0,
+        String url = USDAUtils.buildPlantSearchURL(1000,0,
                 mPlantIdentify.plantState, mPlantIdentify.plantGrowthHabit,
                 mPlantIdentify.plantCategory, mPlantIdentify.plantDuration);
         new PlantTask().execute(url);
@@ -125,7 +125,7 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
             if (plantJSON != null) {
                 mLoadingErrorMessageTV.setVisibility(View.INVISIBLE);
                 mPlantItemsRV.setVisibility(View.VISIBLE);
-                ArrayList<USAUtils.PlantItem> plantItems = USAUtils.parsePlantJSON(plantJSON);
+                ArrayList<USDAUtils.PlantItem> plantItems = USDAUtils.parsePlantJSON(plantJSON);
                 mPlantAdapter.updatePlantItems(plantItems);
 
                 /*
