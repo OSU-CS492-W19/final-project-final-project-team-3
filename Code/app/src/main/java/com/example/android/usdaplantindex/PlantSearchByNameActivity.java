@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.android.usdaplantindex.data.PlantItem;
 import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
 import java.util.ArrayList;
@@ -83,7 +84,7 @@ public class PlantSearchByNameActivity extends AppCompatActivity
     private HashSet<Integer> mPlantIdsToLoad;
 
     // Contains plant details (initially empty)
-    private Hashtable<Integer, USDAPlantUtils.PlantItem> mPlants;
+    private Hashtable<Integer, PlantItem> mPlants;
 
     // Contains search box text split into individual words
     private ArrayList<String> mFilters;
@@ -152,7 +153,7 @@ public class PlantSearchByNameActivity extends AppCompatActivity
                 mLoadingPB.setVisibility(View.INVISIBLE);
 
                 if (s != null) {
-                    ArrayList<USDAPlantUtils.PlantItem> items = USDAPlantUtils.parsePlantJSON(s);
+                    ArrayList<PlantItem> items = USDAPlantUtils.parsePlantJSON(s);
                     if (items != null) {
                         updateAllPlantNames(items);
                         //mLoadingErrorTV.setVisibility(View.INVISIBLE);
@@ -193,7 +194,7 @@ public class PlantSearchByNameActivity extends AppCompatActivity
 
                 // Store details
                 if (s != null) {
-                    ArrayList<USDAPlantUtils.PlantItem> items = USDAPlantUtils.parsePlantJSON(s);
+                    ArrayList<PlantItem> items = USDAPlantUtils.parsePlantJSON(s);
                     if (items != null) {
                         storePlantDetails(items);
                     }
@@ -280,14 +281,14 @@ public class PlantSearchByNameActivity extends AppCompatActivity
     private void updateSearchResults() {
         Log.d(TAG, "Filtering: " + mFilters.toString());
 
-        ArrayList<USDAPlantUtils.PlantItem> filteredPlants = new ArrayList<>();
+        ArrayList<PlantItem> filteredPlants = new ArrayList<>();
 
         ArrayList<Integer> prevIds = new ArrayList<Integer>(mFilteredPlantIds);
         mFilteredPlantIds.clear();
         if (!mFilters.isEmpty()) {
             // Remove current filters that do not match the results
             for (Integer id : prevIds) {
-                USDAPlantUtils.PlantItem item = mPlants.get(id);
+                PlantItem item = mPlants.get(id);
                 if (item == null) continue;
                 String name = item.Scientific_Name_x.toLowerCase();
                 int i;
@@ -302,7 +303,7 @@ public class PlantSearchByNameActivity extends AppCompatActivity
             }
 
             // Add new filters
-            for (USDAPlantUtils.PlantItem item : mPlants.values()) {
+            for (PlantItem item : mPlants.values()) {
                 if (mFilteredPlantIds.contains(item.id)) continue;
                 String name = item.Scientific_Name_x.toLowerCase();
                 int i;
@@ -323,14 +324,14 @@ public class PlantSearchByNameActivity extends AppCompatActivity
         mPlantSearchAdapter.updatePlantItems(filteredPlants);
     }
 
-    private void updateAllPlantNames(ArrayList<USDAPlantUtils.PlantItem> items) {
-        for (USDAPlantUtils.PlantItem item : items) {
+    private void updateAllPlantNames(ArrayList<PlantItem> items) {
+        for (PlantItem item : items) {
             mAllPlantNames.put(item.id, item.Scientific_Name_x.toLowerCase());
         }
     }
 
-    private void storePlantDetails(ArrayList<USDAPlantUtils.PlantItem> items) {
-        for (USDAPlantUtils.PlantItem item : items) {
+    private void storePlantDetails(ArrayList<PlantItem> items) {
+        for (PlantItem item : items) {
             // Store plant details
             mPlants.put(item.id, item);
             // Remove id from the to load set
@@ -362,7 +363,7 @@ public class PlantSearchByNameActivity extends AppCompatActivity
     }
 
     @Override
-    public void onPlantItemClick(USDAPlantUtils.PlantItem repo) {
+    public void onPlantItemClick(PlantItem repo) {
         Intent intent = new Intent(this, PlantItemDetailActivity.class);
         intent.putExtra(USDAPlantUtils.EXTRA_PLANT_ITEM, repo);
         startActivity(intent);

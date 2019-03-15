@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.android.usdaplantindex.data.PlantInfo;
+import com.example.android.usdaplantindex.data.PlantItem;
 import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class FavoritePlantsActivity extends AppCompatActivity implements PlantIn
 
     @Override
     public void onPlantInfoClick(PlantInfo plant) {
-        USDAPlantUtils.PlantItem temp = new USDAPlantUtils.PlantItem();
+        PlantItem temp = new PlantItem();
         // create new PlantItem
         temp.id = plant.id;
         temp.Scientific_Name_x = plant.Scientific_Name_x;

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.android.usdaplantindex.data.PlantItem;
 import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
 import org.jsoup.Jsoup;
@@ -44,7 +45,7 @@ public class PlantItemDetailActivity extends AppCompatActivity {
     private TextView mHSuitTV;
     private TextView mPlantSuitTV;
 
-    private USDAPlantUtils.PlantItem mPlantItem;
+    private PlantItem mPlantItem;
 
     private PlantInfoViewModel mPlantInfoViewModel;
     private PlantInfo mPlantInfo;
@@ -74,7 +75,7 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         mPlantInfo = null;
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(USDAPlantUtils.EXTRA_PLANT_ITEM)) {
-            mPlantItem = (USDAPlantUtils.PlantItem)intent.getSerializableExtra(
+            mPlantItem = (PlantItem)intent.getSerializableExtra(
                     USDAPlantUtils.EXTRA_PLANT_ITEM
             );
             fillInLayout(mPlantItem);
@@ -348,7 +349,7 @@ public class PlantItemDetailActivity extends AppCompatActivity {
     }
 
     // Displays information about the selected plant.
-    private void fillInLayout(USDAPlantUtils.PlantItem plantItem) {
+    private void fillInLayout(PlantItem plantItem) {
         String sciString = plantItem.Scientific_Name_x;
         String comString = plantItem.Common_Name;
         String generalString = getGeneralString();
@@ -377,7 +378,7 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         mPlantSuitTV.setText(suitString);
     }
 
-    private PlantInfo createPlantInfo(USDAPlantUtils.PlantItem pItem){
+    private PlantInfo createPlantInfo(PlantItem pItem){
 
         PlantInfo pInfo = new PlantInfo();
         // change PlantItem to PlantInfo

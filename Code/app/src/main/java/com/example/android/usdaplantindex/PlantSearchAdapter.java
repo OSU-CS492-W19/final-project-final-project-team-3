@@ -6,24 +6,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.android.usdaplantindex.data.PlantItem;
 import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
 import java.util.ArrayList;
 
 public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.PlantItemViewHolder> {
 
-    private ArrayList<USDAPlantUtils.PlantItem> mPlantItems;
+    private ArrayList<PlantItem> mPlantItems;
     private OnPlantItemClickListener mPlantItemClickListener;
 
     public interface OnPlantItemClickListener {
-        void onPlantItemClick(USDAPlantUtils.PlantItem plantItem);
+        void onPlantItemClick(PlantItem plantItem);
     }
 
     public PlantSearchAdapter(OnPlantItemClickListener clickListener) {
         mPlantItemClickListener = clickListener;
     }
 
-    public void updatePlantItems(ArrayList<USDAPlantUtils.PlantItem> plantItems) {
+    public void updatePlantItems(ArrayList<PlantItem> plantItems) {
         mPlantItems = plantItems;
         notifyDataSetChanged();
     }
@@ -61,7 +62,7 @@ public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.
         }
 
         // Binds plant item to a view holder.
-        public void bind(USDAPlantUtils.PlantItem plantItem) {
+        public void bind(PlantItem plantItem) {
             String sciString = plantItem.Scientific_Name_x;
             String comString = plantItem.Common_Name;
             mPlantSciTV.setText(sciString);
@@ -70,7 +71,7 @@ public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.
 
         @Override
         public void onClick(View v) {
-            USDAPlantUtils.PlantItem plantItem = mPlantItems.get(getAdapterPosition());
+            PlantItem plantItem = mPlantItems.get(getAdapterPosition());
             mPlantItemClickListener.onPlantItemClick(plantItem);
         }
     }

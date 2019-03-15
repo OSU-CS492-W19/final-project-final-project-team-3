@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.android.usdaplantindex.data.PlantItem;
 import com.example.android.usdaplantindex.utils.NetworkUtils;
 import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
@@ -49,7 +50,7 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
     }
 
     @Override
-    public void onPlantItemClick(USDAPlantUtils.PlantItem plantItem) {
+    public void onPlantItemClick(PlantItem plantItem) {
         Intent intent = new Intent(this, PlantItemDetailActivity.class);
         intent.putExtra(USDAPlantUtils.EXTRA_PLANT_ITEM, plantItem);
         startActivity(intent);
@@ -125,7 +126,7 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
             if (plantJSON != null) {
                 mLoadingErrorMessageTV.setVisibility(View.INVISIBLE);
                 mPlantItemsRV.setVisibility(View.VISIBLE);
-                ArrayList<USDAPlantUtils.PlantItem> plantItems = USDAPlantUtils.parsePlantJSON(plantJSON);
+                ArrayList<PlantItem> plantItems = USDAPlantUtils.parsePlantJSON(plantJSON);
                 mPlantAdapter.updatePlantItems(plantItems);
 
                 /*
