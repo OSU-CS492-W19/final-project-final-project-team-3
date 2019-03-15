@@ -12,7 +12,7 @@ import java.util.List;
 class LoadPlantsTask extends AsyncTask<Void, Void, String> {
 
     public interface AsyncCallback {
-        void onForecastLoadFinished(List<PlantItem> plantItems);
+        void onPlantsLoadFinished(List<PlantItem> plantItems);
     }
 
     private String mURL;
@@ -40,6 +40,6 @@ class LoadPlantsTask extends AsyncTask<Void, Void, String> {
         if (s != null) {
             plantItems = USDAPlantUtils.parsePlantJSON(s);
         }
-        mCallback.onForecastLoadFinished(plantItems);
+        mCallback.onPlantsLoadFinished(plantItems);
     }
 }

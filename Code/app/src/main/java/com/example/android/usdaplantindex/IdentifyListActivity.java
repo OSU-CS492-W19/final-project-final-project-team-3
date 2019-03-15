@@ -27,6 +27,7 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
     private ProgressBar mLoadingIndicatorPB;
     private TextView mLoadingErrorMessageTV;
     private PlantSearchAdapter mPlantAdapter;
+    private IdentifyPlantViewModel mIdentifyPlantViewModel;
     private USDAPlantUtils.PlantIdentify mPlantIdentify;
 
     @Override

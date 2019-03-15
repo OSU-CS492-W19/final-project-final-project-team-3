@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /*
  * This class is used as a final representation of a single plant item.
- * It condenses the classes below that are used for parsing the OWN JSON response with Gson.
+ * It condenses the classes below that are used for parsing the JSON response with Gson.
  */
 public class PlantItem implements Serializable {
 
