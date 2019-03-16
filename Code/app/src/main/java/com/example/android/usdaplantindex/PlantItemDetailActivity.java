@@ -363,9 +363,9 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         String suitString = getSuitString();
         String suitHString = getHeaderString(getString(R.string.plant_text_suitability), suitString);
 
+        //Set the text for all text views.
         mPlantSciTV.setText(sciString);
         mPlantComTV.setText(comString);
-
         mHGeneralTV.setText(generalHString);
         mPlantGeneralTV.setText(generalString);
         mHMorphTV.setText(morphHString);
@@ -376,12 +376,27 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         mPlantRepTV.setText(repString);
         mHSuitTV.setText(suitHString);
         mPlantSuitTV.setText(suitString);
+
+        //Make text views invisible if they are empty.
+        emptySetInvisible(mPlantSciTV);
+        emptySetInvisible(mPlantComTV);
+        emptySetInvisible(mHGeneralTV);
+        emptySetInvisible(mPlantGeneralTV);
+        emptySetInvisible(mHMorphTV);
+        emptySetInvisible(mPlantMorphTV);
+        emptySetInvisible(mHGrowthTV);
+        emptySetInvisible(mPlantGrowthTV);
+        emptySetInvisible(mHRepTV);
+        emptySetInvisible(mPlantRepTV);
+        emptySetInvisible(mHSuitTV);
+        emptySetInvisible(mPlantSuitTV);
     }
 
+    // change PlantItem to PlantInfo
     private PlantInfo createPlantInfo(PlantItem pItem){
 
         PlantInfo pInfo = new PlantInfo();
-        // change PlantItem to PlantInfo
+
         pInfo.id = pItem.id;
         pInfo.Scientific_Name_x = pItem.Scientific_Name_x;
         pInfo.Scientific_Name_y = pItem.Scientific_Name_y;
@@ -516,6 +531,15 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         pInfo.Veneer_Product = pItem.Veneer_Product;
 
         return pInfo;
+    }
+
+    // If a text view is empty we set it to invisible so it doesn't take up room.
+    public Void emptySetInvisible(TextView textview) {
+        if("".equals(textview.getText().toString())) {
+            textview.setVisibility(View.GONE);
+        }
+
+        return null;
     }
 
     // Sets the plants image.
