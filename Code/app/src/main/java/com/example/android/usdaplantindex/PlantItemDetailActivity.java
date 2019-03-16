@@ -1,22 +1,28 @@
 package com.example.android.usdaplantindex;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.android.usdaplantindex.utils.USAUtils;
+import com.example.android.usdaplantindex.data.PlantItem;
+import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import com.example.android.usdaplantindex.data.PlantInfo;
 
 public class PlantItemDetailActivity extends AppCompatActivity {
 
@@ -27,6 +33,7 @@ public class PlantItemDetailActivity extends AppCompatActivity {
     private TextView mPlantSciTV;
     private TextView mPlantComTV;
     private ImageView mPlantPicIV;
+    private ImageView mPlantFavoriteIV;
     private TextView mHGeneralTV;
     private TextView mPlantGeneralTV;
     private TextView mHMorphTV;
@@ -38,7 +45,11 @@ public class PlantItemDetailActivity extends AppCompatActivity {
     private TextView mHSuitTV;
     private TextView mPlantSuitTV;
 
-    private USAUtils.PlantItem mPlantItem;
+    private PlantItem mPlantItem;
+
+    private PlantInfoViewModel mPlantInfoViewModel;
+    private PlantInfo mPlantInfo;
+    private boolean mIsFav = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +59,8 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         mPlantSciTV = findViewById(R.id.tv_plant_scientific);
         mPlantComTV = findViewById(R.id.tv_plant_common);
         mPlantPicIV = findViewById(R.id.iv_plant_pic_det);
+        mPlantFavoriteIV = findViewById(R.id.iv_plant_favorite);
+        mPlantInfoViewModel = ViewModelProviders.of(this).get(PlantInfoViewModel.class);
         mHGeneralTV = findViewById(R.id.tv_h_general);
         mPlantGeneralTV = findViewById(R.id.tv_plant_general);
         mHMorphTV = findViewById(R.id.tv_h_morphology);
@@ -59,10 +72,11 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         mHSuitTV = findViewById(R.id.tv_h_suitability);
         mPlantSuitTV = findViewById(R.id.tv_plant_suitability);
 
+        mPlantInfo = null;
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra(USAUtils.EXTRA_PLANT_ITEM)) {
-            mPlantItem = (USAUtils.PlantItem)intent.getSerializableExtra(
-                    USAUtils.EXTRA_PLANT_ITEM
+        if (intent != null && intent.hasExtra(USDAPlantUtils.EXTRA_PLANT_ITEM)) {
+            mPlantItem = (PlantItem)intent.getSerializableExtra(
+                    USDAPlantUtils.EXTRA_PLANT_ITEM
             );
             fillInLayout(mPlantItem);
 
@@ -72,7 +86,39 @@ public class PlantItemDetailActivity extends AppCompatActivity {
             // Finds an image URL based on the plants name.
             findImageURL mImageFinder = new findImageURL();
             mImageFinder.execute();
+
+            mPlantInfo = new PlantInfo();
+
+            mPlantInfo = createPlantInfo(mPlantItem);
+
+            // checks for favorite
+            mPlantInfoViewModel.getPlantById(mPlantInfo.id).observe(this, new Observer<PlantInfo>() {
+                @Override
+                public void onChanged(@Nullable PlantInfo plant) {
+                    if (plant != null) {
+                        mIsFav = true;
+                        mPlantFavoriteIV.setImageResource(R.drawable.ic_favorites_black_24dp);
+                    } else {
+                        mIsFav = false;
+                        mPlantFavoriteIV.setImageResource(R.drawable.ic_favorites_border_black_24dp);
+                    }
+                }
+            });
         }
+
+        // set click listener on the favorites button
+        mPlantFavoriteIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mPlantInfo != null) {
+                    if (!mIsFav) {
+                        mPlantInfoViewModel.insertPlant(mPlantInfo);
+                    } else {
+                        mPlantInfoViewModel.deletePlant(mPlantInfo);
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -303,7 +349,7 @@ public class PlantItemDetailActivity extends AppCompatActivity {
     }
 
     // Displays information about the selected plant.
-    private void fillInLayout(USAUtils.PlantItem plantItem) {
+    private void fillInLayout(PlantItem plantItem) {
         String sciString = plantItem.Scientific_Name_x;
         String comString = plantItem.Common_Name;
         String generalString = getGeneralString();
@@ -330,6 +376,146 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         mPlantRepTV.setText(repString);
         mHSuitTV.setText(suitHString);
         mPlantSuitTV.setText(suitString);
+    }
+
+    private PlantInfo createPlantInfo(PlantItem pItem){
+
+        PlantInfo pInfo = new PlantInfo();
+        // change PlantItem to PlantInfo
+        pInfo.id = pItem.id;
+        pInfo.Scientific_Name_x = pItem.Scientific_Name_x;
+        pInfo.Scientific_Name_y = pItem.Scientific_Name_y;
+        pInfo.Common_Name = pItem.Common_Name;
+        pInfo.Symbol = pItem.Symbol;
+        pInfo.Duration = pItem.Duration;
+        pInfo.Growth_Habit = pItem.Growth_Habit;
+        pInfo.Native_Status = pItem.Native_Status;
+        pInfo.Category = pItem.Category;
+        pInfo.Parents = pItem.Parents;
+        pInfo.Forma = pItem.Forma;
+        pInfo.Forma_Prefix = pItem.Forma_Prefix;
+        pInfo.Variety = pItem.Variety;
+        pInfo.Variety_Prefix = pItem.Variety_Prefix;
+        pInfo.Hybrid_Variety_Indicator = pItem.Hybrid_Variety_Indicator;
+        pInfo.Subvariety = pItem.Subvariety;
+        pInfo.Subvariety_Prefix = pItem.Subvariety_Prefix;
+        pInfo.Species = pItem.Species;
+        pInfo.Hybrid_Species_Indicator = pItem.Hybrid_Species_Indicator;
+        pInfo.Subspecies = pItem.Subspecies;
+        pInfo.Subspecies_Prefix = pItem.Subspecies_Prefix;
+        pInfo.Hybrid_Subspecies_Indicator = pItem.Hybrid_Subspecies_Indicator;
+        pInfo.Genus = pItem.Genus;
+        pInfo.Hybrid_Genus_Indicator = pItem.Hybrid_Genus_Indicator;
+        pInfo.Family = pItem.Family;
+        pInfo.Family_Symbol = pItem.Family_Symbol;
+        pInfo.Family_Common_Name = pItem.Family_Common_Name;
+        pInfo.xOrder = pItem.xOrder;
+        pInfo.Class = pItem.Class;
+        pInfo.SubClass = pItem.SubClass;
+        pInfo.Division = pItem.Division;
+        pInfo.SubDivision = pItem.SubDivision;
+        pInfo.SuperDivision = pItem.SuperDivision;
+        pInfo.Kingdom = pItem.Kingdom;
+        pInfo.SubKingdom = pItem.SubKingdom;
+        pInfo.State_and_Province = pItem.State_and_Province;
+        pInfo.Federal_T_E_Status = pItem.Federal_T_E_Status;
+        pInfo.Federal_Noxious_Status = pItem.Federal_Noxious_Status;
+        pInfo.State_T_E_Status = pItem.State_T_E_Status;
+        pInfo.State_T_E_Common_Name = pItem.State_T_E_Common_Name;
+        pInfo.State_Noxious_Status = pItem.State_Noxious_Status;
+        pInfo.State_Noxious_Common_Name = pItem.State_Noxious_Common_Name;
+        pInfo.Genera_Binomial_Author = pItem.Genera_Binomial_Author;
+        pInfo.Trinomial_Author = pItem.Trinomial_Author;
+        pInfo.Quadranomial_Author = pItem.Quadranomial_Author;
+        pInfo.Questionable_Taxon_Indicator = pItem.Questionable_Taxon_Indicator;
+        pInfo.Invasive = pItem.Invasive;
+        pInfo.Accepted_Symbol_y = pItem.Accepted_Symbol_y;
+        pInfo.Synonym_Symbol_y = pItem.Synonym_Symbol_y;
+        pInfo.Active_Growth_Period = pItem.Active_Growth_Period;
+        pInfo.After_Harvest_Regrowth_Rate = pItem.After_Harvest_Regrowth_Rate;
+        pInfo.Bloat = pItem.Bloat;
+        pInfo.C_N_Ratio = pItem.C_N_Ratio;
+        pInfo.Coppice_Potential = pItem.Coppice_Potential;
+        pInfo.Fall_Conspicuous = pItem.Fall_Conspicuous;
+        pInfo.Fire_Resistance = pItem.Fire_Resistance;
+        pInfo.Flower_Color = pItem.Flower_Color;
+        pInfo.Flower_Conspicuous = pItem.Flower_Conspicuous;
+        pInfo.Foliage_Color = pItem.Foliage_Color;
+        pInfo.Foliage_Porosity_Summer = pItem.Foliage_Porosity_Summer;
+        pInfo.Foliage_Porosity_Winter = pItem.Foliage_Porosity_Winter;
+        pInfo.Foliage_Texture = pItem.Foliage_Texture;
+        pInfo.Fruit_Color = pItem.Fruit_Color;
+        pInfo.Fruit_Conspicuous = pItem.Fruit_Conspicuous;
+        pInfo.Growth_Form = pItem.Growth_Form;
+        pInfo.Growth_Rate = pItem.Growth_Rate;
+        pInfo.Height_at_Base_Age_Maximum_feet = pItem.Height_at_Base_Age_Maximum_feet;
+        pInfo.Height_Mature_feet = pItem.Height_Mature_feet;
+        pInfo.Known_Allelopath = pItem.Known_Allelopath;
+        pInfo.Leaf_Retention = pItem.Leaf_Retention;
+        pInfo.Lifespan = pItem.Lifespan;
+        pInfo.Low_Growing_Grass = pItem.Low_Growing_Grass;
+        pInfo.Nitrogen_Fixation = pItem.Nitrogen_Fixation;
+        pInfo.Resprout_Ability = pItem.Resprout_Ability;
+        pInfo.Shape_and_Orientation = pItem.Shape_and_Orientation;
+        pInfo.Toxicity = pItem.Toxicity;
+        pInfo.Adapted_to_Coarse_Textured_Soils = pItem.Adapted_to_Coarse_Textured_Soils;
+        pInfo.Adapted_to_Medium_Textured_Soils = pItem.Adapted_to_Medium_Textured_Soils;
+        pInfo.Adapted_to_Fine_Textured_Soils = pItem.Adapted_to_Fine_Textured_Soils;
+        pInfo.Anaerobic_Tolerance = pItem.Anaerobic_Tolerance;
+        pInfo.CaCO_3_Tolerance = pItem.CaCO_3_Tolerance;
+        pInfo.Cold_Stratification_Required = pItem.Cold_Stratification_Required;
+        pInfo.Drought_Tolerance = pItem.Drought_Tolerance;
+        pInfo.Fertility_Requirement = pItem.Fertility_Requirement;
+        pInfo.Fire_Tolerance = pItem.Fire_Tolerance;
+        pInfo.Frost_Free_Days_Minimum = pItem.Frost_Free_Days_Minimum;
+        pInfo.Hedge_Tolerance = pItem.Hedge_Tolerance;
+        pInfo.Moisture_Use = pItem.Moisture_Use;
+        pInfo.pH_Minimum = pItem.pH_Minimum;
+        pInfo.pH_Maximum = pItem.pH_Maximum;
+        pInfo.Planting_Density_per_Acre_Minimum = pItem.Planting_Density_per_Acre_Minimum;
+        pInfo.Planting_Density_per_Acre_Maximum = pItem.Planting_Density_per_Acre_Maximum;
+        pInfo.Precipitation_Minimum = pItem.Precipitation_Minimum;
+        pInfo.Precipitation_Maximum = pItem.Precipitation_Maximum;
+        pInfo.Root_Depth_Minimum_inches = pItem.Root_Depth_Minimum_inches;
+        pInfo.Salinity_Tolerance = pItem.Salinity_Tolerance;
+        pInfo.Shade_Tolerance = pItem.Shade_Tolerance;
+        pInfo.Temperature_Minimum_F = pItem.Temperature_Minimum_F;
+        pInfo.Bloom_Period = pItem.Bloom_Period;
+        pInfo.Commercial_Availability = pItem.Commercial_Availability;
+        pInfo.Fruit_Seed_Abundance = pItem.Fruit_Seed_Abundance;
+        pInfo.Fruit_Seed_Period_Begin = pItem.Fruit_Seed_Period_Begin;
+        pInfo.Fruit_Seed_Period_End = pItem.Fruit_Seed_Period_End;
+        pInfo.Fruit_Seed_Persistence = pItem.Fruit_Seed_Persistence;
+        pInfo.Propogated_by_Bare_Root = pItem.Propogated_by_Bare_Root;
+        pInfo.Propogated_by_Bulbs = pItem.Propogated_by_Bulbs;
+        pInfo.Propogated_by_Container = pItem.Propogated_by_Container;
+        pInfo.Propogated_by_Corms = pItem.Propogated_by_Corms;
+        pInfo.Propogated_by_Cuttings = pItem.Propogated_by_Cuttings;
+        pInfo.Propogated_by_Seed = pItem.Propogated_by_Seed;
+        pInfo.Propogated_by_Sod = pItem.Propogated_by_Sod;
+        pInfo.Propogated_by_Sprigs = pItem.Propogated_by_Sprigs;
+        pInfo.Propogated_by_Tubers = pItem.Propogated_by_Tubers;
+        pInfo.Seeds_per_Pound = pItem.Seeds_per_Pound;
+        pInfo.Seed_Spread_Rate = pItem.Seed_Spread_Rate;
+        pInfo.Seedling_Vigor = pItem.Seedling_Vigor;
+        pInfo.Small_Grain = pItem.Small_Grain;
+        pInfo.Vegetative_Spread_Rate = pItem.Vegetative_Spread_Rate;
+        pInfo.Berry_Nut_Seed_Product = pItem.Berry_Nut_Seed_Product;
+        pInfo.Christmas_Tree_Product = pItem.Christmas_Tree_Product;
+        pInfo.Fodder_Product = pItem.Fodder_Product;
+        pInfo.Fuelwood_Product = pItem.Fuelwood_Product;
+        pInfo.Lumber_Product = pItem.Lumber_Product;
+        pInfo.Naval_Store_Product = pItem.Naval_Store_Product;
+        pInfo.Nursery_Stock_Product = pItem.Nursery_Stock_Product;
+        pInfo.Palatable_Browse_Animal = pItem.Palatable_Browse_Animal;
+        pInfo.Palatable_Graze_Animal = pItem.Palatable_Graze_Animal;
+        pInfo.Palatable_Human = pItem.Palatable_Human;
+        pInfo.Post_Product = pItem.Post_Product;
+        pInfo.Protein_Potential = pItem.Protein_Potential;
+        pInfo.Pulpwood_Product = pItem.Pulpwood_Product;
+        pInfo.Veneer_Product = pItem.Veneer_Product;
+
+        return pInfo;
     }
 
     // Sets the plants image.

@@ -19,7 +19,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.android.usdaplantindex.utils.USAUtils;
+import com.example.android.usdaplantindex.data.PlantItem;
+import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -98,7 +99,7 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
     private LinkedBlockingDeque<String> mPlantSpeciesToLoad;
 
     // Contains plant details (initially empty)
-    private Hashtable<Integer, USAUtils.PlantItem> mPlants;
+    private Hashtable<Integer, PlantItem> mPlants;
 
     // Contains search box text split into individual words
     private ArrayList<String> mFilters;
@@ -168,7 +169,7 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
                 mLoadingPB.setVisibility(View.INVISIBLE);
 
                 if (s != null) {
-                    ArrayList<USAUtils.PlantItem> items = USAUtils.parsePlantJSON(s);
+                    ArrayList<PlantItem> items = USDAPlantUtils.parsePlantJSON(s);
                     if (items != null) {
                         updateAllPlantSpecies(items);
                         if (!items.isEmpty()) {
@@ -209,7 +210,7 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
 
                 // Store details
                 if (s != null) {
-                    ArrayList<USAUtils.PlantItem> items = USAUtils.parsePlantJSON(s);
+                    ArrayList<PlantItem> items = USDAPlantUtils.parsePlantJSON(s);
                     if (items != null) {
                         storePlantDetails(items);
                     }
@@ -300,14 +301,14 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
     private void updateSearchResults() {
         Log.d(TAG, "Filtering: " + mFilters.toString());
 
-        ArrayList<USAUtils.PlantItem> filteredPlants = new ArrayList<>();
+        ArrayList<PlantItem> filteredPlants = new ArrayList<>();
 
         ArrayList<Integer> prevIds = new ArrayList<Integer>(mFilteredPlantIds);
         mFilteredPlantIds.clear();
         if (!mFilters.isEmpty()) {
             // Remove current filters that do not match the results
             for (Integer id : prevIds) {
-                USAUtils.PlantItem item = mPlants.get(id);
+                PlantItem item = mPlants.get(id);
                 if (item == null) continue;
                 String name = item.Species.toLowerCase();
                 int i;
@@ -322,7 +323,7 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
             }
 
             // Add new filters
-            for (USAUtils.PlantItem item : mPlants.values()) {
+            for (PlantItem item : mPlants.values()) {
                 if (mFilteredPlantIds.contains(item.id)) continue;
                 String name = item.Species.toLowerCase();
                 int i;
@@ -342,8 +343,8 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
         mPlantSearchAdapter.updatePlantItems(filteredPlants);
     }
 
-    private void updateAllPlantSpecies(ArrayList<USAUtils.PlantItem> items) {
-        for (USAUtils.PlantItem item : items) {
+    private void updateAllPlantSpecies(ArrayList<PlantItem> items) {
+        for (PlantItem item : items) {
             Integer count = mAllPlantSpecies.get(item.Species);
             if (count != null) {
                 mAllPlantSpecies.put(item.Species, count + 1);
@@ -354,8 +355,8 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
         }
     }
 
-    private void storePlantDetails(ArrayList<USAUtils.PlantItem> items) {
-        for (USAUtils.PlantItem item : items) {
+    private void storePlantDetails(ArrayList<PlantItem> items) {
+        for (PlantItem item : items) {
             // Store plant details
             mPlants.put(item.id, item);
             // Update search offset for the species
@@ -383,7 +384,7 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
     private void loadPlantSpecies() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String url = USAUtils.buildPlantSearchURL(LITE_LOAD_LIMIT, mLiteLoadOffset, "fields", "Species");
+        String url = USDAPlantUtils.buildPlantSearchURL(LITE_LOAD_LIMIT, mLiteLoadOffset, "fields", "Species");
 
         Bundle args = new Bundle();
         args.putString(PLANT_SEARCH_LITE_URL_KEY, url);
@@ -399,7 +400,7 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
         if (offset == null) {
             offset = 0;
         }
-        String url = USAUtils.buildPlantSearchURL(RESULTS_LOAD_LIMIT, offset, "Species", species);
+        String url = USDAPlantUtils.buildPlantSearchURL(RESULTS_LOAD_LIMIT, offset, "Species", species);
 
         Bundle args = new Bundle();
         args.putString(PLANT_SEARCH_HEAVY_URL_KEY, url);
@@ -407,9 +408,9 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
     }
 
     @Override
-    public void onPlantItemClick(USAUtils.PlantItem repo) {
+    public void onPlantItemClick(PlantItem repo) {
         Intent intent = new Intent(this, PlantItemDetailActivity.class);
-        intent.putExtra(USAUtils.EXTRA_PLANT_ITEM, repo);
+        intent.putExtra(USDAPlantUtils.EXTRA_PLANT_ITEM, repo);
         startActivity(intent);
     }
 
