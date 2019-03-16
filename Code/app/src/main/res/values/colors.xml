@@ -3,7 +3,7 @@
     <color name="colorPrimary">#1D2D24</color>
     <color name="colorPrimaryDark">#221f2c</color>
     <color name="colorAccent">#544b6b</color>
-    <color name="colorBubbleBackground">#64827f </color>
+    <color name="colorBubbleBackground">#AA64827f </color>
     <color name="colorBrightText">#ffffff</color>
     <color name="colorMutedText">#E0E0E0</color>
 </resources>

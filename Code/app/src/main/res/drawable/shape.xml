@@ -4,7 +4,8 @@
     android:shape="rectangle"
     android:layout_width="300dp"
     android:gravity="center"
-    android:layout_height="300dp">
+    android:layout_height="300dp"
+    android:alpha="0.5">
 
     <solid
         android:color="@color/colorBubbleBackground" >
