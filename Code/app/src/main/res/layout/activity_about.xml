@@ -16,7 +16,7 @@
             android:padding="10dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/brightTextColor"
+            android:textColor="@color/colorBrightText"
             android:text="@string/header_history" />
 
         <TextView
@@ -34,7 +34,7 @@
             android:padding="10dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/brightTextColor"
+            android:textColor="@color/colorBrightText"
             android:text="@string/header_issues" />
 
         <TextView
@@ -52,7 +52,7 @@
             android:padding="10dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/brightTextColor"
+            android:textColor="@color/colorBrightText"
             android:text="@string/header_citation" />
 
         <TextView

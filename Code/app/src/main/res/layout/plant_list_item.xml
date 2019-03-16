@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:textSize="20sp"
-                android:textColor="@color/brightTextColor"/>
+                android:textColor="@color/colorBrightText"/>
 
             <TextView
                 android:id="@+id/tv_plant_common"
