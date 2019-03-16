@@ -36,14 +36,19 @@
 
     <string name="plant_identify_button_text">Identify</string>
 
+    <string name="header_history">History</string>
+    <string name="about_history">
+        The USDA Plants Index was created as part of a group project
+        at Oregon State University in the Winter of 2019.\n\n
+        The team members who worked on this project were Zachary Thomas, Anton Synytsia, Corey Hemphill, and
+        Christopher Cooper.
+    </string>
     <string name="header_citation">Sources</string>
     <string name="about_citation">
         USDA, NRCS. 2016. The PLANTS Database (http://plants.usda.gov, 12 July 2016).
-        National Plant Data Team, Greensboro, NC 27401-4901 USA.\n\n.
-
-        REST API for the USDA Plants Database, https://plantsdb.xyz/heartbeat.
-        https://github.com/sckott/usdaplantsapi
-
+        National Plant Data Team, Greensboro, NC 27401-4901 USA.\n\n
+        REST API for the USDA Plants Database,
+        https://github.com/sckott/usdaplantsapi.\n\n
         Plant images are supplied by Google Images (by search with plant name).
     </string>
 
