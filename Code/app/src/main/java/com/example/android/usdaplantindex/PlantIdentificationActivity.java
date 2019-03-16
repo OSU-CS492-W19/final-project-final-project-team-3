@@ -120,7 +120,7 @@ public class PlantIdentificationActivity extends AppCompatActivity {
         identifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PlantIdentificationActivity.this, IdentifyListActivity.class);
+                Intent intent = new Intent(PlantIdentificationActivity.this, PlantIdentificationListActivity.class);
                 intent.putExtra(USDAPlantUtils.EXTRA_PLANT_IDENTIFY, plantIdentify);
                 startActivity(intent);
             }

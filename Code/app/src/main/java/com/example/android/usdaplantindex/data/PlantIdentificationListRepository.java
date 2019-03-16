@@ -9,9 +9,9 @@ import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
 import java.util.List;
 
-public class IdentifyPlantRepository implements LoadPlantsTask.AsyncCallback {
+public class PlantIdentificationListRepository implements LoadPlantsTask.AsyncCallback {
 
-    private static final String TAG = IdentifyPlantRepository.class.getSimpleName();
+    private static final String TAG = PlantIdentificationListRepository.class.getSimpleName();
 
     private MutableLiveData<List<PlantItem>> mPlantItems;
     private MutableLiveData<Status> mLoadingStatus;
@@ -21,7 +21,7 @@ public class IdentifyPlantRepository implements LoadPlantsTask.AsyncCallback {
     private String mCurrentCategory;
     private String mCurrentDuration;
 
-    public IdentifyPlantRepository() {
+    public PlantIdentificationListRepository() {
         mPlantItems = new MutableLiveData<>();
         mPlantItems.setValue(null);
 

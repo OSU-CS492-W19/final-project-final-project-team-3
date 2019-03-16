@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.example.android.usdaplantindex.FavoritePlantsActivity">
+    tools:context="com.example.android.usdaplantindex.PlantFavoriteActivity">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_favorite_plants"

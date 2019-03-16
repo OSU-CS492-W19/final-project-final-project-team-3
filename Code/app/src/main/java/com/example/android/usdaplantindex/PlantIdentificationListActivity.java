@@ -18,16 +18,16 @@ import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
 import java.util.List;
 
-public class IdentifyListActivity extends AppCompatActivity implements PlantSearchAdapter.OnPlantItemClickListener {
+public class PlantIdentificationListActivity extends AppCompatActivity implements PlantSearchAdapter.OnPlantItemClickListener {
 
-    private static final String TAG = IdentifyListActivity.class.getSimpleName();
+    private static final String TAG = PlantIdentificationListActivity.class.getSimpleName();
 
     private RecyclerView mPlantItemsRV;
     private ProgressBar mLoadingIndicatorPB;
     private TextView mLoadingErrorMessageTV;
     private PlantSearchAdapter mPlantAdapter;
     private USDAPlantUtils.PlantIdentify mPlantIdentify;
-    private IdentifyPlantViewModel mIdentifyPlantViewModel;
+    private PlantIdentificationListViewModel mPlantIdentificationListViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +51,13 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
          * the activity.  See the classes in the data package for more about how the ViewModel
          * is set up.  Here, we simply grab the plant data ViewModel.
          */
-        mIdentifyPlantViewModel = ViewModelProviders.of(this).get(IdentifyPlantViewModel.class);
+        mPlantIdentificationListViewModel = ViewModelProviders.of(this).get(PlantIdentificationListViewModel.class);
 
         /*
          * Attach an Observer to the plant data.  Whenever the plant data changes, this
          * Observer will send the new data into our RecyclerView's adapter.
          */
-        mIdentifyPlantViewModel.getPlants().observe(this, new Observer<List<PlantItem>>() {
+        mPlantIdentificationListViewModel.getPlants().observe(this, new Observer<List<PlantItem>>() {
             @Override
             public void onChanged(@Nullable List<PlantItem> plantItems) {
                 mPlantAdapter.updatePlantItems(plantItems);
@@ -71,7 +71,7 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
          * Otherwise, it will display the RecyclerView if plant data was successfully fetched,
          * or it will display the error message if there was an error fetching data.
          */
-        mIdentifyPlantViewModel.getLoadingStatus().observe(this, new Observer<Status>() {
+        mPlantIdentificationListViewModel.getLoadingStatus().observe(this, new Observer<Status>() {
             @Override
             public void onChanged(@Nullable Status status) {
                 if (status == Status.LOADING) {
@@ -128,6 +128,6 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
             plantDuration = "";
         }
 
-        mIdentifyPlantViewModel.loadPlants(plantState, plantGrowthHabit, plantCategory, plantDuration);
+        mPlantIdentificationListViewModel.loadPlants(plantState, plantGrowthHabit, plantCategory, plantDuration);
     }
 }

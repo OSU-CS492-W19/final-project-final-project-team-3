@@ -15,7 +15,7 @@ import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
 import java.util.List;
 
-public class FavoritePlantsActivity extends AppCompatActivity implements PlantInfoAdapter.OnPlantInfoClickListener {
+public class PlantFavoriteActivity extends AppCompatActivity implements PlantInfoAdapter.OnPlantInfoClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

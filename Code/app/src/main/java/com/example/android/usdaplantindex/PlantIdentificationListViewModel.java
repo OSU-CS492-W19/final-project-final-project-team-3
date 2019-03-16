@@ -3,21 +3,21 @@ package com.example.android.usdaplantindex;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.example.android.usdaplantindex.data.IdentifyPlantRepository;
+import com.example.android.usdaplantindex.data.PlantIdentificationListRepository;
 import com.example.android.usdaplantindex.data.PlantItem;
 import com.example.android.usdaplantindex.data.Status;
 
 import java.util.List;
 
-public class IdentifyPlantViewModel extends ViewModel {
+public class PlantIdentificationListViewModel extends ViewModel {
 
     private LiveData<List<PlantItem>> mPlantItems;
     private LiveData<Status> mLoadingStatus;
 
-    private IdentifyPlantRepository mRepository;
+    private PlantIdentificationListRepository mRepository;
 
-    public IdentifyPlantViewModel() {
-        mRepository = new IdentifyPlantRepository();
+    public PlantIdentificationListViewModel() {
+        mRepository = new PlantIdentificationListRepository();
         mPlantItems = mRepository.getPlants();
         mLoadingStatus = mRepository.getLoadingStatus();
     }
