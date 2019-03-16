@@ -13,6 +13,7 @@ public class StartupActivity extends AppCompatActivity {
     private Button mSearchBySpeciesBtn;
     private Button mSearchByLocationBtn;
     private Button mFavoritesBtn;
+    private Button mAboutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class StartupActivity extends AppCompatActivity {
         mSearchBySpeciesBtn = findViewById(R.id.btn_search_by_species);
         mSearchByLocationBtn = findViewById(R.id.btn_search_by_location);
         mFavoritesBtn = findViewById(R.id.btn_favorites);
+        mAboutBtn = findViewById(R.id.btn_about);
 
         mSearchByNameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +54,14 @@ public class StartupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StartupActivity.this, PlantFavoriteActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mAboutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StartupActivity.this, AboutActivity.class);
                 startActivity(intent);
             }
         });

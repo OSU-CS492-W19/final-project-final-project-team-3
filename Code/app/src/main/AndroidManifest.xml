@@ -64,11 +64,22 @@
                 android:value="com.example.android.usdaplantindex.PlantIdentificationActivity" />
         </activity>
         <activity
-            android:name=".PlantItemDetailActivity"
-            android:parentActivityName=".PlantIdentificationListActivity">
-            <meta-data
+        android:name=".PlantItemDetailActivity"
+        android:launchMode="singleTop"
+        android:label="@string/title_activity_detail"
+        android:parentActivityName=".PlantIdentificationListActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.android.usdaplantindex.PlantIdentificationListActivity" />
+        </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:launchMode="singleTop"
+            android:label="@string/title_activity_about"
+            android:parentActivityName=".StartupActivity">
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.usdaplantindex.PlantIdentificationListActivity" />
+                android:value="com.example.android.usdaplantindex.StartupActivity" />
         </activity>
     </application>
 

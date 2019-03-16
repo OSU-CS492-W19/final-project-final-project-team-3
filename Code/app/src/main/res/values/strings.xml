@@ -12,16 +12,18 @@
     <string name="plant_item_share_text">Plant Information:</string>
 
     <string name="title_activity_startup">USDA Plant Index</string>
+    <string name="title_activity_detail">Plant Information</string>
     <string name="title_activity_plant_search_by_species">Plants by Species</string>
     <string name="title_activity_plant_search_by_name">Plants by Name</string>
     <string name="title_activity_plant_identification">Plant Identification</string>
     <string name="title_activity_plant_favorites">Favorites</string>
-
+    <string name="title_activity_about">About USDA Plant Index</string>
 
     <string name="button_text_search_by_species">Search By Species</string>
     <string name="button_text_search_by_name">Search By Scientific Name</string>
     <string name="button_text_identify">Identify Plant</string>
     <string name="button_text_favorites">Favorites</string>
+    <string name="button_text_about">About USDA Plant Index</string>
 
     <string name="plant_search_by_species_box_hint">Enter Species...</string>
     <string name="plant_search_by_name_box_hint">Enter Scientific Name...</string>
@@ -34,7 +36,8 @@
 
     <string name="plant_identify_button_text">Identify</string>
 
-    <string name="source_citation">Citation: USDA, NRCS. 2016. The PLANTS Database (http://plants.usda.gov, 12 July 2016).
+    <string name="header_citation">Sources</string>
+    <string name="about_citation">USDA, NRCS. 2016. The PLANTS Database (http://plants.usda.gov, 12 July 2016).
         National Plant Data Team, Greensboro, NC 27401-4901 USA.\n\n
         Plant images are returned by Google Images and may be inaccurate.
     </string>

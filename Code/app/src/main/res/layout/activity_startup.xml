@@ -44,12 +44,13 @@
         android:background="@color/colorAccent"
         android:text="@string/button_text_favorites" />
 
-    <TextView
-        android:id="@+id/tv_citation"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btn_about"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textSize="8sp"
-        android:text="@string/source_citation" />
+        android:layout_margin="5dp"
+        android:background="@color/colorAccent"
+        android:text="@string/button_text_about" />
 
 </LinearLayout>
