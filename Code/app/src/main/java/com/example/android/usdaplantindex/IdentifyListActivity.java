@@ -1,23 +1,22 @@
 package com.example.android.usdaplantindex;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.android.usdaplantindex.data.PlantItem;
-import com.example.android.usdaplantindex.utils.NetworkUtils;
+import com.example.android.usdaplantindex.data.Status;
 import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class IdentifyListActivity extends AppCompatActivity implements PlantSearchAdapter.OnPlantItemClickListener {
 
@@ -27,8 +26,8 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
     private ProgressBar mLoadingIndicatorPB;
     private TextView mLoadingErrorMessageTV;
     private PlantSearchAdapter mPlantAdapter;
-    private IdentifyPlantViewModel mIdentifyPlantViewModel;
     private USDAPlantUtils.PlantIdentify mPlantIdentify;
+    private IdentifyPlantViewModel mIdentifyPlantViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,49 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
         mPlantItemsRV.setLayoutManager(new LinearLayoutManager(this));
         mPlantItemsRV.setHasFixedSize(true);
 
-        loadPlant();
+        /*
+         * This version of the app code uses the new ViewModel architecture to manage data for
+         * the activity.  See the classes in the data package for more about how the ViewModel
+         * is set up.  Here, we simply grab the plant data ViewModel.
+         */
+        mIdentifyPlantViewModel = ViewModelProviders.of(this).get(IdentifyPlantViewModel.class);
+
+        /*
+         * Attach an Observer to the plant data.  Whenever the plant data changes, this
+         * Observer will send the new data into our RecyclerView's adapter.
+         */
+        mIdentifyPlantViewModel.getPlants().observe(this, new Observer<List<PlantItem>>() {
+            @Override
+            public void onChanged(@Nullable List<PlantItem> plantItems) {
+                mPlantAdapter.updatePlantItems(plantItems);
+            }
+        });
+
+        /*
+         * Attach an Observer to the network loading status.  Whenever the loading status changes,
+         * this Observer will ensure that the correct layout components are visible.  Specifically,
+         * it will make the loading indicator visible only when the plant is being loaded.
+         * Otherwise, it will display the RecyclerView if plant data was successfully fetched,
+         * or it will display the error message if there was an error fetching data.
+         */
+        mIdentifyPlantViewModel.getLoadingStatus().observe(this, new Observer<Status>() {
+            @Override
+            public void onChanged(@Nullable Status status) {
+                if (status == Status.LOADING) {
+                    mLoadingIndicatorPB.setVisibility(View.VISIBLE);
+                } else if (status == Status.SUCCESS) {
+                    mLoadingIndicatorPB.setVisibility(View.INVISIBLE);
+                    mLoadingErrorMessageTV.setVisibility(View.INVISIBLE);
+                    mPlantItemsRV.setVisibility(View.VISIBLE);
+                } else {
+                    mLoadingIndicatorPB.setVisibility(View.INVISIBLE);
+                    mPlantItemsRV.setVisibility(View.INVISIBLE);
+                    mLoadingErrorMessageTV.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        loadPlants();
     }
 
     @Override
@@ -57,21 +98,7 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
         startActivity(intent);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    public void loadPlant() {
+    public void loadPlants() {
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(USDAPlantUtils.EXTRA_PLANT_IDENTIFY)) {
             mPlantIdentify = (USDAPlantUtils.PlantIdentify)intent.getSerializableExtra(
@@ -79,75 +106,28 @@ public class IdentifyListActivity extends AppCompatActivity implements PlantSear
             );
         }
 
+        String plantState = mPlantIdentify.plantState;
+        String plantGrowthHabit = mPlantIdentify.plantGrowthHabit;
+        String plantCategory = mPlantIdentify.plantCategory;
+        String plantDuration = mPlantIdentify.plantDuration;
+
         /*
          * We must ensure that our PlantIdentify values aren't null
          * to avoid null pointer exceptions in the URL builder
          */
-        if (mPlantIdentify.plantState == null) {
-            mPlantIdentify.plantState = "";
+        if (plantState == null) {
+            plantState = "";
         }
-        if (mPlantIdentify.plantGrowthHabit == null) {
-            mPlantIdentify.plantGrowthHabit = "";
+        if (plantGrowthHabit == null) {
+            plantGrowthHabit = "";
         }
-        if (mPlantIdentify.plantCategory == null) {
-            mPlantIdentify.plantCategory = "";
+        if (plantCategory == null) {
+            plantCategory = "";
         }
-        if (mPlantIdentify.plantDuration == null) {
-            mPlantIdentify.plantDuration = "";
-        }
-
-        String url = USDAPlantUtils.buildPlantSearchURL(1000,0,
-                mPlantIdentify.plantState, mPlantIdentify.plantGrowthHabit,
-                mPlantIdentify.plantCategory, mPlantIdentify.plantDuration);
-        new PlantTask().execute(url);
-    }
-
-    class PlantTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            mLoadingIndicatorPB.setVisibility(View.VISIBLE);
+        if (plantDuration == null) {
+            plantDuration = "";
         }
 
-        @Override
-        protected String doInBackground(String... params) {
-            String USDAplantsURL = params[0];
-            String plantJSON = null;
-            try {
-                plantJSON = NetworkUtils.doHTTPGet(USDAplantsURL);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return plantJSON;
-        }
-
-        @Override
-        protected void onPostExecute(String plantJSON) {
-            mLoadingIndicatorPB.setVisibility(View.INVISIBLE);
-            if (plantJSON != null) {
-                mLoadingErrorMessageTV.setVisibility(View.INVISIBLE);
-                mPlantItemsRV.setVisibility(View.VISIBLE);
-                ArrayList<PlantItem> plantItems = USDAPlantUtils.parsePlantJSON(plantJSON);
-                mPlantAdapter.updatePlantItems(plantItems);
-
-                /*
-                 * If the plantItems array list comes back null, our search did not yield
-                 * any results. Display the appropriate search error message to the user
-                 */
-                if (plantItems == null) {
-                    mLoadingErrorMessageTV = findViewById(R.id.tv_search_error_message);
-                    mPlantItemsRV.setVisibility(View.INVISIBLE);
-                    mLoadingErrorMessageTV.setVisibility(View.VISIBLE);
-                }
-            } else {
-                /*
-                 * If the plantJSON comes back null, then our HTTP connection wasn't
-                 * available. Display the appropriate loading error message to the user
-                 */
-                mLoadingErrorMessageTV = findViewById(R.id.tv_loading_error_message);
-                mPlantItemsRV.setVisibility(View.INVISIBLE);
-                mLoadingErrorMessageTV.setVisibility(View.VISIBLE);
-            }
-        }
+        mIdentifyPlantViewModel.loadPlants(plantState, plantGrowthHabit, plantCategory, plantDuration);
     }
 }

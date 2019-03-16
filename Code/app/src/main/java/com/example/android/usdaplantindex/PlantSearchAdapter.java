@@ -10,10 +10,10 @@ import com.example.android.usdaplantindex.data.PlantItem;
 import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.PlantItemViewHolder> {
-
-    private ArrayList<PlantItem> mPlantItems;
+    private List<PlantItem> mPlantItems;
     private OnPlantItemClickListener mPlantItemClickListener;
 
     public interface OnPlantItemClickListener {
@@ -24,7 +24,7 @@ public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.
         mPlantItemClickListener = clickListener;
     }
 
-    public void updatePlantItems(ArrayList<PlantItem> plantItems) {
+    public void updatePlantItems(List<PlantItem> plantItems) {
         mPlantItems = plantItems;
         notifyDataSetChanged();
     }
