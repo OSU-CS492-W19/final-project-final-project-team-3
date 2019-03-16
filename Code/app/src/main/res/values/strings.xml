@@ -38,18 +38,17 @@
 
     <string name="header_history">History</string>
     <string name="about_history">
-        The USDA Plants Index was created as part of a group project
-        at Oregon State University in the Winter of 2019.\n\n
-        The team members who worked on this project were Zachary Thomas, Anton Synytsia, Corey Hemphill, and
-        Christopher Cooper.
+        The USDA Plants Index was created as part of a group project at Oregon State University in the Winter of 2019.\n\nZachary Thomas, Anton Synytsia, Corey Hemphill, and Christopher Cooper were the team members who worked on this project.
     </string>
+
+    <string name="header_issues">Known Issues</string>
+    <string name="about_issues">
+        Images shown with plant information may be inaccurate. They are returned from a Google Image search using the common and scientific name of the plant.\n\nSearching for plants by name may take a long time. This is due to the API that we have used for this application not supporting "Fuzzy Search".\n\nIdentifying a plant by state will only show plants that are exclusive to that state. This is due to the API that we have used for this application not supporting "Fuzzy Search".
+    </string>
+
     <string name="header_citation">Sources</string>
     <string name="about_citation">
-        USDA, NRCS. 2016. The PLANTS Database (http://plants.usda.gov, 12 July 2016).
-        National Plant Data Team, Greensboro, NC 27401-4901 USA.\n\n
-        REST API for the USDA Plants Database,
-        https://github.com/sckott/usdaplantsapi.\n\n
-        Plant images are supplied by Google Images (by search with plant name).
+        USDA, NRCS. 2016. The PLANTS Database (http://plants.usda.gov, 12 July 2016).National Plant Data Team, Greensboro, NC 27401-4901 USA.\n\nREST API for the USDA Plants Database, https://github.com/sckott/usdaplantsapi.\n\nPlant images are supplied by Google Images.
     </string>
 
     <string name="title_plant_identification_spinner_state">Select a State</string>
