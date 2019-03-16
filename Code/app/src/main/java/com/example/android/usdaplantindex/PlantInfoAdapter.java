@@ -4,11 +4,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.usdaplantindex.data.PlantInfo;
-import com.example.android.usdaplantindex.utils.USAUtils;
 
 import java.util.List;
 
@@ -66,7 +64,7 @@ public class PlantInfoAdapter extends RecyclerView.Adapter<PlantInfoAdapter.Plan
         public void bind(PlantInfo plantInfo) {
             String sciString = plantInfo.Scientific_Name_x;
             String comString = plantInfo.Common_Name;
-            //String iconURL = USDAUtils.buildIconURL(plantItem.icon);
+            //String iconURL = USDAPlantUtils.buildIconURL(plantItem.icon);
             mPlantSciTV.setText(sciString);
             mPlantComTV.setText(comString);
             //Glide.with(mPlantPicIV.getContext()).load(iconURL).into(mPlantPicIV);

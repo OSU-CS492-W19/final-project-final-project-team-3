@@ -10,12 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.android.usdaplantindex.data.PlantInfo;
-import com.example.android.usdaplantindex.utils.USAUtils;
+import com.example.android.usdaplantindex.data.PlantItem;
+import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
 import java.util.List;
-import java.util.ArrayList;
 
-public class FavoritePlantsActivity extends AppCompatActivity implements PlantInfoAdapter.OnPlantInfoClickListener {
+public class PlantFavoriteActivity extends AppCompatActivity implements PlantInfoAdapter.OnPlantInfoClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class FavoritePlantsActivity extends AppCompatActivity implements PlantIn
 
     @Override
     public void onPlantInfoClick(PlantInfo plant) {
-        USAUtils.PlantItem temp = new USAUtils.PlantItem();
+        PlantItem temp = new PlantItem();
         // create new PlantItem
         temp.id = plant.id;
         temp.Scientific_Name_x = plant.Scientific_Name_x;
@@ -178,7 +178,7 @@ public class FavoritePlantsActivity extends AppCompatActivity implements PlantIn
 
         // start the detail activity
         Intent intent = new Intent(this, PlantItemDetailActivity.class);
-        intent.putExtra(USAUtils.EXTRA_PLANT_ITEM, temp);
+        intent.putExtra(USDAPlantUtils.EXTRA_PLANT_ITEM, temp);
         startActivity(intent);
     }
 }

@@ -51,7 +51,7 @@ public class StartupActivity extends AppCompatActivity {
         mFavoritesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StartupActivity.this, FavoritePlantsActivity.class);
+                Intent intent = new Intent(StartupActivity.this, PlantFavoriteActivity.class);
                 startActivity(intent);
             }
         });

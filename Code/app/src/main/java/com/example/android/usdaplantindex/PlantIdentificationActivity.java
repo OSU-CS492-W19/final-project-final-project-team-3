@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.example.android.usdaplantindex.utils.USAUtils;
+import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
 public class PlantIdentificationActivity extends AppCompatActivity {
 
@@ -20,7 +20,7 @@ public class PlantIdentificationActivity extends AppCompatActivity {
     private Spinner mSpinnerCategories;
     private Spinner mSpinnerDurations;
 
-    public USAUtils.PlantIdentify plantIdentify = new USAUtils.PlantIdentify();
+    public USDAPlantUtils.PlantIdentify plantIdentify = new USDAPlantUtils.PlantIdentify();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,8 +120,8 @@ public class PlantIdentificationActivity extends AppCompatActivity {
         identifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PlantIdentificationActivity.this, IdentifyListActivity.class);
-                intent.putExtra(USAUtils.EXTRA_PLANT_IDENTIFY, plantIdentify);
+                Intent intent = new Intent(PlantIdentificationActivity.this, PlantIdentificationListActivity.class);
+                intent.putExtra(USDAPlantUtils.EXTRA_PLANT_IDENTIFY, plantIdentify);
                 startActivity(intent);
             }
         });
