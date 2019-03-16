@@ -16,28 +16,29 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:layout_marginLeft="12dp"
-            android:textSize="18sp"
-            android:textColor="#000"/>
+            android:textSize="20sp"
+            android:textColor="@color/brightTextColor"/>
 
         <RelativeLayout
-            android:layout_height="wrap_content"
+            android:id="@+id/common_name"
             android:layout_width="fill_parent"
-            android:id="@+id/common_name">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tv_plant_common"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
                 android:layout_marginLeft="12dp"
+                android:padding="5dp"
                 android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/iv_plant_favorite"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:layout_marginLeft="337dp"
                 android:layout_toRightOf="@+id/tv_plant_common"
-                android:src="@drawable/ic_favorites_border_black_24dp"/>
+                android:src="@drawable/ic_favorites_border_black_24dp" />
 
         </RelativeLayout>
 

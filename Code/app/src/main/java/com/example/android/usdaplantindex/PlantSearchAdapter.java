@@ -64,7 +64,7 @@ public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.
         // Binds plant item to a view holder.
         public void bind(PlantItem plantItem) {
             String sciString = plantItem.Scientific_Name_x;
-            String comString = plantItem.Common_Name;
+            String comString = plantItem.Common_Name + "\n\n";
             mPlantSciTV.setText(sciString);
             mPlantComTV.setText(comString);
         }

@@ -28,7 +28,7 @@ public class PlantItemDetailActivity extends AppCompatActivity {
 
     public PlantItemDetailActivity parentDetail = this;
     public String sciString = "";
-    public String comString = "";
+    public String comString = "\n\n";
 
     private TextView mPlantSciTV;
     private TextView mPlantComTV;
