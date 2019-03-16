@@ -103,10 +103,15 @@
         android:textSize="18sp"
         android:background="@drawable/spinner_border" />
 
-    <Button
-        android:id="@+id/btn_identify"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/plant_identify_button_text"
-        android:textSize="24sp" />
+   <Button
+       android:id="@+id/btn_identify"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginLeft="5dp"
+       android:layout_marginRight="5dp"
+       android:layout_marginTop="25dp"
+       android:layout_marginBottom="5dp"
+       android:background="@color/colorAccent"
+       android:text="@string/plant_identify_button_text"
+       android:textAppearance="@android:style/TextAppearance.Material.Widget.Button.Colored" tools:targetApi="n" />
  </LinearLayout>
