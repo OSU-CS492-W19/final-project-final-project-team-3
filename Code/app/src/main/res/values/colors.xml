@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1D2D24</color>
-    <color name="colorPrimaryDark">#221f2c</color>
-    <color name="colorAccent">#544b6b</color>
-    <color name="colorBubbleBackground">#AA64827f </color>
+    <color name="colorPrimary">#567D30</color>
+    <color name="colorPrimaryDark">#355829</color>
+    <color name="colorAccent">#CEB31E</color>
+    <color name="colorBubbleBackground">#CCAAC78E </color>
+    <color name="colorMainBackground">#355829 </color>
     <color name="colorBrightText">#ffffff</color>
     <color name="colorMutedText">#E0E0E0</color>
     <color name="colorSpinnerText">#000000</color>
