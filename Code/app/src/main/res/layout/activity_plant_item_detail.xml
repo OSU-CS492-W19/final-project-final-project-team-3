@@ -50,43 +50,12 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/image_view_container"
-        android:background="@drawable/shape"
-        android:layout_margin="12dp"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_gravity="center_horizontal">
-
-        <ImageView
-            android:id="@+id/iv_plant_pic_det"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent" />
-
-    </android.support.v7.widget.CardView>
-
-        <!--
-    <android.support.v7.widget.CardView
-        android:layout_width="303dp"
-        android:layout_height="303dp"
+    <ImageView
+        android:id="@+id/iv_plant_pic_det"
+        android:adjustViewBounds="true"
         android:layout_gravity="center_horizontal"
-        app:cardCornerRadius="8dp"
-        app:background="@color/colorBrightText"
-        android:layout_margin="5dp"
-        android:elevation="10dp">
-
-        <ImageView
-            android:id="@+id/iv_plant_pic_det"
-            android:background="@color/colorGoogleImageBackground"
-            android:layout_gravity="center_horizontal"
-            android:padding="5dp"
-            android:layout_width="300dp"
-            android:layout_height="300dp" />
-
-    </android.support.v7.widget.CardView>
--->
+        android:layout_width="300dp"
+        android:layout_height="300dp" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_margin="12dp"

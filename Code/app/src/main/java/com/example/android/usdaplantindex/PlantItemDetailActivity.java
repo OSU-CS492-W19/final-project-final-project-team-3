@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.android.usdaplantindex.data.PlantItem;
 import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
@@ -544,7 +546,10 @@ public class PlantItemDetailActivity extends AppCompatActivity {
 
     // Sets the plants image.
     private void setImage(String plantImage){
-        Glide.with(mPlantPicIV).load(plantImage).into(mPlantPicIV);
+        Glide.with(mPlantPicIV)
+                .load(plantImage)
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(100)))
+                .into(mPlantPicIV);
     }
 
     // Class that handles getting image urls.
