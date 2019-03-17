@@ -2,7 +2,7 @@
 <layer-list
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@drawable/shadow"/>
+    <item android:drawable="@drawable/shadow_bubble"/>
     <item
         android:drawable="@drawable/shape"
         android:bottom="8px" />
