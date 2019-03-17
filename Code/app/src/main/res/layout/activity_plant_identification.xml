@@ -9,7 +9,7 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_margin="12dp"
-        android:background="@drawable/shape"
+        android:background="@drawable/shape_w_shadow"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -33,7 +33,7 @@
             android:gravity="center"
             android:textAlignment="center"
             android:textSize="18sp"
-            android:background="@drawable/spinner_fill" />
+            android:background="@drawable/spinner_fill_w_shadow" />
 
         <TextView
             android:id="@+id/tv_spinner_growth_habit"
@@ -53,7 +53,7 @@
             android:gravity="center"
             android:textAlignment="center"
             android:textSize="18sp"
-            android:background="@drawable/spinner_fill" />
+            android:background="@drawable/spinner_fill_w_shadow" />
 
         <TextView
             android:id="@+id/tv_spinner_category"
@@ -73,7 +73,7 @@
             android:gravity="center"
             android:textAlignment="center"
             android:textSize="18sp"
-            android:background="@drawable/spinner_fill" />
+            android:background="@drawable/spinner_fill_w_shadow" />
 
         <TextView
             android:id="@+id/tv_spinner_duration"
@@ -93,17 +93,17 @@
             android:gravity="center"
             android:textAlignment="center"
             android:textSize="18sp"
-            android:background="@drawable/spinner_fill" />
+            android:background="@drawable/spinner_fill_w_shadow" />
 
        <Button
            android:id="@+id/btn_identify"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:layout_marginLeft="12dp"
-           android:layout_marginRight="12dp"
+           android:layout_marginLeft="24dp"
+           android:layout_marginRight="24dp"
            android:layout_marginBottom="12dp"
            android:layout_marginTop="44dp"
-           android:background="@color/colorAccent"
+           android:background="@drawable/button_edged_w_shadow"
            android:text="@string/plant_identify_button_text"
            android:textAppearance="@android:style/TextAppearance.Material.Widget.Button.Colored" tools:targetApi="n" />
 

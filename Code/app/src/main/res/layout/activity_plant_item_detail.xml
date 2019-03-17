@@ -11,7 +11,7 @@
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_margin="12dp"
-            android:background="@drawable/shape"
+            android:background="@drawable/shape_w_shadow"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -59,7 +59,7 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_margin="12dp"
-        android:background="@drawable/shape"
+        android:background="@drawable/shape_w_shadow"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

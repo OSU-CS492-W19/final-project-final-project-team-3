@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#567D30</color>
-    <color name="colorPrimaryDark">#355829</color>
-    <color name="colorAccent">#CEB31E</color>
-    <color name="colorBubbleBackground">#CCAAC78E </color>
-    <color name="colorMainBackground">#355829 </color>
-    <color name="colorBrightText">#ffffff</color>
+    <color name="colorPrimary">#495e4d</color>
+    <color name="colorPrimaryDark">#374046</color>
+    <color name="colorAccent">#aea085</color>
+    <color name="colorAccentStart">#aea085</color>
+    <color name="colorAccentEnd">#aea085</color>
+    <color name="colorAccentDark">#aea085</color>
+    <color name="colorBubbleBackground">#AA849f77 </color>
+    <color name="colorMainBackground">#293a3d </color>
+    <color name="colorBrightText">#FFFFFF</color>
     <color name="colorMutedText">#E0E0E0</color>
     <color name="colorSpinnerText">#000000</color>
     <color name="colorGoogleImageBackground">#000000</color>
+    <color name="colorShadow">#88000000</color>
 </resources>

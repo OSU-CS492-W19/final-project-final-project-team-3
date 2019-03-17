@@ -10,47 +10,42 @@
 
     <Button
         android:id="@+id/btn_search_by_name"
-        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/button_w_shadow"
         android:text="@string/button_text_search_by_name" />
 
     <Button
         android:id="@+id/btn_search_by_species"
-        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/button_w_shadow"
         android:text="@string/button_text_search_by_species" />
 
     <Button
         android:id="@+id/btn_search_by_location"
-        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/button_w_shadow"
         android:text="@string/button_text_identify" />
 
     <Button
         android:id="@+id/btn_favorites"
-        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/button_w_shadow"
         android:text="@string/button_text_favorites" />
 
     <Button
         android:id="@+id/btn_about"
-        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/button_w_shadow"
         android:text="@string/button_text_about" />
 
 </LinearLayout>

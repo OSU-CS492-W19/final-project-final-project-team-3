@@ -7,8 +7,6 @@
         android:angle="90">
     </gradient>
 
-    <corners android:radius="20dip" />
-
     <stroke
         android:width="1px"
         android:color="@color/colorAccentDark" />
