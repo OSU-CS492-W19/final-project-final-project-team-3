@@ -13,13 +13,21 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <android.support.design.widget.TextInputLayout
+            android:theme="@style/EditTextHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
         <EditText
             android:id="@+id/plant_search_by_species_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:textColor="@color/colorBrightText"
             android:layout_margin="4dp"
             android:hint="@string/plant_search_by_species_box_hint"/>
+
+        </android.support.design.widget.TextInputLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
