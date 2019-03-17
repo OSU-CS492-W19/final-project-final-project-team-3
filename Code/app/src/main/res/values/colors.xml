@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#495e4d</color>
-    <color name="colorPrimaryDark">#374046</color>
-    <color name="colorAccent">#aea085</color>
-    <color name="colorAccentStart">#aea085</color>
-    <color name="colorAccentEnd">#aea085</color>
-    <color name="colorAccentDark">#aea085</color>
+    <color name="colorPrimaryDark">#2c3a2f</color>
+    <color name="colorAccent">#847767</color>
+    <color name="colorAccentStart">#847767</color>
+    <color name="colorAccentEnd">#847767</color>
+    <color name="colorAccentDark">#847767</color>
     <color name="colorBubbleBackground">#AA849f77 </color>
     <color name="colorMainBackground">#293a3d </color>
     <color name="colorBrightText">#FFFFFF</color>
