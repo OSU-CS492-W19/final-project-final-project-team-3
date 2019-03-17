@@ -8,6 +8,4 @@
     <color name="colorMutedText">#E0E0E0</color>
     <color name="colorSpinnerText">#000000</color>
     <color name="colorGoogleImageBackground">#000000</color>
-    <color name="colorStarBorder">#FFFFFF</color>
-    <color name="colorStarFill">#F0E68C</color>
 </resources>
