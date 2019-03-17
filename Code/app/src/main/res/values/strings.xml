@@ -19,10 +19,10 @@
     <string name="title_activity_plant_favorites">Favorites</string>
     <string name="title_activity_about">About USDA Plant Index</string>
 
-    <string name="button_text_search_by_species">Search By Species</string>
-    <string name="button_text_search_by_name">Search By Scientific Name</string>
+    <string name="button_text_search_by_species">Search By\nSpecies Name</string>
+    <string name="button_text_search_by_name">Search By\nScientific Name</string>
     <string name="button_text_identify">Identify Plant</string>
-    <string name="button_text_favorites">Favorites</string>
+    <string name="button_text_favorites">Browse Favorites</string>
     <string name="button_text_about">About USDA Plant Index</string>
 
     <string name="plant_search_by_species_box_hint">Enter Species...</string>

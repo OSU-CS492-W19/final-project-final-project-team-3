@@ -5,14 +5,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 // This activity is the entry to "Search Plants" and "Identify by Map" activities.
 public class StartupActivity extends AppCompatActivity {
 
-    private Button mSearchByNameBtn;
-    private Button mSearchBySpeciesBtn;
-    private Button mSearchByLocationBtn;
-    private Button mFavoritesBtn;
+    private LinearLayout mSearchByNameBtn;
+    private LinearLayout mSearchBySpeciesBtn;
+    private LinearLayout mSearchByLocationBtn;
+    private LinearLayout mFavoritesBtn;
     private Button mAboutBtn;
 
     @Override
