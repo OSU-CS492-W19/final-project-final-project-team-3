@@ -16,7 +16,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:text="@string/title_plant_identification_spinner_state"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorBrightText"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -40,7 +40,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:text="@string/title_plant_identification_spinner_growth_habit"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorBrightText"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -64,7 +64,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:text="@string/title_plant_identification_spinner_category"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorBrightText"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -88,7 +88,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:text="@string/title_plant_identification_spinner_duration"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorBrightText"
         android:textSize="24sp"
         android:textStyle="bold" />
 

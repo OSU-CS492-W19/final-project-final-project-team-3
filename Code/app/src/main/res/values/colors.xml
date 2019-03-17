@@ -6,4 +6,5 @@
     <color name="colorBubbleBackground">#AA64827f </color>
     <color name="colorBrightText">#ffffff</color>
     <color name="colorMutedText">#E0E0E0</color>
+    <color name="colorSpinnerText">#000000</color>
 </resources>

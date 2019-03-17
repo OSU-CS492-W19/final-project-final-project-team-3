@@ -48,9 +48,13 @@ public class PlantIdentificationActivity extends AppCompatActivity {
                 R.array.durations, android.R.layout.simple_spinner_item);
 
         mSpinnerStates.setAdapter(mStatesAdapter);
+        mStatesAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         mSpinnerGrowthHabits.setAdapter(mGrowthHabitsAdapter);
+        mGrowthHabitsAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         mSpinnerCategories.setAdapter(mCategoriesAdapter);
+        mCategoriesAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         mSpinnerDurations.setAdapter(mDurationsAdapter);
+        mDurationsAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
 
         mSpinnerStates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
