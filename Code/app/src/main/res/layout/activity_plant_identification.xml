@@ -114,4 +114,5 @@
        android:background="@color/colorAccent"
        android:text="@string/plant_identify_button_text"
        android:textAppearance="@android:style/TextAppearance.Material.Widget.Button.Colored" tools:targetApi="n" />
+
  </LinearLayout>
