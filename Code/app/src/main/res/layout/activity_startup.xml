@@ -25,13 +25,13 @@
                 android:layout_height="200dp"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_w_shadow">
+                android:background="@drawable/button_w_shadow_sci">
 
                 <ImageView
                     android:layout_gravity="center_horizontal"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    android:layout_margin="10dp"
+                    android:layout_margin="20dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_sci" />
@@ -41,7 +41,8 @@
                     android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/colorBrightText"
                     android:text="@string/button_text_search_by_name" />
 
             </LinearLayout>
@@ -53,13 +54,13 @@
                 android:layout_height="200dp"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
-                android:background="@drawable/button_w_shadow">
+                android:background="@drawable/button_w_shadow_com">
 
                 <ImageView
                     android:layout_gravity="center_horizontal"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    android:layout_margin="10dp"
+                    android:layout_margin="20dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_com" />
@@ -69,7 +70,8 @@
                     android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/colorBrightText"
                     android:text="@string/button_text_search_by_species" />
 
             </LinearLayout>
@@ -83,13 +85,13 @@
             android:layout_height="200dp"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:background="@drawable/button_w_shadow">
+            android:background="@drawable/button_w_shadow_id">
 
             <ImageView
                 android:layout_gravity="center_horizontal"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:layout_margin="10dp"
+                android:layout_margin="15dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_id" />
@@ -100,6 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:textColor="@color/colorBrightText"
                 android:text="@string/button_text_identify" />
 
         </LinearLayout>
@@ -111,13 +114,13 @@
             android:layout_height="200dp"
             android:layout_weight="1"
             android:layout_margin="10dp"
-            android:background="@drawable/button_w_shadow">
+            android:background="@drawable/button_w_shadow_fav">
 
             <ImageView
                 android:layout_gravity="center_horizontal"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:layout_margin="5dp"
+                android:layout_margin="15dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_fav" />
@@ -128,6 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:textColor="@color/colorBrightText"
                 android:text="@string/button_text_favorites" />
 
         </LinearLayout>
@@ -137,7 +141,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="@drawable/button_w_shadow"
+            android:background="@drawable/button_w_shadow_abo"
+            android:textColor="@color/colorBrightText"
             android:text="@string/button_text_about" />
 
     </LinearLayout>

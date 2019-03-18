@@ -48,7 +48,7 @@
 
     <string name="header_citation">Sources</string>
     <string name="about_citation">
-        USDA, NRCS. 2016. The PLANTS Database (http://plants.usda.gov, 12 July 2016).National Plant Data Team, Greensboro, NC 27401-4901 USA.\n\nREST API for the USDA Plants Database, https://github.com/sckott/usdaplantsapi.\n\nPlant images are supplied by Google Images.\n\nIcons made by Freepik from www.flaticon.com is licensed by CC 3.0.
+        USDA, NRCS. 2016. The PLANTS Database (http://plants.usda.gov, 12 July 2016).National Plant Data Team, Greensboro, NC 27401-4901 USA.\n\nREST API for the USDA Plants Database, https://github.com/sckott/usdaplantsapi.\n\nPlant images are supplied by Google Images.\n\nIcons made by Freepik from www.flaticon.com licensed under CC 3.0.
     </string>
 
     <string name="title_plant_identification_spinner_state">Select a State</string>
