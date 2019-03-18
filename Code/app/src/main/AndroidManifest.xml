@@ -40,7 +40,7 @@
             android:name=".PlantIdentificationActivity"
             android:launchMode="singleTop"
             android:label="@string/title_activity_plant_identification"
-            android:parentActivityName=".StartupActivity">
+            android:parentActivityName=".StartupActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.usdaplantindex.StartupActivity" />
