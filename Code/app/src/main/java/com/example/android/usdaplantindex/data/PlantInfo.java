@@ -12,7 +12,6 @@ public class PlantInfo implements Serializable {
     @PrimaryKey
     public Integer id;
     public String Scientific_Name_x;
-    public String Scientific_Name_y;
     public String Common_Name;
     public String Symbol;
     public String Duration;
@@ -57,8 +56,6 @@ public class PlantInfo implements Serializable {
     public String Quadranomial_Author;
     public String Questionable_Taxon_Indicator;
     public String Invasive;
-    public String Accepted_Symbol_y;
-    public String Synonym_Symbol_y;
     public String Active_Growth_Period;
     public String After_Harvest_Regrowth_Rate;
     public String Bloat;

@@ -165,10 +165,7 @@ public class PlantItemDetailActivity extends AppCompatActivity {
     public String getGeneralString() {
         String detailString = "";
 
-        detailString += getFieldString("Alternative Scientific Name", mPlantItem.Scientific_Name_y);
         detailString += getFieldString("Symbol", mPlantItem.Symbol);
-        detailString += getFieldString("Alternative Symbol", mPlantItem.Accepted_Symbol_y);
-        detailString += getFieldString("Alternative Synonym Symbol", mPlantItem.Synonym_Symbol_y);
         detailString += getFieldString("Duration", mPlantItem.Duration);
         detailString += getFieldString("Growth Habit", mPlantItem.Growth_Habit);
         detailString += getFieldString("Native Status", mPlantItem.Native_Status);
@@ -401,7 +398,6 @@ public class PlantItemDetailActivity extends AppCompatActivity {
 
         pInfo.id = pItem.id;
         pInfo.Scientific_Name_x = pItem.Scientific_Name_x;
-        pInfo.Scientific_Name_y = pItem.Scientific_Name_y;
         pInfo.Common_Name = pItem.Common_Name;
         pInfo.Symbol = pItem.Symbol;
         pInfo.Duration = pItem.Duration;
@@ -446,8 +442,6 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         pInfo.Quadranomial_Author = pItem.Quadranomial_Author;
         pInfo.Questionable_Taxon_Indicator = pItem.Questionable_Taxon_Indicator;
         pInfo.Invasive = pItem.Invasive;
-        pInfo.Accepted_Symbol_y = pItem.Accepted_Symbol_y;
-        pInfo.Synonym_Symbol_y = pItem.Synonym_Symbol_y;
         pInfo.Active_Growth_Period = pItem.Active_Growth_Period;
         pInfo.After_Harvest_Regrowth_Rate = pItem.After_Harvest_Regrowth_Rate;
         pInfo.Bloat = pItem.Bloat;
