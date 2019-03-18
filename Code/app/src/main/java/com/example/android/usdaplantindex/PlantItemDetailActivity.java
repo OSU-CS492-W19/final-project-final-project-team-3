@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.android.usdaplantindex.data.PlantItem;
 import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
@@ -163,10 +165,7 @@ public class PlantItemDetailActivity extends AppCompatActivity {
     public String getGeneralString() {
         String detailString = "";
 
-        detailString += getFieldString("Alternative Scientific Name", mPlantItem.Scientific_Name_y);
         detailString += getFieldString("Symbol", mPlantItem.Symbol);
-        detailString += getFieldString("Alternative Symbol", mPlantItem.Accepted_Symbol_y);
-        detailString += getFieldString("Alternative Synonym Symbol", mPlantItem.Synonym_Symbol_y);
         detailString += getFieldString("Duration", mPlantItem.Duration);
         detailString += getFieldString("Growth Habit", mPlantItem.Growth_Habit);
         detailString += getFieldString("Native Status", mPlantItem.Native_Status);
@@ -363,9 +362,9 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         String suitString = getSuitString();
         String suitHString = getHeaderString(getString(R.string.plant_text_suitability), suitString);
 
+        //Set the text for all text views.
         mPlantSciTV.setText(sciString);
         mPlantComTV.setText(comString);
-
         mHGeneralTV.setText(generalHString);
         mPlantGeneralTV.setText(generalString);
         mHMorphTV.setText(morphHString);
@@ -376,15 +375,29 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         mPlantRepTV.setText(repString);
         mHSuitTV.setText(suitHString);
         mPlantSuitTV.setText(suitString);
+
+        //Make text views invisible if they are empty.
+        emptySetInvisible(mPlantSciTV);
+        emptySetInvisible(mPlantComTV);
+        emptySetInvisible(mHGeneralTV);
+        emptySetInvisible(mPlantGeneralTV);
+        emptySetInvisible(mHMorphTV);
+        emptySetInvisible(mPlantMorphTV);
+        emptySetInvisible(mHGrowthTV);
+        emptySetInvisible(mPlantGrowthTV);
+        emptySetInvisible(mHRepTV);
+        emptySetInvisible(mPlantRepTV);
+        emptySetInvisible(mHSuitTV);
+        emptySetInvisible(mPlantSuitTV);
     }
 
+    // change PlantItem to PlantInfo
     private PlantInfo createPlantInfo(PlantItem pItem){
 
         PlantInfo pInfo = new PlantInfo();
-        // change PlantItem to PlantInfo
+
         pInfo.id = pItem.id;
         pInfo.Scientific_Name_x = pItem.Scientific_Name_x;
-        pInfo.Scientific_Name_y = pItem.Scientific_Name_y;
         pInfo.Common_Name = pItem.Common_Name;
         pInfo.Symbol = pItem.Symbol;
         pInfo.Duration = pItem.Duration;
@@ -429,8 +442,6 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         pInfo.Quadranomial_Author = pItem.Quadranomial_Author;
         pInfo.Questionable_Taxon_Indicator = pItem.Questionable_Taxon_Indicator;
         pInfo.Invasive = pItem.Invasive;
-        pInfo.Accepted_Symbol_y = pItem.Accepted_Symbol_y;
-        pInfo.Synonym_Symbol_y = pItem.Synonym_Symbol_y;
         pInfo.Active_Growth_Period = pItem.Active_Growth_Period;
         pInfo.After_Harvest_Regrowth_Rate = pItem.After_Harvest_Regrowth_Rate;
         pInfo.Bloat = pItem.Bloat;
@@ -518,9 +529,21 @@ public class PlantItemDetailActivity extends AppCompatActivity {
         return pInfo;
     }
 
+    // If a text view is empty we set it to invisible so it doesn't take up room.
+    public Void emptySetInvisible(TextView textview) {
+        if("".equals(textview.getText().toString())) {
+            textview.setVisibility(View.GONE);
+        }
+
+        return null;
+    }
+
     // Sets the plants image.
     private void setImage(String plantImage){
-        Glide.with(mPlantPicIV).load(plantImage).into(mPlantPicIV);
+        Glide.with(mPlantPicIV)
+                .load(plantImage)
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(100)))
+                .into(mPlantPicIV);
     }
 
     // Class that handles getting image urls.

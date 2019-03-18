@@ -45,7 +45,6 @@ public class PlantFavoriteActivity extends AppCompatActivity implements PlantInf
         // create new PlantItem
         temp.id = plant.id;
         temp.Scientific_Name_x = plant.Scientific_Name_x;
-        temp.Scientific_Name_y = plant.Scientific_Name_y;
         temp.Common_Name = plant.Common_Name;
         temp.Symbol = plant.Symbol;
         temp.Duration = plant.Duration;
@@ -90,8 +89,6 @@ public class PlantFavoriteActivity extends AppCompatActivity implements PlantInf
         temp.Quadranomial_Author = plant.Quadranomial_Author;
         temp.Questionable_Taxon_Indicator = plant.Questionable_Taxon_Indicator;
         temp.Invasive = plant.Invasive;
-        temp.Accepted_Symbol_y = plant.Accepted_Symbol_y;
-        temp.Synonym_Symbol_y = plant.Synonym_Symbol_y;
         temp.Active_Growth_Period = plant.Active_Growth_Period;
         temp.After_Harvest_Regrowth_Rate = plant.After_Harvest_Regrowth_Rate;
         temp.Bloat = plant.Bloat;

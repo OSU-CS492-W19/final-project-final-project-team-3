@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="@color/colorButton" />
+                    <padding android:bottom="3dp" android:left="3dp" android:right="3dp" android:top="3dp" />
+                    <corners
+                        android:topLeftRadius="25dip"
+                        android:topRightRadius="25dip"
+                        android:bottomLeftRadius="25dip"
+                        android:bottomRightRadius="25dip">
+                    </corners>
+                </shape>
+            </item>
+            <item >
+                <bitmap android:gravity="right|center" android:src="@mipmap/arrow_white" />
+            </item>
+        </layer-list>
+    </item>
+</selector>
