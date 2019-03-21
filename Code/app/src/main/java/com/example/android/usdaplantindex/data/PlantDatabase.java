@@ -5,7 +5,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-@Database(entities = {PlantInfo.class}, version = 1, exportSchema = false)
+@Database(entities = {PlantInfo.class}, version = 2, exportSchema = false)
 public abstract class PlantDatabase extends RoomDatabase {
     private static volatile PlantDatabase INSTANCE;
 
@@ -14,7 +14,7 @@ public abstract class PlantDatabase extends RoomDatabase {
             synchronized (PlantDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            PlantDatabase.class, "usda_plant_db").build();
+                            PlantDatabase.class, "usda_plant_db").fallbackToDestructiveMigration().build();
                 }
             }
         }

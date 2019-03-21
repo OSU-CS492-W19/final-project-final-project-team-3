@@ -12,19 +12,24 @@
     <string name="plant_item_share_text">Plant Information:</string>
 
     <string name="title_activity_startup">USDA Plant Index</string>
+    <string name="title_activity_detail">Plant Information</string>
     <string name="title_activity_plant_search_by_species">Plants by Species</string>
-    <string name="title_activity_plant_search_by_name">Plants by Name</string>
+    <string name="title_activity_plant_search_by_name">Plants by Scientific Name</string>
+    <string name="title_activity_plant_search_by_common">Plants by Common Name</string>
     <string name="title_activity_plant_identification">Plant Identification</string>
     <string name="title_activity_plant_favorites">Favorites</string>
+    <string name="title_activity_about">About USDA Plant Index</string>
 
-
-    <string name="button_text_search_by_species">Search By Species</string>
-    <string name="button_text_search_by_name">Search By Scientific Name</string>
+    <string name="button_text_search_by_species">Search By\nSpecies Name</string>
+    <string name="button_text_search_by_common">Search By\nCommon Name</string>
+    <string name="button_text_search_by_name">Search By\nScientific Name</string>
     <string name="button_text_identify">Identify Plant</string>
-    <string name="button_text_favorites">Favorites</string>
+    <string name="button_text_favorites">Browse Favorites</string>
+    <string name="button_text_about">About USDA Plant Index</string>
 
-    <string name="plant_search_by_species_box_hint">Enter Species...</string>
     <string name="plant_search_by_name_box_hint">Enter Scientific Name...</string>
+    <string name="plant_search_by_species_box_hint">Enter Species...</string>
+    <string name="plant_search_by_common_box_hint">Enter Common Name...</string>
 
     <string name="plant_text_general">General Information</string>
     <string name="plant_text_morphology">Morphology/Physiology</string>
@@ -34,9 +39,19 @@
 
     <string name="plant_identify_button_text">Identify</string>
 
-    <string name="source_citation">Citation: USDA, NRCS. 2016. The PLANTS Database (http://plants.usda.gov, 12 July 2016).
-        National Plant Data Team, Greensboro, NC 27401-4901 USA.\n\n
-        Plant images are returned by Google Images and may be inaccurate.
+    <string name="header_history">History</string>
+    <string name="about_history">
+        The USDA Plants Index was created as part of a group project at Oregon State University in the Winter of 2019.\n\nZachary Thomas, Anton Synytsia, Corey Hemphill, and Christopher Cooper were the team members who worked on this project.
+    </string>
+
+    <string name="header_issues">Known Issues</string>
+    <string name="about_issues">
+        Images shown with plant information may be inaccurate. They are returned from a Google Image search using the common and scientific name of the plant.\n\nSearching for plants by name may take a long time. This is due to the API that we have used for this application not supporting "Fuzzy Search".\n\nIdentifying a plant by state will only show plants that are exclusive to that state. This is due to the API that we have used for this application not supporting "Fuzzy Search".
+    </string>
+
+    <string name="header_citation">Sources</string>
+    <string name="about_citation">
+        USDA, NRCS. 2016. The PLANTS Database (http://plants.usda.gov, 12 July 2016).National Plant Data Team, Greensboro, NC 27401-4901 USA.\n\nREST API for the USDA Plants Database, https://github.com/sckott/usdaplantsapi.\n\nPlant images are supplied by Google Images.\n\nIcons made by Freepik from www.flaticon.com licensed under CC 3.0.
     </string>
 
     <string name="title_plant_identification_spinner_state">Select a State</string>
