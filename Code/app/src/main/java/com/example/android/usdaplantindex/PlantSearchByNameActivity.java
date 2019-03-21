@@ -379,10 +379,10 @@ public class PlantSearchByNameActivity extends AppCompatActivity
         super.onSaveInstanceState(outState);
         if (mAllPlantNames != null) {
             // Saving large amount of data results with android.os.TransactionTooLargeException
-            outState.putSerializable(PLANT_SEARCH_LITE_ARRAY_KEY, mAllPlantNames);
+            //~ outState.putSerializable(PLANT_SEARCH_LITE_ARRAY_KEY, mAllPlantNames);
         }
         if (mLiteLoadOffset != null) {
-            outState.putInt(PLANT_SEARCH_LITE_LOAD_OFFSET_KEY, mLiteLoadOffset);
+            //~ outState.putInt(PLANT_SEARCH_LITE_LOAD_OFFSET_KEY, mLiteLoadOffset);
         }
 
         // TODO Also store search results
