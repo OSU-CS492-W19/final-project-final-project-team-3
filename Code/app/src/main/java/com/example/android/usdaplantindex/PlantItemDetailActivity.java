@@ -572,7 +572,7 @@ public class PlantItemDetailActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void ... records) {
-            FindImage(comString + " " + sciString);
+            FindImage(comString + " " + sciString + " -map");
             return null;
         }
 
