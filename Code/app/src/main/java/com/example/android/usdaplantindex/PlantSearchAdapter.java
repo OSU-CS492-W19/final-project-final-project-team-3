@@ -1,5 +1,6 @@
 package com.example.android.usdaplantindex;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,18 +40,18 @@ public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.
     }
 
     @Override
-    public PlantItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PlantItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.plant_list_item, parent, false);
         return new PlantItemViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(PlantItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PlantItemViewHolder holder, int position) {
         holder.bind(mPlantItems.get(position));
     }
 
-    class PlantItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class PlantItemViewHolder extends RecyclerView.ViewHolder {
         private TextView mPlantSciTV;
         private TextView mPlantComTV;
 
@@ -58,7 +59,14 @@ public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.
             super(itemView);
             mPlantSciTV = itemView.findViewById(R.id.tv_plant_scientific);
             mPlantComTV = itemView.findViewById(R.id.tv_plant_common);
-            itemView.setOnClickListener(this);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PlantItem plantItem = mPlantItems.get(getAdapterPosition());
+                    mPlantItemClickListener.onPlantItemClick(plantItem);
+                }
+            });
         }
 
         // Binds plant item to a view holder.
@@ -67,12 +75,6 @@ public class PlantSearchAdapter extends RecyclerView.Adapter<PlantSearchAdapter.
             String comString = plantItem.Common_Name;
             mPlantSciTV.setText(sciString);
             mPlantComTV.setText(comString);
-        }
-
-        @Override
-        public void onClick(View v) {
-            PlantItem plantItem = mPlantItems.get(getAdapterPosition());
-            mPlantItemClickListener.onPlantItemClick(plantItem);
         }
     }
 }
