@@ -14,8 +14,8 @@
     <string name="title_activity_startup">USDA Plant Index</string>
     <string name="title_activity_detail">Plant Information</string>
     <string name="title_activity_plant_search_by_species">Plants by Species</string>
-    <string name="title_activity_plant_search_by_name">Plants by Scientific Name</string>
-    <string name="title_activity_plant_search_by_common">Plants by Common Name</string>
+    <string name="title_activity_plant_search_by_name">Scientific Name</string>
+    <string name="title_activity_plant_search_by_common">Common Name</string>
     <string name="title_activity_plant_identification">Plant Identification</string>
     <string name="title_activity_plant_favorites">Favorites</string>
     <string name="title_activity_about">About USDA Plant Index</string>

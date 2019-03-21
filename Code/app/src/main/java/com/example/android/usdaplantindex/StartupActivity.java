@@ -22,7 +22,7 @@ public class StartupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_startup);
 
         mSearchByNameBtn = findViewById(R.id.btn_search_by_name);
-        mSearchBySpeciesBtn = findViewById(R.id.btn_search_by_species);
+        mSearchBySpeciesBtn = findViewById(R.id.btn_search_by_common);
         mSearchByLocationBtn = findViewById(R.id.btn_search_by_location);
         mFavoritesBtn = findViewById(R.id.btn_favorites);
         mAboutBtn = findViewById(R.id.btn_about);
