@@ -14,19 +14,22 @@
     <string name="title_activity_startup">USDA Plant Index</string>
     <string name="title_activity_detail">Plant Information</string>
     <string name="title_activity_plant_search_by_species">Plants by Species</string>
-    <string name="title_activity_plant_search_by_name">Plants by Name</string>
+    <string name="title_activity_plant_search_by_name">Plants by Scientific Name</string>
+    <string name="title_activity_plant_search_by_common">Plants by Common Name</string>
     <string name="title_activity_plant_identification">Plant Identification</string>
     <string name="title_activity_plant_favorites">Favorites</string>
     <string name="title_activity_about">About USDA Plant Index</string>
 
     <string name="button_text_search_by_species">Search By\nSpecies Name</string>
+    <string name="button_text_search_by_common">Search By\nCommon Name</string>
     <string name="button_text_search_by_name">Search By\nScientific Name</string>
     <string name="button_text_identify">Identify Plant</string>
     <string name="button_text_favorites">Browse Favorites</string>
     <string name="button_text_about">About USDA Plant Index</string>
 
-    <string name="plant_search_by_species_box_hint">Enter Species...</string>
     <string name="plant_search_by_name_box_hint">Enter Scientific Name...</string>
+    <string name="plant_search_by_species_box_hint">Enter Species...</string>
+    <string name="plant_search_by_common_box_hint">Enter Common Name...</string>
 
     <string name="plant_text_general">General Information</string>
     <string name="plant_text_morphology">Morphology/Physiology</string>
