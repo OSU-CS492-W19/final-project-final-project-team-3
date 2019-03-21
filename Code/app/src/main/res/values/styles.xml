@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColor">@color/colorMutedText</item>
+        <item name="android:textColor">@color/colorBrightText</item>
         <item name="android:windowBackground">@drawable/backrepeat</item>
     </style>
 
@@ -19,7 +19,7 @@
         <item name="colorAccent">@android:color/white</item>
         <item name="android:textColorHint">@color/colorMutedText</item>
         <item name="colorControlNormal">@color/colorMutedText</item>
-        <item name="colorControlActivated">@color/colorBrightText</item>
+        <item name="colorControlActivated">@color/colorMutedText</item>
         <item name="colorControlHighlight">@color/colorBrightText</item>
     </style>
 
