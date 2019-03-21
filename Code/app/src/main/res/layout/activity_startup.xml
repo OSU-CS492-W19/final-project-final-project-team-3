@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textColor="@color/colorBrightText"
-                    android:text="@string/button_text_search_by_species" />
+                    android:text="@string/button_text_search_by_common" />
 
             </LinearLayout>
 

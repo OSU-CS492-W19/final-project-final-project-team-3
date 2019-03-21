@@ -78,7 +78,7 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
     private static final Integer RESULTS_LOAD_LIMIT = 5;
 
     // Number of plant items to display in search results
-    private static final Integer RESULTS_DIPLAY_LIMIT = 25;
+    private static final Integer RESULTS_DISPLAY_LIMIT = 25;
 
     private RecyclerView mSearchResultsRV;
     private EditText mSearchBoxET;
@@ -221,7 +221,7 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
 
                 // Resume loading until plant details of all, matched plant Species
                 // are loaded
-                if (mFilteredPlantIds.size() < RESULTS_DIPLAY_LIMIT) {
+                if (mFilteredPlantIds.size() < RESULTS_DISPLAY_LIMIT) {
                     loadPlantDetails();
                 }
             }
@@ -330,7 +330,7 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
                 if (i == mFilters.size()) { // if plant contains all filters
                     filteredPlants.add(item);
                     mFilteredPlantIds.add(item.id);
-                    if (filteredPlants.size() >= RESULTS_DIPLAY_LIMIT) // verify limit
+                    if (filteredPlants.size() >= RESULTS_DISPLAY_LIMIT) // verify limit
                         break;
                 }
             }

@@ -38,7 +38,7 @@ public class StartupActivity extends AppCompatActivity {
         mSearchBySpeciesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StartupActivity.this, PlantSearchBySpeciesActivity.class);
+                Intent intent = new Intent(StartupActivity.this, PlantSearchByCommonActivity.class);
                 startActivity(intent);
             }
         });

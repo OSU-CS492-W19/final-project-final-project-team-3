@@ -37,6 +37,14 @@
                 android:value="com.example.android.usdaplantindex.StartupActivity" />
         </activity>
         <activity
+            android:name=".PlantSearchByCommonActivity"
+            android:label="@string/title_activity_plant_search_by_common"
+            android:parentActivityName=".StartupActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.usdaplantindex.StartupActivity" />
+        </activity>
+        <activity
             android:name=".PlantIdentificationActivity"
             android:launchMode="singleTop"
             android:label="@string/title_activity_plant_identification"
