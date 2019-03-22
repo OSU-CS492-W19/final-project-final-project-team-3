@@ -1,5 +1,7 @@
 package com.example.android.usdaplantindex;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
@@ -9,7 +11,7 @@ import com.example.android.usdaplantindex.data.Status;
 
 import java.util.List;
 
-public class PlantSearchByScientificViewModel extends ViewModel {
+public class PlantSearchByScientificViewModel extends AndroidViewModel {
     private LiveData<List<PlantItem>> mFilteredPlants;
     private LiveData<Integer> mLitePlantCount;
     private LiveData<Status> mLiteLoadingStatus;
@@ -17,7 +19,9 @@ public class PlantSearchByScientificViewModel extends ViewModel {
 
     private PlantSearchByScientificRepository mRepository;
 
-    public PlantSearchByScientificViewModel() {
+    public PlantSearchByScientificViewModel(Application application) {
+        super(application);
+
         mRepository = new PlantSearchByScientificRepository();
         mFilteredPlants = mRepository.getFilteredPlants();
         mLitePlantCount = mRepository.getLitePlantCount();

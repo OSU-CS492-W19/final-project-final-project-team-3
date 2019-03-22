@@ -30,7 +30,7 @@
         </activity>
         <activity
             android:name=".PlantSearchByScientificActivity"
-            android:label="@string/title_activity_plant_search_by_name"
+            android:label="@string/title_activity_plant_search_by_scientific"
             android:parentActivityName=".StartupActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

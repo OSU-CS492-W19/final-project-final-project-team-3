@@ -99,7 +99,6 @@ public class PlantSearchByScientificRepository {
                     if (!items.isEmpty()) {
                         mLiteLoadOffset += LITE_LOAD_LIMIT;
                         mLiteLoadingStatus.setValue(Status.SUCCESS);
-                        loadPlantNames();
                         return;
                     }
                 }

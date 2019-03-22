@@ -35,18 +35,18 @@ public class PlantSearchByScientificActivity extends AppCompatActivity
 
     private PlantSearchAdapter mPlantSearchAdapter;
 
-    private PlantSearchByScientificViewModel mPlantSearchByNameViewModel;
+    private PlantSearchByScientificViewModel mPlantSearchByScientificViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plant_search_by_name);
+        setContentView(R.layout.activity_plant_search_by_scientific);
 
-        mSearchBoxET = findViewById(R.id.plant_search_by_name_et);
-        mSearchResultsRV = findViewById(R.id.plant_search_by_name_results);
-        mLoadingErrorTV = findViewById(R.id.plant_search_by_name_loading_error_tv);
-        mLoadingTextTV = findViewById(R.id.plant_search_by_name_loading_tv);
-        mLoadingPB = findViewById(R.id.plant_search_by_name_loading_pb);
+        mSearchBoxET = findViewById(R.id.plant_search_by_scientific_et);
+        mSearchResultsRV = findViewById(R.id.plant_search_by_scientific_results);
+        mLoadingErrorTV = findViewById(R.id.plant_search_by_scientific_loading_error_tv);
+        mLoadingTextTV = findViewById(R.id.plant_search_by_scientific_loading_tv);
+        mLoadingPB = findViewById(R.id.plant_search_by_scientific_loading_pb);
 
         mSearchResultsRV.setLayoutManager(new LinearLayoutManager(this));
         mSearchResultsRV.setHasFixedSize(true);
@@ -54,10 +54,10 @@ public class PlantSearchByScientificActivity extends AppCompatActivity
         mPlantSearchAdapter = new PlantSearchAdapter(this);
         mSearchResultsRV.setAdapter(mPlantSearchAdapter);
 
-        mPlantSearchByNameViewModel = ViewModelProviders.of(this)
+        mPlantSearchByScientificViewModel = ViewModelProviders.of(this)
                 .get(PlantSearchByScientificViewModel.class);
 
-        mPlantSearchByNameViewModel.getFilteredPlants().observe(this,
+        mPlantSearchByScientificViewModel.getFilteredPlants().observe(this,
                 new Observer<List<PlantItem>>() {
                     @Override
                     public void onChanged(@Nullable List<PlantItem> filteredPlants) {
@@ -65,7 +65,7 @@ public class PlantSearchByScientificActivity extends AppCompatActivity
                     }
                 });
 
-        mPlantSearchByNameViewModel.getLiteLoadingStatus().observe(this, new Observer<Status>() {
+        mPlantSearchByScientificViewModel.getLiteLoadingStatus().observe(this, new Observer<Status>() {
             @Override
             public void onChanged(@Nullable Status status) {
                 updateLoadingText();
@@ -73,6 +73,7 @@ public class PlantSearchByScientificActivity extends AppCompatActivity
                     mLoadingPB.setVisibility(View.VISIBLE);
                 } else if (status == Status.SUCCESS) {
                     mLoadingPB.setVisibility(View.INVISIBLE);
+                    mPlantSearchByScientificViewModel.loadPlantNames();
                     //mSearchResultsRV.setVisibility(View.VISIBLE);
                     //mLoadingErrorTV.setVisibility(View.INVISIBLE);
                 } else {
@@ -94,16 +95,16 @@ public class PlantSearchByScientificActivity extends AppCompatActivity
 
             @Override
             public void afterTextChanged(Editable s) {
-                mPlantSearchByNameViewModel.searchChanged(s.toString());
+                mPlantSearchByScientificViewModel.searchChanged(s.toString());
             }
         });
 
-        mPlantSearchByNameViewModel.loadPlantNames();
+        mPlantSearchByScientificViewModel.loadPlantNames();
         updateLoadingText();
     }
 
     private void updateLoadingText() {
-        mLoadingTextTV.setText(String.valueOf(mPlantSearchByNameViewModel.getLitePlantCount().getValue()));
+        mLoadingTextTV.setText(String.valueOf(mPlantSearchByScientificViewModel.getLitePlantCount().getValue()));
     }
 
     @Override
