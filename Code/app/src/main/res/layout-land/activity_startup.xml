@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="com.example.android.usdaplantindex.StartupActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+            <LinearLayout
+                android:id="@+id/btn_search_by_scientific"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_w_shadow_sci">
+
+                <ImageView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:padding="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_sci" />
+
+                <TextView
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="24dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/colorBrightText"
+                    android:layout_weight="1"
+                    android:text="@string/button_text_search_by_scientific" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_search_by_common"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_w_shadow_com">
+
+                <ImageView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:padding="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_com" />
+
+                <TextView
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="24dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorBrightText"
+                    android:text="@string/button_text_search_by_common" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_search_by_location"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@drawable/button_w_shadow_id">
+
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="0dp"
+                android:padding="5dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:src="@drawable/ic_id" />
+
+            <TextView
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:textSize="25dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:textColor="@color/colorBrightText"
+                android:text="@string/button_text_identify" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_favorites"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@drawable/button_w_shadow_fav">
+
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="0dp"
+                android:padding="5dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:src="@drawable/ic_fav" />
+
+            <TextView
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:textSize="25dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:textColor="@color/colorBrightText"
+                android:text="@string/button_text_favorites" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_about"
+            android:layout_margin="5dp"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/button_w_shadow_abo"
+            android:textSize="25dp"
+            android:textColor="@color/colorBrightText"
+            android:layout_weight="1"
+            android:text="@string/button_text_about" />
+
+    </LinearLayout>
+
+</LinearLayout>
