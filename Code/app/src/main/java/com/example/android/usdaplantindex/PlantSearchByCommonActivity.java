@@ -35,7 +35,7 @@ public class PlantSearchByCommonActivity extends AppCompatActivity
 
     private PlantSearchAdapter mPlantSearchAdapter;
 
-    private PlantSearchByScientificViewModel mPlantSearchByCommonViewModel;
+    private PlantSearchByCommonViewModel mPlantSearchByCommonViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class PlantSearchByCommonActivity extends AppCompatActivity
         mSearchResultsRV.setAdapter(mPlantSearchAdapter);
 
         mPlantSearchByCommonViewModel = ViewModelProviders.of(this)
-                .get(PlantSearchByScientificViewModel.class);
+                .get(PlantSearchByCommonViewModel.class);
 
         mPlantSearchByCommonViewModel.getFilteredPlants().observe(this,
                 new Observer<List<PlantItem>>() {
