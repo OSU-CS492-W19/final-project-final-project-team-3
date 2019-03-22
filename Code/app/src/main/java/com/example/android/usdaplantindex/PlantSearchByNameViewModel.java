@@ -2,41 +2,50 @@ package com.example.android.usdaplantindex;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.View;
 
-import com.example.android.usdaplantindex.data.PlantIdentificationListRepository;
 import com.example.android.usdaplantindex.data.PlantItem;
+import com.example.android.usdaplantindex.data.PlantSearchByNameRepository;
 import com.example.android.usdaplantindex.data.Status;
-import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlantSearchByNameViewModel extends ViewModel {
-    private LiveData<List<PlantItem>> mPlantItems;
-    private LiveData<Status> mLoadingStatus;
+    private LiveData<List<PlantItem>> mFilteredPlants;
+    private LiveData<Integer> mLitePlantCount;
+    private LiveData<Status> mLiteLoadingStatus;
+    private LiveData<Status> mHeavyLoadingStatus;
 
-    private PlantIdentificationListRepository mRepository;
+    private PlantSearchByNameRepository mRepository;
 
     public PlantSearchByNameViewModel() {
-        mRepository = new PlantIdentificationListRepository();
-        mPlantItems = mRepository.getPlants();
-        mLoadingStatus = mRepository.getLoadingStatus();
+        mRepository = new PlantSearchByNameRepository();
+        mFilteredPlants = mRepository.getFilteredPlants();
+        mLitePlantCount = mRepository.getLitePlantCount();
+        mLiteLoadingStatus = mRepository.getLiteLoadingStatus();
+        mHeavyLoadingStatus = mRepository.getHeavyLoadingStatus();
     }
 
-    public void loadPlants(String state, String growthHabit, String category, String duration) {
-        mRepository.loadPlants(state, growthHabit, category, duration);
+    public void loadPlantNames() {
+        mRepository.loadPlantNames();
     }
 
-    public LiveData<List<PlantItem>> getPlants() {
-        return mPlantItems;
+    public void searchChanged(String s) {
+        mRepository.searchChanged(s);
     }
 
-    public LiveData<Status> getLoadingStatus() {
-        return mLoadingStatus;
+    public LiveData<List<PlantItem>> getFilteredPlants() {
+        return mFilteredPlants;
+    }
+
+    public LiveData<Integer> getLitePlantCount() {
+        return mLitePlantCount;
+    }
+
+    public LiveData<Status> getLiteLoadingStatus() {
+        return mLiteLoadingStatus;
+    }
+
+    public LiveData<Status> getHeavyLoadingStatus() {
+        return mHeavyLoadingStatus;
     }
 }

@@ -100,7 +100,7 @@ public class PlantIdentificationListRepository implements LoadPlantsTask.AsyncCa
      * finishes.
      */
     public void onPlantsLoadFinished(List<PlantItem> plantItems) {
-        mPlantItemLoadPlantsTasks.setValue(plantItems);
+        mPlantItems.setValue(plantItems);
         if (plantItems != null) {
             mLoadingStatus.setValue(Status.SUCCESS);
         } else {
