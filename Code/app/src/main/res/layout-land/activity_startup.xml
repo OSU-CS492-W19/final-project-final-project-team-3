@@ -22,7 +22,7 @@
             <LinearLayout
                 android:id="@+id/btn_search_by_scientific"
                 android:layout_margin="5dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -30,9 +30,10 @@
 
                 <ImageView
                     android:layout_gravity="center_horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_margin="10dp"
+                    android:layout_width="0dp"
+                    android:padding="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     android:layout_weight="1"
@@ -42,9 +43,9 @@
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
                     android:textSize="24dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_margin="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
                     android:textColor="@color/colorBrightText"
                     android:layout_weight="1"
                     android:text="@string/button_text_search_by_scientific" />
@@ -54,7 +55,7 @@
             <LinearLayout
                 android:id="@+id/btn_search_by_common"
                 android:layout_margin="5dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -62,9 +63,10 @@
 
                 <ImageView
                     android:layout_gravity="center_horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_margin="10dp"
+                    android:layout_width="0dp"
+                    android:padding="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     android:layout_weight="1"
@@ -74,9 +76,9 @@
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
                     android:textSize="24dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_margin="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:textColor="@color/colorBrightText"
                     android:text="@string/button_text_search_by_common" />
@@ -88,7 +90,7 @@
         <LinearLayout
             android:id="@+id/btn_search_by_location"
             android:layout_margin="5dp"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
@@ -96,9 +98,10 @@
 
             <ImageView
                 android:layout_gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="10dp"
+                android:layout_width="0dp"
+                android:padding="5dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:layout_weight="1"
@@ -108,9 +111,9 @@
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"
                 android:textSize="25dp"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="10dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:textColor="@color/colorBrightText"
                 android:text="@string/button_text_identify" />
@@ -120,7 +123,7 @@
         <LinearLayout
             android:id="@+id/btn_favorites"
             android:layout_margin="5dp"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
@@ -128,9 +131,10 @@
 
             <ImageView
                 android:layout_gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="10dp"
+                android:layout_width="0dp"
+                android:padding="5dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:layout_weight="1"
@@ -140,9 +144,9 @@
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"
                 android:textSize="25dp"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="10dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:textColor="@color/colorBrightText"
                 android:text="@string/button_text_favorites" />

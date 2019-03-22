@@ -25,6 +25,7 @@ public class PlantIdentificationListActivity extends AppCompatActivity implement
     private RecyclerView mPlantItemsRV;
     private ProgressBar mLoadingIndicatorPB;
     private TextView mLoadingErrorMessageTV;
+    private TextView mSearchErrorMessageTV;
     private PlantSearchAdapter mPlantAdapter;
     private USDAPlantUtils.PlantIdentify mPlantIdentify;
     private PlantIdentificationListViewModel mPlantIdentificationListViewModel;
@@ -39,6 +40,7 @@ public class PlantIdentificationListActivity extends AppCompatActivity implement
 
         mLoadingIndicatorPB = findViewById(R.id.pb_loading_indicator);
         mLoadingErrorMessageTV = findViewById(R.id.tv_loading_error_message);
+        mSearchErrorMessageTV = findViewById(R.id.tv_search_error_message);
         mPlantItemsRV = findViewById(R.id.rv_plant_items);
 
         mPlantAdapter = new PlantSearchAdapter(this);
@@ -79,11 +81,13 @@ public class PlantIdentificationListActivity extends AppCompatActivity implement
                 } else if (status == Status.SUCCESS) {
                     mLoadingIndicatorPB.setVisibility(View.INVISIBLE);
                     mLoadingErrorMessageTV.setVisibility(View.INVISIBLE);
+                    mSearchErrorMessageTV.setVisibility(View.INVISIBLE);
                     mPlantItemsRV.setVisibility(View.VISIBLE);
                 } else {
                     mLoadingIndicatorPB.setVisibility(View.INVISIBLE);
                     mPlantItemsRV.setVisibility(View.INVISIBLE);
-                    mLoadingErrorMessageTV.setVisibility(View.VISIBLE);
+                    mLoadingErrorMessageTV.setVisibility(View.INVISIBLE);
+                    mSearchErrorMessageTV.setVisibility(View.VISIBLE);
                 }
             }
         });
