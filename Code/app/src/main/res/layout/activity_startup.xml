@@ -20,7 +20,7 @@
             android:layout_weight="3">
 
             <LinearLayout
-                android:id="@+id/btn_search_by_name"
+                android:id="@+id/btn_search_by_scientific"
                 android:layout_margin="5dp"
                 android:orientation="vertical"
                 android:layout_width="0dp"
@@ -47,7 +47,7 @@
                     android:layout_margin="10dp"
                     android:textColor="@color/colorBrightText"
                     android:layout_weight="1"
-                    android:text="@string/button_text_search_by_name" />
+                    android:text="@string/button_text_search_by_scientific" />
 
             </LinearLayout>
 

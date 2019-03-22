@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.example.android.usdaplantindex.PlantSearchByNameActivity">
+    tools:context="com.example.android.usdaplantindex.PlantSearchByScientificActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,14 +19,14 @@
             android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/plant_search_by_name_et"
+            android:id="@+id/plant_search_by_scientific_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@color/colorBrightText"
             android:layout_margin="4dp"
             android:inputType="text"
-            android:hint="@string/plant_search_by_name_box_hint"/>
+            android:hint="@string/plant_search_by_scientific_box_hint"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -36,12 +36,12 @@
             android:padding="8dp">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/plant_search_by_name_results"
+                android:id="@+id/plant_search_by_scientific_results"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
             <TextView
-                android:id="@+id/plant_search_by_name_loading_error_tv"
+                android:id="@+id/plant_search_by_scientific_loading_error_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -50,7 +50,7 @@
                 android:text="@string/loading_error_message" />
 
                 <ProgressBar
-                    android:id="@+id/plant_search_by_name_loading_pb"
+                    android:id="@+id/plant_search_by_scientific_loading_pb"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_gravity="bottom|end"
@@ -58,7 +58,7 @@
                     android:visibility="invisible" />
 
                 <TextView
-                    android:id="@+id/plant_search_by_name_loading_tv"
+                    android:id="@+id/plant_search_by_scientific_loading_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"

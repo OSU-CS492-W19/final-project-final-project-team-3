@@ -10,8 +10,8 @@ import android.widget.LinearLayout;
 // This activity is the entry to "Search Plants" and "Identify by Map" activities.
 public class StartupActivity extends AppCompatActivity {
 
-    private LinearLayout mSearchByNameBtn;
-    private LinearLayout mSearchBySpeciesBtn;
+    private LinearLayout mSearchByScientificBtn;
+    private LinearLayout mSearchByCommonBtn;
     private LinearLayout mSearchByLocationBtn;
     private LinearLayout mFavoritesBtn;
     private Button mAboutBtn;
@@ -21,21 +21,21 @@ public class StartupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
 
-        mSearchByNameBtn = findViewById(R.id.btn_search_by_name);
-        mSearchBySpeciesBtn = findViewById(R.id.btn_search_by_common);
+        mSearchByScientificBtn = findViewById(R.id.btn_search_by_scientific);
+        mSearchByCommonBtn = findViewById(R.id.btn_search_by_common);
         mSearchByLocationBtn = findViewById(R.id.btn_search_by_location);
         mFavoritesBtn = findViewById(R.id.btn_favorites);
         mAboutBtn = findViewById(R.id.btn_about);
 
-        mSearchByNameBtn.setOnClickListener(new View.OnClickListener() {
+        mSearchByScientificBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StartupActivity.this, PlantSearchByNameActivity.class);
+                Intent intent = new Intent(StartupActivity.this, PlantSearchByScientificActivity.class);
                 startActivity(intent);
             }
         });
 
-        mSearchBySpeciesBtn.setOnClickListener(new View.OnClickListener() {
+        mSearchByCommonBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StartupActivity.this, PlantSearchByCommonActivity.class);

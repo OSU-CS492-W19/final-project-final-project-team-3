@@ -235,9 +235,13 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
         getSupportLoaderManager().initLoader(PLANT_SEARCH_LITE_LOADER_ID, null, mSearchLiteLoader);
         getSupportLoaderManager().initLoader(PLANT_SEARCH_HEAVY_LOADER_ID, null, mSearchHeavyLoader);
 
-        if (savedInstanceState != null && savedInstanceState.containsKey(PLANT_SEARCH_LITE_ARRAY_KEY)) {
-            mAllPlantSpecies = (Hashtable<String, Integer>) savedInstanceState.getSerializable(PLANT_SEARCH_LITE_ARRAY_KEY);
-            mLiteLoadOffset = (Integer)savedInstanceState.getSerializable(PLANT_SEARCH_LITE_LOAD_OFFSET_KEY);
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(PLANT_SEARCH_LITE_ARRAY_KEY)) {
+                mAllPlantSpecies = (Hashtable<String, Integer>) savedInstanceState.getSerializable(PLANT_SEARCH_LITE_ARRAY_KEY);
+            }
+            if (savedInstanceState.containsKey(PLANT_SEARCH_LITE_LOAD_OFFSET_KEY)) {
+                mLiteLoadOffset = savedInstanceState.getInt(PLANT_SEARCH_LITE_LOAD_OFFSET_KEY);
+            }
         }
 
         loadPlantSpecies();
@@ -416,7 +420,9 @@ public class PlantSearchBySpeciesActivity extends AppCompatActivity
         if (mAllPlantSpecies != null) {
             // Saving large amount of data results with android.os.TransactionTooLargeException
             //~ outState.putSerializable(PLANT_SEARCH_LITE_ARRAY_KEY, mAllPlantSpecies);
-            //~ outState.putSerializable(PLANT_SEARCH_LITE_LOAD_OFFSET_KEY, mLiteLoadOffset);
+        }
+        if (mLiteLoadOffset != null) {
+            //~ outState.putInt(PLANT_SEARCH_LITE_LOAD_OFFSET_KEY, mLiteLoadOffset);
         }
 
         // TODO Also store search results
