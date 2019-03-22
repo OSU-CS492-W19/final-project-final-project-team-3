@@ -4,21 +4,21 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.android.usdaplantindex.data.PlantItem;
-import com.example.android.usdaplantindex.data.PlantSearchByNameRepository;
+import com.example.android.usdaplantindex.data.PlantSearchByScientificRepository;
 import com.example.android.usdaplantindex.data.Status;
 
 import java.util.List;
 
-public class PlantSearchByNameViewModel extends ViewModel {
+public class PlantSearchByScientificViewModel extends ViewModel {
     private LiveData<List<PlantItem>> mFilteredPlants;
     private LiveData<Integer> mLitePlantCount;
     private LiveData<Status> mLiteLoadingStatus;
     private LiveData<Status> mHeavyLoadingStatus;
 
-    private PlantSearchByNameRepository mRepository;
+    private PlantSearchByScientificRepository mRepository;
 
-    public PlantSearchByNameViewModel() {
-        mRepository = new PlantSearchByNameRepository();
+    public PlantSearchByScientificViewModel() {
+        mRepository = new PlantSearchByScientificRepository();
         mFilteredPlants = mRepository.getFilteredPlants();
         mLitePlantCount = mRepository.getLitePlantCount();
         mLiteLoadingStatus = mRepository.getLiteLoadingStatus();

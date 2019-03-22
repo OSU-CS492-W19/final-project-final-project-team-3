@@ -29,7 +29,7 @@
                 android:value="com.example.android.usdaplantindex.StartupActivity" />
         </activity>
         <activity
-            android:name=".PlantSearchByNameActivity"
+            android:name=".PlantSearchByScientificActivity"
             android:label="@string/title_activity_plant_search_by_name"
             android:parentActivityName=".StartupActivity">
             <meta-data

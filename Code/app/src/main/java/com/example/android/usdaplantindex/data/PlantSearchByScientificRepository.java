@@ -12,9 +12,9 @@ import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PlantSearchByNameRepository {
+public class PlantSearchByScientificRepository {
 
-    private static final String TAG = PlantSearchByNameRepository.class.getSimpleName();
+    private static final String TAG = PlantSearchByScientificRepository.class.getSimpleName();
 
     /*
      - When the activity is created, we first load all the Scientific_Name_x fields
@@ -69,7 +69,7 @@ public class PlantSearchByNameRepository {
 
     private MutableLiveData<Integer> mLitePlantCount;
 
-    public PlantSearchByNameRepository() {
+    public PlantSearchByScientificRepository() {
         mAllPlantNames = new Hashtable<>();
         mPlantIdsToLoad = new HashSet<>();
         mPlants = new Hashtable<>();
@@ -256,7 +256,7 @@ public class PlantSearchByNameRepository {
         new LoadPlantsTask(url, mAsyncTaskLite).execute();
     }
 
-    private void loadPlantDetails() {
+    public void loadPlantDetails() {
         if (mPlantIdsToLoad.isEmpty()) return;
 
         Integer id = mPlantIdsToLoad.iterator().next();

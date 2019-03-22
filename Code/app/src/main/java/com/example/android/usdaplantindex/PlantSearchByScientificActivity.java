@@ -22,10 +22,10 @@ import com.example.android.usdaplantindex.utils.USDAPlantUtils;
 import java.util.List;
 
 // This activity provides the functionality for searching plants by scientific name.
-public class PlantSearchByNameActivity extends AppCompatActivity
+public class PlantSearchByScientificActivity extends AppCompatActivity
         implements PlantSearchAdapter.OnPlantItemClickListener {
 
-    private static final String TAG = PlantSearchByNameActivity.class.getSimpleName();
+    private static final String TAG = PlantSearchByScientificActivity.class.getSimpleName();
 
     private RecyclerView mSearchResultsRV;
     private EditText mSearchBoxET;
@@ -35,7 +35,7 @@ public class PlantSearchByNameActivity extends AppCompatActivity
 
     private PlantSearchAdapter mPlantSearchAdapter;
 
-    private PlantSearchByNameViewModel mPlantSearchByNameViewModel;
+    private PlantSearchByScientificViewModel mPlantSearchByNameViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class PlantSearchByNameActivity extends AppCompatActivity
         mSearchResultsRV.setAdapter(mPlantSearchAdapter);
 
         mPlantSearchByNameViewModel = ViewModelProviders.of(this)
-                .get(PlantSearchByNameViewModel.class);
+                .get(PlantSearchByScientificViewModel.class);
 
         mPlantSearchByNameViewModel.getFilteredPlants().observe(this,
                 new Observer<List<PlantItem>>() {
@@ -65,7 +65,7 @@ public class PlantSearchByNameActivity extends AppCompatActivity
                     }
                 });
 
-        mPlantSearchByNameViewModel.getLiteLoadingStatus().observe(this,new Observer<Status>() {
+        mPlantSearchByNameViewModel.getLiteLoadingStatus().observe(this, new Observer<Status>() {
             @Override
             public void onChanged(@Nullable Status status) {
                 updateLoadingText();

@@ -30,7 +30,7 @@ public class StartupActivity extends AppCompatActivity {
         mSearchByNameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StartupActivity.this, PlantSearchByNameActivity.class);
+                Intent intent = new Intent(StartupActivity.this, PlantSearchByScientificActivity.class);
                 startActivity(intent);
             }
         });
