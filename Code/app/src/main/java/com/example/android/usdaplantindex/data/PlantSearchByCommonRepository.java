@@ -248,7 +248,7 @@ public class PlantSearchByCommonRepository {
         if (mLiteLoadOffset > 26000) {
             return;
         }
-        
+
         Log.d(TAG, "Lite load " + String.valueOf(mLiteLoadOffset));
 
         String url = USDAPlantUtils.buildPlantSearchURL(
